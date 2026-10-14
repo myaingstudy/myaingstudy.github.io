@@ -23664,18 +23664,19 @@ function playLines(lines,onStep){
   let i=0;const nx=()=>{if(tok!==DPLAY_TOKEN)return;if(i>=lines.length){onStep(-1);return}onStep(i);speakJa(lines[i++],0.85,()=>setTimeout(nx,700))};nx();
 }
 function stopLines(){DPLAY_TOKEN++;try{speechSynthesis.cancel()}catch(e){}S.dplay=-1}
-function dlgFilter(q){q=(q||'').trim().toLowerCase();const m=document.getElementById('dm');if(!m)return;m.classList.toggle('dqon',!!q);m.querySelectorAll('.dl').forEach(e=>e.classList.toggle('dhide',!!q&&!e.dataset.t.includes(q)))}
+function dlgFilter(q){q=(q||'').trim().toLowerCase();const m=document.getElementById('dm');if(!m)return;m.classList.toggle('dqon',!!q);m.querySelectorAll('.dl').forEach(e=>e.classList.toggle('dhide',!!q&&!e.dataset.dt.includes(q)))}
 function renderDialog(){
   const name=S.dlg,L=DLG[name]||[],tile=(DATA.talk.find(d=>d[1]===name)||[])[3]||'';const SEC=DLG_SEC[name]||[];
   document.getElementById('app').innerHTML=`${pageHead(`${name}`,`${tile} · ${L.length} ${T('ကြောင်း','文','lines')}`)}
 <main id="dm">
 <button data-a="dplayall" style="min-height:52px;border-radius:16px;border:none;background:${S.dplay>=0?'#14223D':'var(--red)'};color:#fff;font-size:16px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:8px">${S.dplay>=0?'■ '+T('ရပ်မယ်','停止','Stop'):'▶ '+T('အကုန် ဆက်တိုက် နားထောင်မယ်','すべて再生','Play all')}</button>
-${L.length>30?`<input id="dq" type="search" oninput="dlgFilter(this.value)" placeholder="🔍 ${T('ရှာရန် (ဂျပန်/မြန်မာ/English)','検索','Search')}" style="flex-shrink:0;min-height:46px;border-radius:14px;border:1.5px solid #D5DCE8;padding:0 14px;font-size:16px;background:#fff">`:''}
+${L.length>30?`<input id="dq" type="search" value="${esc(S.dlq||'')}" oninput="S.dlq=this.value;dlgFilter(this.value)" placeholder="🔍 ${T('ရှာရန် (ဂျပန်/မြန်မာ/English)','検索','Search')}" style="flex-shrink:0;min-height:46px;border-radius:14px;border:1.5px solid #D5DCE8;padding:0 14px;font-size:16px;background:#fff">`:''}
 ${SEC.length?`<div class="dsh" style="display:flex;gap:8px;overflow-x:auto;padding:2px 0 4px;flex-shrink:0">${SEC.map((c,k)=>`<button data-dsec="${k}" style="flex-shrink:0;min-height:36px;padding:0 12px;border-radius:18px;border:1.5px solid #D5DCE8;background:#fff;font-size:14px;font-weight:700;color:var(--navy)">${c.h}</button>`).join('')}</div>`:''}
-${L.map((x,i)=>`${SEC.map((c,k)=>c.at===i?`<div id="dsec${k}" class="dsh" style="flex-shrink:0;font-size:15px;font-weight:800;color:#fff;background:var(--navy);border-radius:12px;padding:8px 14px;margin-top:6px">${c.h}</div>`:'').join('')}<button class="dl" data-t="${esc((x.j+' '+x.m+' '+x.e).toLowerCase())}" data-sp="${esc(x.j)}" style="flex-shrink:0;text-align:left;border:none;background:#fff;border-radius:16px;padding:12px 14px;display:flex;flex-direction:column;gap:4px;box-shadow:0 3px 10px rgba(20,34,61,.05);${S.dplay===i||S.kSay===x.j?'outline:2px solid #E8463A;':''}">
+${L.map((x,i)=>`${SEC.map((c,k)=>c.at===i?`<div id="dsec${k}" class="dsh" style="flex-shrink:0;font-size:15px;font-weight:800;color:#fff;background:var(--navy);border-radius:12px;padding:8px 14px;margin-top:6px">${c.h}</div>`:'').join('')}<button class="dl" data-dt="${esc((x.j+' '+x.m+' '+x.e).toLowerCase())}" data-sp="${esc(x.j)}" style="flex-shrink:0;text-align:left;border:none;background:#fff;border-radius:16px;padding:12px 14px;display:flex;flex-direction:column;gap:4px;box-shadow:0 3px 10px rgba(20,34,61,.05);${S.dplay===i||S.kSay===x.j?'outline:2px solid #E8463A;':''}">
 <span style="display:flex;gap:10px;align-items:flex-start"><span style="font-size:12px;font-weight:800;color:#fff;background:var(--navy);border-radius:8px;padding:2px 7px;margin-top:4px">${i+1}</span><span style="font-size:18px;font-weight:700;line-height:1.6">${x.j}</span></span>
 <span class="mm" style="font-size:14px;color:#1F3A68;padding-left:32px">${x.m}</span><span style="font-size:13px;color:#4A5468;padding-left:32px">${x.e}</span></button>`).join('')}
 <div class="mm" style="font-size:13px;color:#4A5468;text-align:center">${T('ဝါကျကို နှိပ်ရင် အသံထွက်ပါတယ်','文をタップで発音','Tap a line to hear it')}</div></main>`;
+  if(S.dlq)dlgFilter(S.dlq);
 }
 
 /* ---------- Pro data ---------- */
@@ -26371,7 +26372,7 @@ document.getElementById('app').addEventListener('click',e=>{
   if(b.dataset.g){SET[b.dataset.g]=!SET[b.dataset.g];saveSet();render();return}
   if(b.dataset.s){const k=b.dataset.s;if(k==='rnd'){S.rnd=S.words.map(w=>w.t).sort(()=>Math.random()-.5)}S.sort=k;S.sortOpen=false;render();return}
   if(b.dataset.r!==undefined){if(S.hide!=='none'){const r=+b.dataset.r;S.reveal[r]=!S.reveal[r];render()}return}
-  if(b.dataset.dlg){stopLines();S.dlg=b.dataset.dlg;S.view='dlg';S.kSay='';render();const m=document.getElementById('dm');if(m)m.scrollTop=0;return}
+  if(b.dataset.dlg){stopLines();S.dlq='';S.dlg=b.dataset.dlg;S.view='dlg';S.kSay='';render();const m=document.getElementById('dm');if(m)m.scrollTop=0;return}
   if(b.dataset.pro){if(!PRO_OK){S.payFrom=b.dataset.pro;S.proModal=b.dataset.pro;S.proModalCode=false;render();return}openPro(b.dataset.pro);render();return}
   if(b.dataset.plan){S.plan=b.dataset.plan;render();return}
   if(b.dataset.paym){S.payM=b.dataset.paym;render();const m=document.getElementById('paym');if(m&&m.scrollTo)setTimeout(()=>m.scrollTo({top:m.scrollHeight,behavior:'smooth'}),50);return}
