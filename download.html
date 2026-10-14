@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="my"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Myaing Study — ဒေါင်းလုဒ်</title>
+<meta name="theme-color" content="#1F3A68"><link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:title" content="Myaing Study — ဂျပန်စာကို မြန်မာလို"><meta property="og:image" content="icon-512.png">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1F3A68;--red:#E8463A;--ink:#14223D;--muted:#6B7486;--bg:#F3F5F9}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans Myanmar',sans-serif;line-height:1.8}
+.wrap{max-width:520px;margin:0 auto;padding:16px 16px 40px;display:flex;flex-direction:column;gap:14px}
+.hero{background:linear-gradient(160deg,#1F3A68,#2C5596);color:#fff;border-radius:24px;padding:28px 20px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px}
+.hero img{width:92px;height:92px;border-radius:24px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+h1{margin:6px 0 0;font-size:28px;font-family:sans-serif}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:52px;border-radius:26px;border:none;font:700 16px 'Noto Sans Myanmar',sans-serif;text-decoration:none;cursor:pointer}
+.red{background:var(--red);color:#fff}.dark{background:#14223D;color:#fff}.ghost{background:rgba(255,255,255,.15);color:#fff}
+.card{background:#fff;border-radius:20px;padding:16px 18px}
+.card h2{margin:0 0 6px;font-size:17px}
+ol{margin:0;padding-left:22px}li{margin:4px 0}
+.tabs{display:flex;gap:6px}.tab{flex:1;min-height:44px;border-radius:22px;border:1.5px solid #D5DCE8;background:#fff;font:700 14px sans-serif;color:var(--navy);cursor:pointer}
+.tab.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.note{background:#FFF1DE;color:#6B4200;border-radius:16px;padding:12px 14px;font-size:13.5px}
+.feat{display:grid;grid-template-columns:1fr 1fr;gap:8px}.feat div{background:#fff;border-radius:16px;padding:12px;font-size:13px}.feat b{display:block;font-size:14px}
+small{color:var(--muted)}
+</style></head><body><div class="wrap">
+<div class="hero"><img src="icon-512.png" alt="Myaing Study icon"><h1>Myaing Study</h1>
+<div style="opacity:.92">ဂျပန်စာကို မြန်မာလို အလွယ်ဆုံး လေ့လာမယ်</div>
+<a class="btn red" href="index.html" style="margin-top:8px">▶ App ကို ဖွင့်မယ်</a>
+<button class="btn ghost" id="inst" hidden>⬇ ဖုန်းထဲ ထည့်မယ် (Install)</button>
+<a class="btn dark" id="apk" href="#apk-soon">🤖 Android APK — မကြာမီ</a>
+<small style="color:#C9D4E8">အခမဲ့ · Pro ¥480 / ၁၅,၀၀၀ ကျပ် မှစ</small></div>
+
+<div class="note" id="inapp" hidden>Viber / Facebook / Messenger ထဲကနေ ဖွင့်ထားရင် ဖုန်းထဲ ထည့်လို့ မရပါဘူး။ ညာဘက်အပေါ်က ⋮ ကိုနှိပ်ပြီး <b>Chrome</b> (iPhone ဆို <b>Safari</b>) နဲ့ ပြန်ဖွင့်ပါ။</div>
+
+<div class="card"><h2>📲 ဖုန်း Home Screen ထဲ ထည့်နည်း</h2>
+<div class="tabs"><button class="tab on" data-t="and">Android</button><button class="tab" data-t="ios">iPhone</button></div>
+<div id="t-and" style="margin-top:10px"><ol><li><b>Chrome</b> နဲ့ ဒီစာမျက်နှာကို ဖွင့်ပါ။</li><li>အပေါ်က <b>“ဖုန်းထဲ ထည့်မယ်”</b> ခလုတ် ပေါ်ရင် နှိပ်ပါ။</li><li>မပေါ်ရင် ညာဘက်အပေါ် <b>⋮</b> → <b>“Add to Home screen”</b> ဒါမှမဟုတ် <b>“Install app”</b> ကို နှိပ်ပါ။</li><li>Home Screen မှာ Myaing icon ပေါ်လာပါမယ်။</li></ol></div>
+<div id="t-ios" style="margin-top:10px" hidden><ol><li><b>Safari</b> နဲ့ ဒီစာမျက်နှာကို ဖွင့်ပါ (Chrome မရပါ)။</li><li>အောက်ခြေက <b>မျှဝေ ခလုတ် (□↑)</b> ကို နှိပ်ပါ။</li><li>အောက်ဆွဲပြီး <b>“Add to Home Screen”</b> (ホーム画面に追加) ကို နှိပ်ပါ။</li><li>ညာဘက်အပေါ် <b>“Add”</b> နှိပ်ရင် Myaing icon ပေါ်လာပါမယ်။</li></ol></div>
+<small>တစ်ခါ ဖွင့်ပြီးရင် အင်တာနက် မရှိလည်း သုံးလို့ ရပါတယ်။ အင်တာနက် ရှိတဲ့အခါ ဗားရှင်းအသစ်ကို အလိုအလျောက် ရပါတယ်။</small></div>
+
+<div class="feat"><div><b>辞 M Dictionary</b>စကားလုံး ၂,၅၀၀ ကျော်</div><div><b>話 Dialog</b>စကားပြော ၁၈,၅၀၀ ကြောင်း</div><div><b>暦 M Calendar</b>ဥပုသ် · ပွဲတော် · ပိတ်ရက်</div><div><b>N1 JLPT</b>N5 ကနေ N1 အထိ</div></div>
+
+<div class="card" id="apk-soon"><h2>🤖 Android APK</h2>APK ဗားရှင်း ပြင်ဆင်နေပါတယ်။ အဲဒီအထိ အပေါ်က နည်းနဲ့ Home Screen ထဲ ထည့်သုံးပါ — APK နဲ့ အတူတူပဲ သုံးလို့ ရပါတယ်။</div>
+
+<div class="card"><h2>✉️ ဆက်သွယ်ရန်</h2>myaingstudy@gmail.com</div>
+<small style="text-align:center">© Myaing Study</small>
+</div>
+<script>
+const ua=navigator.userAgent||'';if(/FBAN|FBAV|FB_IAB|Instagram|Line\/|Viber|Messenger/i.test(ua))document.getElementById('inapp').hidden=false;
+if(/iPhone|iPad|iPod/i.test(ua)){document.querySelector('[data-t=ios]').click&&setTimeout(()=>document.querySelector('[data-t=ios]').click(),0)}
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===b));document.getElementById('t-and').hidden=b.dataset.t!=='and';document.getElementById('t-ios').hidden=b.dataset.t!=='ios'});
+let dp=null;addEventListener('beforeinstallprompt',e=>{e.preventDefault();dp=e;document.getElementById('inst').hidden=false});
+document.getElementById('inst').onclick=async()=>{if(!dp)return;dp.prompt();try{await dp.userChoice}catch(e){}dp=null;document.getElementById('inst').hidden=true};
+if('serviceWorker' in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script></body></html>
