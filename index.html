@@ -26304,8 +26304,30 @@ let _gaInit=false,_gaLast='';
 function gaInit(){if(_gaInit||!gaOn())return;_gaInit=true;window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config',GA_ID,{send_page_view:false,user_id:proUID(),anonymize_ip:true});gtag('set','user_properties',{app_pro:PRO_OK?'pro':'free',app_id:proUID()});const sc=document.createElement('script');sc.async=true;sc.src='https://www.googletagmanager.com/gtag/js?id='+GA_ID;document.head.appendChild(sc)}
 function gaPath(){const v=S.view;if(v==='main')return '/'+(S.tab==='words'?'discovery':S.tab==='talk'?'dialog':S.tab==='practice'?'pro':S.tab);if(v==='dlg')return '/dialog/'+S.dlg;if(v==='xp')return '/'+({dict:'dictionary',cal:'calendar',dham:'dhamma',know:'knowledge',burma:'burma'}[S.xp]||S.xp);if(v==='topic')return '/discovery/'+S.topic;if(v==='jlpt')return '/jlpt/N'+S.jl+'/'+S.jtab;if(v==='kana')return '/kana/'+S.kana;if(v==='pro')return '/pro/'+S.pro;return '/'+v}
 function gaView(){if(!gaOn())return;gaInit();const p=gaPath();if(p===_gaLast)return;_gaLast=p;try{gtag('event','page_view',{page_path:p,page_location:location.origin+location.pathname+'#'+p,page_title:p})}catch(e){}}
+/* ---------- Welcome / Guest mode (shown once after splash) ---------- */
+function welcomed(){try{return !!localStorage.getItem('myaing.welcomed')}catch(e){return true}}
+function renderWelcome(){
+  const logo=`<svg viewBox="0 0 150 150" width="96" height="96" aria-hidden="true"><rect width="150" height="150" rx="40" fill="#1F3A68"/><circle cx="75" cy="44" r="15" fill="#E8463A"/><path d="M30 116 V38 L75 80 L120 38 V116 C102 108 88 110 75 122 C62 110 48 108 30 116 Z" fill="#fff" stroke="#fff" stroke-width="6" stroke-linejoin="round"/><path d="M75 86 V118" stroke="#1F3A68" stroke-width="4" stroke-linecap="round"/><path d="M42 100 C52 97 62 99 70 104 M108 100 C98 97 88 99 80 104" stroke="#B9C6DD" stroke-width="3" fill="none" stroke-linecap="round"/></svg>`;
+  const L=SET.lang||'my',lb=(k,t)=>`<button data-wlang="${k}" style="flex:1;min-height:40px;border-radius:20px;border:1.5px solid ${L===k?'#1F3A68':'#D5DCE8'};background:${L===k?'#1F3A68':'#fff'};color:${L===k?'#fff':'#1F3A68'};font-weight:800;font-size:14px">${t}</button>`;
+  const feat=(i,a,b)=>`<div style="display:flex;align-items:center;gap:12px;background:#fff;border-radius:16px;padding:10px 14px;box-shadow:0 3px 10px rgba(20,34,61,.05)"><span style="width:40px;height:40px;border-radius:12px;background:#EEF2FA;color:#1F3A68;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0">${i}</span><span style="display:flex;flex-direction:column;min-width:0"><b style="font-size:15px">${a}</b><span class="mm" style="font-size:12.5px;color:#6B7486">${b}</span></span></div>`;
+  const soon=(ic,t)=>`<button data-soon="${T('အကောင့်','アカウント','Account')}" style="display:flex;align-items:center;justify-content:center;gap:10px;min-height:52px;border-radius:26px;border:1.5px solid #D5DCE8;background:#fff;color:#14223D;font-size:15px;font-weight:700"><span style="font-size:18px;font-weight:800">${ic}</span><span class="mm">${t}</span><span style="font-size:11px;font-weight:800;color:#8A5A12;background:#FFF1DE;border-radius:8px;padding:2px 7px">${T('မကြာမီ','準備中','Soon')}</span></button>`;
+  document.getElementById('app').innerHTML=`<main style="padding:22px 20px calc(24px + env(safe-area-inset-bottom));gap:14px;background:linear-gradient(180deg,#EAF0FA 0%,#F3F5F9 45%)">
+<div style="display:flex;gap:6px">${lb('my','မြန်မာ')}${lb('ja','日本語')}${lb('en','English')}</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:10px 0 4px;text-align:center"><span style="border-radius:28px;box-shadow:0 12px 28px rgba(31,58,104,.3);display:block;line-height:0">${logo}</span><b style="font-size:24px;letter-spacing:2px;color:#1F3A68;margin-top:6px">MYAING STUDY</b><span class="mm" style="font-size:16px;font-weight:700;color:#14223D">${T('Myaing Study မှ ကြိုဆိုပါတယ် 🙏','ようこそ Myaing Study へ 🙏','Welcome to Myaing Study 🙏')}</span><span class="mm" style="font-size:13.5px;color:#4A5468">${T('ဂျပန်စာကို မြန်မာလို အလွယ်ဆုံး လေ့လာမယ်','ミャンマー語でかんたん日本語学習','Learn Japanese the easy way, in Myanmar')}</span></div>
+${feat('あ',T('ဟီရာဂါနာ → JLPT N1','ひらがな → JLPT N1','Hiragana → JLPT N1'),T('အခြေခံကနေ အဆင့်မြင့်အထိ','基礎から上級まで','From basics to advanced'))}
+${feat('話',T('စကားပြော ၁၈,၅၀၀ ကြောင်း','会話 18,500文','18,500 dialog lines'),T('ဆေးရုံ၊ ဘဏ်၊ အလုပ်ခွင် … ၃၇ ခန်း','病院・銀行・職場など37場面','Hospital, bank, work … 37 scenes'))}
+${feat('辞',T('Dictionary · ပြက္ခဒိန်','辞書・ミャンマー暦','Dictionary · Calendar'),T('ဂျပန် ⇄ မြန်မာ ⇄ English','日本語⇄ミャンマー語⇄英語','Japanese ⇄ Myanmar ⇄ English'))}
+<button data-a="guest" class="mm" style="margin-top:6px;min-height:56px;border-radius:28px;border:none;background:linear-gradient(90deg,#1F3A68,#2C5596);color:#fff;font-size:17px;font-weight:900;box-shadow:0 8px 20px rgba(31,58,104,.3)">👤 ${T('Guest အဖြစ် စမယ်','ゲストではじめる','Start as Guest')}</button>
+<span class="mm" style="text-align:center;font-size:12px;color:#6B7486;margin-top:-4px">${T('အကောင့် မလိုဘဲ ချက်ချင်း သုံးလို့ရပါတယ်','アカウントなしですぐ使えます','No account needed — start right away')}</span>
+<div style="display:flex;align-items:center;gap:10px;color:#8A93A5;font-size:12px;margin:2px 0"><span style="flex:1;height:1px;background:#D5DCE8"></span>${T('ဒါမှမဟုတ်','または','or')}<span style="flex:1;height:1px;background:#D5DCE8"></span></div>
+${soon('G',T('Google နဲ့ ဝင်မယ်','Googleでログイン','Sign in with Google'))}
+${soon('✉',T('Email နဲ့ အကောင့်ဖွင့်မယ်','メールで登録','Sign up with email'))}
+<span class="mm" style="text-align:center;font-size:11.5px;color:#8A93A5;line-height:1.8">${T('ဆက်သုံးခြင်းဖြင့် Privacy Policy ကို သဘောတူပါတယ်','続けることでプライバシーポリシーに同意したものとみなします','By continuing you agree to the Privacy Policy')}</span>
+</main>`;
+}
 function render(){setTimeout(gaView,0);_render()}
 function _render(){
+  if(S.view==='welcome'){renderWelcome();return}
   try{document.documentElement.lang={my:'my',ja:'ja',en:'en'}[SET.lang]||'my'}catch(e){}
   applyPrefs();
   if(S.view==='about'){renderAbout();return}
@@ -26360,6 +26382,7 @@ document.getElementById('app').addEventListener('click',e=>{
   if(b.dataset.dq!==undefined){S.dq=b.dataset.dq;if(S.dq)dictRemember(S.dq);renderDict();return}
   if(b.dataset.dclr){try{localStorage.removeItem('myaing.dict.recent')}catch(e){}renderDict();return}
   if(b.dataset.dsave&&S.view==='xp'&&S.xp==='dict'){dictRemember(S.dq)}
+  if(b.dataset.wlang){SET.lang=b.dataset.wlang;saveSet();render();return}
   if(b.dataset.about){S.view='about';S.drawer=false;S.aboutSec=b.dataset.about;render();return}
   if(b.dataset.t){S.tab=b.dataset.t;S.q='';S.drawer=false;render();return}
   if(b.dataset.chat!==undefined){S.chat=+b.dataset.chat;CONTACTS[S.chat].unread=false;S.view='chat';render();return}
@@ -26413,6 +26436,7 @@ document.getElementById('app').addEventListener('click',e=>{
     kback:()=>{stopLines();S.podOn='';if(S.view==='adult'){S.view='pro';S.pro='Dark Side';return}if(S.view==='pay'){S.view='paywall';return}S.view='main'},
     adult:()=>{S.view=PRO_OK?'adult':'paywall';S.kSay=''},
     pro:()=>{S.view='paywall';S.drawer=false},
+    guest:()=>{try{localStorage.setItem('myaing.welcomed',String(Date.now()))}catch(e){}S.view='main';S.tab='home';try{if(window.gtag)gtag('event','welcome_guest')}catch(e){}},
     share:()=>{const u=APP.site+'download.html',t=T('ဂျပန်စာကို မြန်မာလို လေ့လာမယ် — Myaing Study (အခမဲ့)','ミャンマー語で日本語を学ぼう — Myaing Study','Learn Japanese in Myanmar — Myaing Study');const cp=()=>{try{navigator.clipboard.writeText(t+'\n'+u).then(()=>toast(T('Link ကူးပြီးပါပြီ — Viber/Facebook မှာ paste လုပ်ပါ','リンクをコピーしました','Link copied')),()=>toast(u))}catch(e){toast(u)}};if(navigator.share){navigator.share({title:'Myaing Study',text:t,url:u}).catch(e=>{if(e&&e.name!=='AbortError')cp()})}else cp();return 'skip'},
     pmclose:()=>{S.proModal='';S.payFrom=''}, pmno:()=>{S.proModal='';S.view='paywall'}, pmyes:()=>{S.proModalCode=true}, pmback:()=>{S.proModalCode=false},
     pmapply:()=>{const e=document.getElementById('pmcode');if(proUnlock(e&&e.value)){const n=S.proModal;S.proModal='';S.payFrom='';openPro(n)}},
@@ -26442,6 +26466,7 @@ document.getElementById('app').addEventListener('click',e=>{
   if(acts[a]){if(acts[a]()==='skip')return}else S[a]=!S[a];
   render();
 });
+if(!welcomed())S.view='welcome';
 render();
 (function(){const sp=document.getElementById('splash');if(!sp)return;const close=()=>{if(sp.classList.contains('out'))return;sp.classList.add('out');setTimeout(()=>sp.remove(),500)};sp.addEventListener('click',close);setTimeout(close,4200)})();
 </script>
