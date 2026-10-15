@@ -191,6 +191,7 @@ ${GA_ID?`<button class="row" data-g="noga"><svg width="22" height="22" viewBox="
 <span class="sec">${T('App အကြောင်း','アプリについて','App')}</span>
 <div class="box">
 <button class="row" data-a="pro"><span style="width:22px;text-align:center;font-size:18px">👑</span><span class="lb">MYAING Pro</span><span style="font-weight:800;color:${PRO_OK?'#0F6B5C':'#E0A030'}">${PRO_OK?'Active':T('ဝယ်မယ်','登録','Upgrade')}</span>${CH}</button>
+<button class="row" data-copy="${proUID()}"><span style="width:22px;text-align:center;font-size:12px;font-weight:900;color:#1F3A68;border:2px solid #1F3A68;border-radius:6px;line-height:16px">ID</span><span class="lb">${T('ကျွန်ုပ်၏ User ID','ユーザーID','My User ID')}</span><b style="letter-spacing:2px;color:var(--navy)">${proUID()}</b><span style="font-size:11.5px;font-weight:800;color:#2C5596;background:#EEF2FA;border-radius:8px;padding:3px 8px">Copy</span></button>
 <button class="row" data-about="ab-about"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1F3A68" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg><span class="lb">About</span>${CH}</button>
 <button class="row" data-about="ab-contact"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1F3A68" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><span class="lb">Contact</span>${CH}</button>
 <button class="row" data-about="ab-privacy"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1F3A68" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg><span class="lb">Privacy Policy</span>${CH}</button>
@@ -24015,7 +24016,7 @@ ${ADULT.map((c,i)=>`<b id="asec-${i}" style="font-size:17px;padding:6px 4px 0">$
 }
 
 /* ---------- Pro subscription (paywall) ---------- */
-const PRO_PLAN={monthly:'¥480',yearly:'¥3,800',codes:['MYAING2026']};
+const PRO_PLAN={monthly:'¥480',yearly:'¥3,800',codes:[]};
 let PRO_OK=false;try{PRO_OK=localStorage.getItem('myaing.pro')==='1'}catch(e){}
 Object.assign(S,{plan:'m12',payFrom:''});
 const planLabel=id=>{const p=PAY.plans.find(x=>x[0]===id)||PAY.plans[0];return p[1]===12?T('၁၂ လ (၁ နှစ်)','12か月','12 months'):T(`${'၀၁၂၃၄၅၆၇၈၉'.split('').reduce((a,c,i)=>a.replace(new RegExp(i,'g'),c),String(p[1]))} လ`,`${p[1]}か月`,`${p[1]} month${p[1]>1?'s':''}`)};
@@ -24047,7 +24048,7 @@ const PAY={
     {id:'wave',icon:IC_WAVE,name:'Wave Pay',color:'#FFD400',fg:'#14223D',cur:'MMK',qr:QR_WAVE,fields:[]}
   ]
 };
-const PRO_SECRET='myaing-pro-v1';
+const PRO_SECRET=(a=>a.map(c=>String.fromCharCode(c^23)).reverse().join(''))([38, 97, 58, 120, 101, 103, 58, 112, 121, 126, 118, 110, 122]);
 let PRO_EXP='';try{PRO_EXP=localStorage.getItem('myaing.proexp')||''}catch(e){}
 function proUID(){let u='';try{u=localStorage.getItem('myaing.uid')||''}catch(e){}if(!u){const c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';for(let i=0;i<6;i++)u+=c[Math.floor(Math.random()*c.length)];try{localStorage.setItem('myaing.uid',u)}catch(e){}}return u}
 function proHash(str){let h=2166136261>>>0;for(const ch of str){h^=ch.charCodeAt(0);h=Math.imul(h,16777619)>>>0}const c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';let o='';for(let i=0;i<6;i++){o+=c[h%32];h=(Math.floor(h/32)^Math.imul(h,31))>>>0}return o}
