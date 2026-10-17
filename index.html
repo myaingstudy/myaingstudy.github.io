@@ -1085,6 +1085,7 @@ const NAME_RAW=`ကို|コ
 ကောင်း|カウン
 ကြူ|チュ
 ကြည်|チー
+ကိုယ်|コー
 ကံ|カン
 ကြီး|ジー
 ကြွယ်|チュエー
@@ -1115,7 +1116,7 @@ const NAME_RAW=`ကို|コ
 ငူ|グ
 ငြိမ်း|ニェイン
 ငွေ|グウェ
-စု|ス
+စု|スー、ス
 စ|サ
 စိုး|ソー
 စံ/စမ်း|サン
@@ -1131,7 +1132,7 @@ const NAME_RAW=`ကို|コ
 စွဲ|スエ
 စည်|シー
 စဉ်|シン
-ဆန်း|セン
+ဆန်း|サン、セン
 ဆု|ス
 ဆက်|セッ
 ဆောင်း|サウン
@@ -1316,25 +1317,28 @@ const NAME_RAW=`ကို|コ
 const NAMES=NAME_RAW.split('\n').map(l=>{const [m,k]=l.split('|');return {m,k,ks:k.split('、'),keys:m.split('/')}});
 const NKEYS=NAMES.flatMap(n=>n.keys.map(key=>({key,k:n.ks[0]}))).sort((a,b)=>b.key.length-a.key.length);
 function nmNorm(x){return (x||'').normalize('NFC').replace(/[\u200B-\u200D\u25CC\uFEFF]/g,'').replace(/(^|[^\u1000-\u1021\u103B-\u103F])\u1031([\u1000-\u1021\u103F])([\u103B-\u103E]*)/g,'$1$2$3\u1031').replace(/\u1031{2,}/g,'\u1031')}
-function nameToKata(src){
-  const parts=nmNorm(src).trim().split(/\s+/).filter(Boolean);
-  return parts.map(p=>{
-    let out='',i=0;
-    while(i<p.length){const hit=NKEYS.find(e=>p.startsWith(e.key,i));if(hit){out+=hit.k;i+=hit.key.length}else{out+='？';i++;while(i<p.length&&/[ါ-ှ္်]/.test(p[i]))i++}}
-    return out}).join('・');
+const NMARK=/[ါ-ှ္်]/;
+function nmTok(src){
+  return nmNorm(src).trim().split(/\s+/).filter(Boolean).map(p=>{
+    const t=[];let i=0;
+    while(i<p.length){const hit=NKEYS.find(e=>{const j=i+e.key.length;return p.startsWith(e.key,i)&&!NMARK.test(p[j]||'')&&p[j+1]!=='်'});
+      if(hit){t.push({m:hit.key,k:hit.k,n:NAMES.find(n=>n.keys.includes(hit.key))});i+=hit.key.length}
+      else{const a=i;i++;while(i<p.length&&(NMARK.test(p[i])||p[i+1]==='်'))i++;t.push({m:p.slice(a,i),k:'？'})}}
+    return t});
 }
-Object.assign(S,{nq:''});
+function nameToKata(src){return nmTok(src).map(t=>t.map(x=>x.k).join('')).join('・')}
+Object.assign(S,{nq:'',nAll:false});
 function renderNames(){
   document.getElementById('app').innerHTML=`
 <header><button class="hbtn" data-a="kback" aria-label="Back">${BACK}</button><div class="htitle"><b>${T('名前 · အမည်များ','名前','Names')}</b><span class="mm">${T('မြန်မာနာမည်ကို カタカナ နဲ့ ရေးနည်း','ミャンマー人の名前をカタカナで','Myanmar names in Katakana')}</span></div><span style="width:44px"></span></header>
 <main>
 <div style="background:#1F3A68;border-radius:22px;padding:16px;display:flex;flex-direction:column;gap:10px">
 <span class="mm" style="color:#fff;font-size:15px;font-weight:700">${T('ကိုယ့်နာမည် ရိုက်ကြည့်ပါ','名前を入力してみよう','Type your name')}</span>
-<input id="nq" aria-label="Myanmar name" placeholder="${T('ဥပမာ — မြင့် ဇော် ထွေး','例：မြင့် ဇော် ထွေး','e.g. မြင့် ဇော် ထွေး')}" value="${esc(S.nq)}" maxlength="40" autocomplete="off" style="height:50px;border-radius:14px;border:none;padding:0 14px;font-size:17px;font-family:'Noto Sans Myanmar',sans-serif;outline:none">
+<input id="nq" aria-label="Myanmar name" placeholder="${T('ဥပမာ — အောင်ဆန်း စုကြည်','例：အောင်ဆန်း စုကြည်','e.g. အောင်ဆန်း စုကြည်')}" value="${esc(S.nq)}" maxlength="40" autocomplete="off" style="height:50px;border-radius:14px;border:none;padding:0 14px;font-size:17px;font-family:'Noto Sans Myanmar',sans-serif;outline:none">
 <div id="nres"></div>
-<span class="mm" style="color:#AFC0DD;font-size:12px">${T('စကားလုံးတစ်လုံးချင်း ကြားမှာ space ခြားပေးပါ · ？ ပေါ်ရင် ဇယားထဲမှာ မပါသေးပါ','音節ごとにスペースを入れてください · ？は表にない音節','Put a space between syllables · ？ = not in the table')}</span>
+<span class="mm" style="color:#AFC0DD;font-size:12px">${T('နာမည်တစ်ခုချင်း ကြားမှာ space ခြားပေးပါ (ဥပမာ အောင်ဆန်း␣စုကြည်) · ？ ပေါ်ရင် ဇယားထဲမှာ မပါသေးပါ','名前の区切りにスペースを入れてください · ？は表にない音節','Put a space between name parts · ？ = not in the table')}</span>
 </div>
-<div class="mm" style="font-size:13px;color:#4A5468;text-align:center">${T(`နာမည်စာလုံး ${NAMES.length} လုံး · နှိပ်ရင် အသံထွက်ပါတယ်`,`${NAMES.length}音節 · タップで発音`,`${NAMES.length} syllables · tap to hear`)}</div>
+<div id="ncnt" class="mm" style="font-size:13px;color:#4A5468;text-align:center"></div>
 <div id="nlist" style="background:#fff;border-radius:20px;border:1px solid var(--line);overflow:hidden"></div>
 <div class="mm" style="font-size:12px;color:#6B7486;line-height:1.8;padding:0 4px">${T('နိုင်ငံခြားသား အမည်ကို カタカナ နဲ့ ရေးတဲ့အတွက် လူတစ်ယောက်နဲ့ တစ်ယောက် ကွဲလွဲနိုင်ပါတယ်။ အနီးစပ်ဆုံး ရေးထားပါတယ်။','外国人の名前のカタカナ表記は人によって異なる場合があります。できるだけ近い表記にしています。','Katakana spellings of foreign names can vary from person to person. These are the closest common forms.')}</div>
 </main>`;
@@ -1346,10 +1350,13 @@ function nmUpd(){
   const r=document.getElementById('nres'),L=document.getElementById('nlist');if(!r||!L)return;
   const q=nmNorm(S.nq).trim();
   const conv=q?nameToKata(q):'';
-  const list=NAMES.filter(n=>!q||q.split(/\s+/).some(w=>n.m.includes(w))||n.k.includes(q));
+  const seen=new Set(),list=[];if(q)for(const x of nmTok(q).flat()){const key=x.n?x.n.m:'?'+x.m;if(seen.has(key))continue;seen.add(key);list.push(x.n||{m:x.m,k:'？',ks:[''],miss:1})}
+  const all=!q&&S.nAll;if(all)list.push(...NAMES);
+  const c=document.getElementById('ncnt');if(c)c.innerHTML=q?T('စာလုံးတစ်လုံးချင်း · နှိပ်ရင် အသံထွက်ပါတယ်','音節ごと · タップで発音','Each syllable · tap to hear'):`<button data-a="nall" style="border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 16px;font:inherit;color:#1F3A68;font-weight:700">${all?T('🙈 ဖုံးထားမယ်','🙈 隠す','🙈 Hide list'):T(`📖 နာမည်စာလုံး ${NAMES.length} လုံး ကြည့်မယ်`,`📖 全${NAMES.length}音節を見る`,`📖 Show all ${NAMES.length} syllables`)}</button>`;
+  L.style.display=list.length?'':'none';
   r.innerHTML=`<button ${conv?`data-sp="${conv.replace(/・/g,' ')}"`:''} style="width:100%;box-sizing:border-box;min-height:64px;border-radius:14px;border:none;background:#fff;display:flex;align-items:center;justify-content:center;gap:10px;padding:8px 12px;max-width:100%;overflow:hidden">
 <span style="font-size:${conv?(conv.length>14?17:conv.length>9?21:26):15}px;font-weight:800;overflow-wrap:anywhere;word-break:break-all;min-width:0;line-height:1.35;text-align:center;color:${conv?'#14223D':'#6B7486'}">${conv||T('カタカナ ဒီမှာ ပေါ်ပါမယ်','ここにカタカナが表示されます','Katakana appears here')}</span>${conv?'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E8463A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>':''}</button>`;
-  L.innerHTML=list.map((n,i)=>`<button data-sp="${n.ks[0]}" style="width:100%;border:none;background:${S.kSay===n.ks[0]?'#FBE5E3':'transparent'};display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr);gap:10px;align-items:center;min-height:54px;padding:6px 16px;text-align:left;${i<list.length-1?'border-bottom:1px solid #E8ECF3;':''}"><span class="mm" style="font-size:19px;font-weight:700">${n.m}</span><span style="font-size:18px;color:#1F3A68;font-weight:700">${n.k}</span></button>`).join('')||`${owlEmpty()}`;
+  L.innerHTML=list.map((n,i)=>`<button ${n.miss?'':`data-sp="${n.ks[0]}"`} style="width:100%;border:none;background:${S.kSay===n.ks[0]?'#FBE5E3':'transparent'};display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr);gap:10px;align-items:center;min-height:54px;padding:6px 16px;text-align:left;${i<list.length-1?'border-bottom:1px solid #E8ECF3;':''}"><span class="mm" style="font-size:19px;font-weight:700">${n.m}</span><span style="font-size:18px;color:#1F3A68;font-weight:700">${n.k}</span></button>`).join('')||`${owlEmpty()}`;
 }
 /* ---------- Topic: 家族 Family ---------- */
 const TOPICS={
@@ -36443,6 +36450,7 @@ document.getElementById('app').addEventListener('click',e=>{
   if(b.dataset.dsave&&S.view==='xp'&&S.xp==='dict'){dictRemember(S.dq)}
   if(b.dataset.wlang){SET.lang=b.dataset.wlang;saveSet();render();return}
   if(b.dataset.mc!==undefined){mcGo(+b.dataset.mc);return}
+  if(b.dataset.a==='nall'){S.nAll=!S.nAll;nmUpd();return}
   if(b.dataset.jxl){S.jx={L:+b.dataset.jxl,st:'setup'};render();return}
   if(b.dataset.jxs){jxStart(S.jx.L);render();const m=document.getElementById('jxm');if(m)m.scrollTop=0;return}
   if(b.dataset.jxh){S.jx={L:S.jx.L,st:'setup'};render();return}
@@ -36521,7 +36529,7 @@ document.getElementById('app').addEventListener('click',e=>{
     addw:()=>{S.addOpen=!S.addOpen},addone:()=>{S.addMode='one'},addbulk:()=>{S.addMode='bulk'},
     savew:()=>{const g=id=>{const e=document.getElementById(id);return e&&e.value?e.value.trim():''};const k=g('aw_k'),r=g('aw_r')||k,mm=g('aw_mm'),en=g('aw_en');if(!k||!mm){toast(T('ဂျပန် နဲ့ မြန်မာ အဓိပ္ပာယ် ဖြည့်ပါ','日本語と意味を入力してください','Enter the Japanese word and its meaning'));return}MYW.unshift({k,r,mm,en,lv:S.jl});saveMyw();toast(T('သိမ်းပြီးပါပြီ','保存しました','Saved'))},
     bulkw:()=>{const e=document.getElementById('aw_bulk');const ws=parseBulk(e&&e.value||'',S.jl);if(!ws.length){toast(T('ထည့်စရာ မတွေ့ပါ — ပုံစံကို စစ်ပါ','追加できる行がありません','No valid lines found'));return}MYW.unshift(...ws);saveMyw();toast(T(`${ws.length} လုံး ထည့်ပြီးပါပြီ`,`${ws.length}語 追加しました`,`Added ${ws.length} words`))},
-    names:()=>{S.view='names';S.nq='';S.kSay=''},
+    names:()=>{S.view='names';S.nq='';S.kSay='';S.nAll=false},
     goju:()=>{S.view='goju';S.gq='';S.kSay='';S.glv=0},
     cmenu:()=>{S.flowing=false;S.view='cmenu'}, cmback:()=>S.view='chat',
     cdel:()=>{if(confirm(T('ဒီစကားပြောကို ဖျက်မလား?','この会話を削除しますか？','Delete this conversation?'))){const c=CONTACTS[S.chat];c.msgs=[];c.unread=false;c.time='';S.view='chat'}},
