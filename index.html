@@ -44,8 +44,8 @@ main{flex:1;overflow-y:auto;padding:14px 14px 120px;display:flex;flex-direction:
 .list button:last-child{border-bottom:none}
 .dko{display:inline-block;width:.56em;height:.56em;border-radius:50%;background:#E8463A;margin:0 .03em;vertical-align:-.02em;flex-shrink:0}
 .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.grid.anim .tile{animation:tileIn .45s cubic-bezier(.2,.8,.3,1) both;animation-delay:calc(var(--i,0)*40ms)}
-.grid.anim .tile .ic{animation:icPop .55s cubic-bezier(.3,1.6,.5,1) both;animation-delay:calc(var(--i,0)*40ms + 120ms)}
+.grid.anim .tile{animation:tileIn .26s cubic-bezier(.2,.8,.3,1) both;animation-delay:calc(var(--i,0)*18ms)}
+.grid.anim .tile .ic{animation:icPop .32s cubic-bezier(.3,1.6,.5,1) both;animation-delay:calc(var(--i,0)*18ms + 60ms)}
 @keyframes tileIn{from{opacity:0;transform:translateY(16px) scale(.96)}to{opacity:1;transform:none}}
 @keyframes icPop{from{transform:scale(.55) rotate(-8deg)}to{transform:none}}
 @media (prefers-reduced-motion:reduce){.grid.anim .tile,.grid.anim .tile .ic{animation:none}}
@@ -111,19 +111,19 @@ body.dark #app{filter:invert(.92) hue-rotate(180deg)}
 body.dark #app svg.owl{filter:hue-rotate(180deg) invert(1)}
 
 @keyframes kdraw{to{stroke-dashoffset:0}}@keyframes kfade{to{opacity:1}}
-#splash{position:fixed;inset:0;z-index:999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;transition:opacity .45s ease}
+#splash{position:fixed;inset:0;z-index:999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;transition:opacity .3s ease}
 #splash.out{opacity:0;pointer-events:none}
-#splash .lg{width:132px;height:132px;border-radius:36px;box-shadow:0 14px 34px rgba(31,58,104,.35);animation:spPop .9s cubic-bezier(.2,1.5,.4,1) both}
+#splash .lg{width:132px;height:132px;border-radius:36px;box-shadow:0 14px 34px rgba(31,58,104,.35);animation:spPop .5s cubic-bezier(.2,1.5,.4,1) both}
 #splash .lg svg{width:132px;height:132px}
 #splash .lg svg{display:block}
-#splash .bk{transform-box:view-box;transform-origin:75px 100px;animation:spBook 1s cubic-bezier(.3,1.3,.5,1) .7s both}
-#splash .sun{transform-box:view-box;transform-origin:75px 44px;animation:spSun .9s cubic-bezier(.2,1.4,.4,1) 1.6s both,spGlow 1.4s ease-in-out 2.5s 2}
+#splash .bk{transform-box:view-box;transform-origin:75px 100px;animation:spBook .55s cubic-bezier(.3,1.3,.5,1) .25s both}
+#splash .sun{transform-box:view-box;transform-origin:75px 44px;animation:spSun .5s cubic-bezier(.2,1.4,.4,1) .7s both,spGlow .8s ease-in-out 1.2s 1}
 @keyframes spBook{0%{transform:scale(0,.2);opacity:0}60%{transform:scale(1.08,1.04);opacity:1}100%{transform:none;opacity:1}}
 @keyframes spSun{0%{transform:translateY(40px) scale(.4);opacity:0}100%{transform:none;opacity:1}}
 @keyframes spGlow{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
-#splash .nm{font:800 22px 'M PLUS Rounded 1c',sans-serif;letter-spacing:3px;color:#1F3A68;animation:spUp .6s ease-out 2.3s both}
-#splash .sb{font:500 14px 'M PLUS Rounded 1c',sans-serif;color:#6B7486;animation:spUp .6s ease-out 2.55s both}
-#splash .dots{display:flex;gap:6px;margin-top:10px;animation:spUp .4s ease-out 2.8s both}
+#splash .nm{font:800 22px 'M PLUS Rounded 1c',sans-serif;letter-spacing:3px;color:#1F3A68;animation:spUp .35s ease-out 1s both}
+#splash .sb{font:500 14px 'M PLUS Rounded 1c',sans-serif;color:#6B7486;animation:spUp .35s ease-out 1.12s both}
+#splash .dots{display:flex;gap:6px;margin-top:10px;animation:spUp .3s ease-out 1.25s both}
 #splash .dots i{width:7px;height:7px;border-radius:4px;background:#C9D2E3;animation:spDot .9s ease-in-out infinite}
 #splash .dots i:nth-child(2){animation-delay:.15s}#splash .dots i:nth-child(3){animation-delay:.3s}
 @keyframes spPop{0%{transform:scale(.3) rotate(-12deg);opacity:0}100%{transform:scale(1) rotate(0);opacity:1}}
@@ -202,14 +202,14 @@ document.addEventListener('click',e=>{
     if(tile){
       const bg=taGhost(app,snap,scr,0);const dim=document.createElement('div');dim.style.cssText='position:absolute;inset:0;background:#14223D;opacity:0';bg.appendChild(dim);
       for(const t of bg.querySelectorAll('.grid .tile')){const j=t.querySelector('.jp');if(j&&j.textContent===TA.txt)t.style.visibility='hidden'}
-      const D=420,E='cubic-bezier(.2,.85,.25,1)',z0=app.style.zIndex,o0=app.style.transformOrigin;app.style.zIndex='1';app.style.transformOrigin='0 0';
+      const D=250,E='cubic-bezier(.2,.85,.25,1)',z0=app.style.zIndex,o0=app.style.transformOrigin;app.style.zIndex='1';app.style.transformOrigin='0 0';
       const an=app.animate([{transform:taXf(TA.rect,A),borderRadius:'70px',opacity:0,boxShadow:'0 18px 50px rgba(20,34,61,.35)'},{opacity:1,offset:.25},{transform:'none',borderRadius:'0px',opacity:1,boxShadow:'0 18px 50px rgba(20,34,61,0)'}],{duration:D,easing:E});
       dim.animate([{opacity:0},{opacity:.28}],{duration:D,easing:E,fill:'forwards'});bg.animate([{transform:'none'},{transform:'scale(.96)',offset:1}],{duration:D,easing:E,fill:'forwards'});
       let fin=0;const done=()=>{if(fin++)return;bg.remove();app.style.zIndex=z0;app.style.transformOrigin=o0};an.onfinish=done;setTimeout(done,D+300);
     }else if(back&&S.tab===TA.tab){
       const t=taFindTile();if(!t)return;const r=t.getBoundingClientRect();
       const ov=taGhost(app,snap,scr,999);ov.style.boxShadow='0 18px 50px rgba(20,34,61,.3)';
-      const an=ov.animate([{transform:'none',borderRadius:'0px',opacity:1},{opacity:.9,offset:.5},{transform:taXf(r,A),borderRadius:'70px',opacity:0}],{duration:320,easing:'cubic-bezier(.4,0,.2,1)',fill:'forwards'});
+      const an=ov.animate([{transform:'none',borderRadius:'0px',opacity:1},{opacity:.9,offset:.5},{transform:taXf(r,A),borderRadius:'70px',opacity:0}],{duration:200,easing:'cubic-bezier(.4,0,.2,1)',fill:'forwards'});
       an.onfinish=()=>ov.remove();setTimeout(()=>{try{ov.remove()}catch(x){}},800);
       const g=app.querySelector('.grid');if(g){g.classList.remove('anim');void g.offsetWidth;g.classList.add('anim')}
     }
@@ -1315,8 +1315,9 @@ const NAME_RAW=`ကို|コ
 ဥက္ကာ|オッカー`;
 const NAMES=NAME_RAW.split('\n').map(l=>{const [m,k]=l.split('|');return {m,k,ks:k.split('、'),keys:m.split('/')}});
 const NKEYS=NAMES.flatMap(n=>n.keys.map(key=>({key,k:n.ks[0]}))).sort((a,b)=>b.key.length-a.key.length);
+function nmNorm(x){return (x||'').normalize('NFC').replace(/[\u200B-\u200D\u25CC\uFEFF]/g,'').replace(/(^|[^\u1000-\u1021\u103B-\u103F])\u1031([\u1000-\u1021\u103F])([\u103B-\u103E]*)/g,'$1$2$3\u1031').replace(/\u1031{2,}/g,'\u1031')}
 function nameToKata(src){
-  const parts=src.trim().split(/\s+/).filter(Boolean);
+  const parts=nmNorm(src).trim().split(/\s+/).filter(Boolean);
   return parts.map(p=>{
     let out='',i=0;
     while(i<p.length){const hit=NKEYS.find(e=>p.startsWith(e.key,i));if(hit){out+=hit.k;i+=hit.key.length}else{out+='？';i++;while(i<p.length&&/[ါ-ှ္်]/.test(p[i]))i++}}
@@ -1324,27 +1325,31 @@ function nameToKata(src){
 }
 Object.assign(S,{nq:''});
 function renderNames(){
-  const q=S.nq.trim();
-  const conv=q?nameToKata(q):'';
-  const list=NAMES.filter(n=>!q||q.split(/\s+/).some(w=>n.m.includes(w))||n.k.includes(q));
   document.getElementById('app').innerHTML=`
 <header><button class="hbtn" data-a="kback" aria-label="Back">${BACK}</button><div class="htitle"><b>${T('名前 · အမည်များ','名前','Names')}</b><span class="mm">${T('မြန်မာနာမည်ကို カタカナ နဲ့ ရေးနည်း','ミャンマー人の名前をカタカナで','Myanmar names in Katakana')}</span></div><span style="width:44px"></span></header>
 <main>
 <div style="background:#1F3A68;border-radius:22px;padding:16px;display:flex;flex-direction:column;gap:10px">
 <span class="mm" style="color:#fff;font-size:15px;font-weight:700">${T('ကိုယ့်နာမည် ရိုက်ကြည့်ပါ','名前を入力してみよう','Type your name')}</span>
-<input id="nq" aria-label="Myanmar name" placeholder="${T('ဥပမာ — မြင့် ဇော် ထွေး','例：မြင့် ဇော် ထွေး','e.g. မြင့် ဇော် ထွေး')}" value="${esc(S.nq)}" style="height:50px;border-radius:14px;border:none;padding:0 14px;font-size:17px;font-family:'Noto Sans Myanmar',sans-serif;outline:none">
-<button ${conv?`data-sp="${conv.replace(/・/g,' ')}"`:''} style="min-height:64px;border-radius:14px;border:none;background:#fff;display:flex;align-items:center;justify-content:center;gap:10px;padding:8px">
-<span style="font-size:${conv?26:15}px;font-weight:800;color:${conv?'#14223D':'#6B7486'}">${conv||T('カタカナ ဒီမှာ ပေါ်ပါမယ်','ここにカタカナが表示されます','Katakana appears here')}</span>${conv?'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E8463A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>':''}</button>
+<input id="nq" aria-label="Myanmar name" placeholder="${T('ဥပမာ — မြင့် ဇော် ထွေး','例：မြင့် ဇော် ထွေး','e.g. မြင့် ဇော် ထွေး')}" value="${esc(S.nq)}" maxlength="40" autocomplete="off" style="height:50px;border-radius:14px;border:none;padding:0 14px;font-size:17px;font-family:'Noto Sans Myanmar',sans-serif;outline:none">
+<div id="nres"></div>
 <span class="mm" style="color:#AFC0DD;font-size:12px">${T('စကားလုံးတစ်လုံးချင်း ကြားမှာ space ခြားပေးပါ · ？ ပေါ်ရင် ဇယားထဲမှာ မပါသေးပါ','音節ごとにスペースを入れてください · ？は表にない音節','Put a space between syllables · ？ = not in the table')}</span>
 </div>
 <div class="mm" style="font-size:13px;color:#4A5468;text-align:center">${T(`နာမည်စာလုံး ${NAMES.length} လုံး · နှိပ်ရင် အသံထွက်ပါတယ်`,`${NAMES.length}音節 · タップで発音`,`${NAMES.length} syllables · tap to hear`)}</div>
-<div style="background:#fff;border-radius:20px;border:1px solid var(--line);overflow:hidden">
-${list.map((n,i)=>`<button data-sp="${n.ks[0]}" style="width:100%;border:none;background:${S.kSay===n.ks[0]?'#FBE5E3':'transparent'};display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr);gap:10px;align-items:center;min-height:54px;padding:6px 16px;text-align:left;${i<list.length-1?'border-bottom:1px solid #E8ECF3;':''}"><span class="mm" style="font-size:19px;font-weight:700">${n.m}</span><span style="font-size:18px;color:#1F3A68;font-weight:700">${n.k}</span></button>`).join('')||`${owlEmpty()}`}
-</div>
+<div id="nlist" style="background:#fff;border-radius:20px;border:1px solid var(--line);overflow:hidden"></div>
 <div class="mm" style="font-size:12px;color:#6B7486;line-height:1.8;padding:0 4px">${T('နိုင်ငံခြားသား အမည်ကို カタカナ နဲ့ ရေးတဲ့အတွက် လူတစ်ယောက်နဲ့ တစ်ယောက် ကွဲလွဲနိုင်ပါတယ်။ အနီးစပ်ဆုံး ရေးထားပါတယ်။','外国人の名前のカタカナ表記は人によって異なる場合があります。できるだけ近い表記にしています。','Katakana spellings of foreign names can vary from person to person. These are the closest common forms.')}</div>
 </main>`;
   const ni=document.getElementById('nq');
-  if(ni)ni.oninput=()=>{S.nq=ni.value;const y=document.querySelector&&document.querySelector('main')?document.querySelector('main').scrollTop:0;renderNames();const n=document.getElementById('nq');if(n){n.focus();n.setSelectionRange(n.value.length,n.value.length)}};
+  nmUpd();
+  if(ni){let comp=false;ni.addEventListener('compositionstart',()=>comp=true);ni.addEventListener('compositionend',()=>{comp=false;S.nq=ni.value;nmUpd()});ni.oninput=()=>{S.nq=ni.value;if(!comp)nmUpd()}}
+}
+function nmUpd(){
+  const r=document.getElementById('nres'),L=document.getElementById('nlist');if(!r||!L)return;
+  const q=nmNorm(S.nq).trim();
+  const conv=q?nameToKata(q):'';
+  const list=NAMES.filter(n=>!q||q.split(/\s+/).some(w=>n.m.includes(w))||n.k.includes(q));
+  r.innerHTML=`<button ${conv?`data-sp="${conv.replace(/・/g,' ')}"`:''} style="width:100%;box-sizing:border-box;min-height:64px;border-radius:14px;border:none;background:#fff;display:flex;align-items:center;justify-content:center;gap:10px;padding:8px 12px;max-width:100%;overflow:hidden">
+<span style="font-size:${conv?(conv.length>14?17:conv.length>9?21:26):15}px;font-weight:800;overflow-wrap:anywhere;word-break:break-all;min-width:0;line-height:1.35;text-align:center;color:${conv?'#14223D':'#6B7486'}">${conv||T('カタカナ ဒီမှာ ပေါ်ပါမယ်','ここにカタカナが表示されます','Katakana appears here')}</span>${conv?'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E8463A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>':''}</button>`;
+  L.innerHTML=list.map((n,i)=>`<button data-sp="${n.ks[0]}" style="width:100%;border:none;background:${S.kSay===n.ks[0]?'#FBE5E3':'transparent'};display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr);gap:10px;align-items:center;min-height:54px;padding:6px 16px;text-align:left;${i<list.length-1?'border-bottom:1px solid #E8ECF3;':''}"><span class="mm" style="font-size:19px;font-weight:700">${n.m}</span><span style="font-size:18px;color:#1F3A68;font-weight:700">${n.k}</span></button>`).join('')||`${owlEmpty()}`;
 }
 /* ---------- Topic: 家族 Family ---------- */
 const TOPICS={
@@ -36530,7 +36535,7 @@ document.getElementById('app').addEventListener('click',e=>{
 });
 if(!welcomed())S.view='welcome';
 render();
-(function(){const sp=document.getElementById('splash');if(!sp)return;const close=()=>{if(sp.classList.contains('out'))return;sp.classList.add('out');setTimeout(()=>sp.remove(),500)};sp.addEventListener('click',close);setTimeout(close,4200)})();
+(function(){const sp=document.getElementById('splash');if(!sp)return;const close=()=>{if(sp.classList.contains('out'))return;sp.classList.add('out');setTimeout(()=>sp.remove(),350)};sp.addEventListener('click',close);setTimeout(close,2200)})();
 </script>
 <script>if("serviceWorker" in navigator&&location.protocol.startsWith("http")){addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}))}</script>
 </body>
