@@ -43,6 +43,11 @@ main{flex:1;overflow-y:auto;padding:14px 14px 120px;display:flex;flex-direction:
 .list button{width:100%;border:none;background:transparent;min-height:62px;border-bottom:1px solid var(--line);font-size:17px}
 .list button:last-child{border-bottom:none}
 .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.grid.anim .tile{animation:tileIn .45s cubic-bezier(.2,.8,.3,1) both;animation-delay:calc(var(--i,0)*40ms)}
+.grid.anim .tile .ic{animation:icPop .55s cubic-bezier(.3,1.6,.5,1) both;animation-delay:calc(var(--i,0)*40ms + 120ms)}
+@keyframes tileIn{from{opacity:0;transform:translateY(16px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes icPop{from{transform:scale(.55) rotate(-8deg)}to{transform:none}}
+@media (prefers-reduced-motion:reduce){.grid.anim .tile,.grid.anim .tile .ic{animation:none}}
 .tile{position:relative;border:none;background:#fff;border-radius:22px;padding:16px 6px 12px;display:flex;flex-direction:column;align-items:center;gap:5px;box-shadow:0 4px 14px rgba(20,34,61,.06);min-height:150px}
 .ic{width:56px;height:56px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:800}
 .tile .jp{font-size:16px;font-weight:800;line-height:1.2;text-align:center}
@@ -154,15 +159,68 @@ const LOGO=(f)=>`<svg width="34" height="26" viewBox="0 0 170 130"><circle cx="8
 const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
 function homeTop(){try{if(typeof monthCard==='function'){const h=monthCard(S.mcm||0);if(h)return h}}catch(e){}return '<div class="pimg" role="img" aria-label="Buddha"></div>'}
+/* ---------- Mascot: ふくろう先生 (original) ---------- */
+function owlEyes(e){const x1=46,x2=74,y=46,N='#1F3A68';
+ if(e==='happy')return `<path d="M${x1-6} ${y+2} Q${x1} ${y-6} ${x1+6} ${y+2}M${x2-6} ${y+2} Q${x2} ${y-6} ${x2+6} ${y+2}" stroke="${N}" stroke-width="3.5" fill="none" stroke-linecap="round"/>`;
+ if(e==='cheer')return `<circle cx="${x1}" cy="${y}" r="5" fill="${N}"/><circle cx="${x1+1.5}" cy="${y-1.5}" r="1.6" fill="#fff"/><path d="M${x2-6} ${y} L${x2+6} ${y}" stroke="${N}" stroke-width="3.5" stroke-linecap="round"/>`;
+ if(e==='sad')return `<circle cx="${x1}" cy="${y+1}" r="4.5" fill="${N}"/><circle cx="${x2}" cy="${y+1}" r="4.5" fill="${N}"/><path d="M${x1-7} ${y-6} L${x1+4} ${y-10}M${x2+7} ${y-6} L${x2-4} ${y-10}" stroke="${N}" stroke-width="2.5" stroke-linecap="round"/><path d="M${x2+8} ${y+6} q2 5 0 7 q-2 -2 0 -7z" fill="#7FB8E8"/>`;
+ return `<circle cx="${x1}" cy="${y}" r="5.5" fill="${N}"/><circle cx="${x2}" cy="${y}" r="5.5" fill="${N}"/><circle cx="${x1+1.8}" cy="${y-1.8}" r="1.8" fill="#fff"/><circle cx="${x2+1.8}" cy="${y-1.8}" r="1.8" fill="#fff"/>`}
+function owl(e,sz){const N='#1F3A68',Y='#F5C036',R='#E8463A',C='#FBF6EC';sz=sz||110;return `<svg class="owl" width="${sz}" height="${sz}" viewBox="0 0 120 120" role="img" aria-label="ふくろう先生"><ellipse cx="60" cy="112" rx="28" ry="5" fill="rgba(20,34,61,.1)"/>
+<path d="M30 54 Q30 18 60 16 Q90 18 90 54 L90 86 Q90 108 60 108 Q30 108 30 86Z" fill="${N}"/><path d="M30 30 L26 12 L44 22Z M90 30 L94 12 L76 22Z" fill="${N}"/>
+<path d="M42 70 Q42 100 60 100 Q78 100 78 70 Q60 62 42 70Z" fill="${C}"/><path d="M50 78 q3 3 6 0 M64 78 q3 3 6 0 M57 88 q3 3 6 0" stroke="#D9CBB0" stroke-width="2" fill="none"/>
+<circle cx="46" cy="46" r="15" fill="#fff"/><circle cx="74" cy="46" r="15" fill="#fff"/>${owlEyes(e)}
+<circle cx="46" cy="46" r="16" fill="none" stroke="${Y}" stroke-width="3.5"/><circle cx="74" cy="46" r="16" fill="none" stroke="${Y}" stroke-width="3.5"/><path d="M62 44 h-4" stroke="${Y}" stroke-width="3.5"/>
+<path d="M56 58 L64 58 L60 66Z" fill="${Y}" stroke="#C98A10" stroke-width="1.5" stroke-linejoin="round"/>
+${e==='happy'?`<path d="M30 70 Q14 56 18 44" stroke="${N}" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M90 70 Q106 56 102 44" stroke="${N}" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M14 30 l2 6 M106 30 l-2 6 M20 24 l5 4" stroke="${Y}" stroke-width="3" stroke-linecap="round"/>`:`<path d="M30 64 Q20 80 30 94" stroke="#2C5596" stroke-width="9" fill="none" stroke-linecap="round"/><path d="M90 64 Q100 80 90 94" stroke="#2C5596" stroke-width="9" fill="none" stroke-linecap="round"/>`}
+<path d="M30 14 L60 2 L90 14 L60 24Z" fill="#14223D"/><path d="M84 14 v14" stroke="${R}" stroke-width="3"/><circle cx="84" cy="30" r="3.5" fill="${R}"/>
+${e==='cheer'?`<rect x="86" y="70" width="26" height="18" rx="4" fill="${R}"/><text x="99" y="83" font-size="11" font-weight="900" fill="#fff" text-anchor="middle">A+</text>`:''}${e==='sad'?`<text x="96" y="40" font-size="18" font-weight="900" fill="#7FB8E8">?</text>`:''}</svg>`}
+function owlEmpty(){return `<div class="empty mm" style="display:flex;flex-direction:column;align-items:center;gap:4px">${owl('sad',96)}<b style="font-size:15px;color:#1F3A68">${T('ရှာမတွေ့ပါ','見つかりません','No results')}</b><span style="font-size:12.5px">${T('တခြား စကားလုံးနဲ့ ရှာကြည့်ပါ','別のことばで探してみてね','Try another word')}</span></div>`}
+/* ---------- Tile open / close animation (zoom from tile) ---------- */
+const TA={rect:null,txt:'',tab:''};
+function taReduced(){try{return matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){return false}}
+function taFindTile(){if(!TA.txt)return null;for(const t of document.querySelectorAll('#app .grid .tile')){const j=t.querySelector('.jp');if(j&&j.textContent===TA.txt)return t}return null}
+function taXf(r,a){const s=Math.max(.18,r.width/a.width);const tx=r.left-a.left+r.width/2-a.width*s/2,ty=r.top-a.top+r.height/2-a.height*s/2;return `translate(${tx}px,${ty}px) scale(${s})`}
+function taGhost(app,html,scr,z){const a=app.getBoundingClientRect(),g=document.createElement('div');g.setAttribute('aria-hidden','true');
+  g.style.cssText=`position:fixed;left:${a.left}px;top:${a.top}px;width:${a.width}px;height:${a.height}px;z-index:${z};pointer-events:none;background:var(--bg);display:flex;flex-direction:column;overflow:hidden;transform-origin:0 0;filter:${getComputedStyle(app).filter}`;
+  g.innerHTML=html;g.querySelectorAll('.grid.anim').forEach(x=>x.classList.remove('anim'));document.body.appendChild(g);[...g.querySelectorAll('main,[id]')].forEach((x,i)=>{if(scr[i])x.scrollTop=scr[i];if(x.id)x.removeAttribute('id')});return g}
+document.addEventListener('click',e=>{
+  if(taReduced())return;
+  const app=document.getElementById('app');if(!app||!app.animate)return;
+  const hadGrid=!!app.querySelector('.grid .tile');
+  const tile=e.target.closest&&e.target.closest('#app .grid .tile');
+  const back=!hadGrid&&TA.txt&&e.target.closest&&e.target.closest('.hbtn,[data-a$="back"]');
+  if(!tile&&!back)return;
+  const snap=app.innerHTML,scr=[...app.querySelectorAll('main,[id]')].map(x=>x.scrollTop),A=app.getBoundingClientRect();
+  if(tile){const j=tile.querySelector('.jp');TA.rect=tile.getBoundingClientRect();TA.txt=j?j.textContent:'';TA.tab=S.tab}
+  let tries=0;const go=()=>{
+    const nowGrid=!!app.querySelector('.grid .tile');
+    if((tile&&nowGrid)||(back&&!nowGrid)){if(++tries<30)requestAnimationFrame(go);return}
+    if(tile){
+      const bg=taGhost(app,snap,scr,0);const dim=document.createElement('div');dim.style.cssText='position:absolute;inset:0;background:#14223D;opacity:0';bg.appendChild(dim);
+      for(const t of bg.querySelectorAll('.grid .tile')){const j=t.querySelector('.jp');if(j&&j.textContent===TA.txt)t.style.visibility='hidden'}
+      const D=420,E='cubic-bezier(.2,.85,.25,1)',z0=app.style.zIndex,o0=app.style.transformOrigin;app.style.zIndex='1';app.style.transformOrigin='0 0';
+      const an=app.animate([{transform:taXf(TA.rect,A),borderRadius:'70px',opacity:0,boxShadow:'0 18px 50px rgba(20,34,61,.35)'},{opacity:1,offset:.25},{transform:'none',borderRadius:'0px',opacity:1,boxShadow:'0 18px 50px rgba(20,34,61,0)'}],{duration:D,easing:E});
+      dim.animate([{opacity:0},{opacity:.28}],{duration:D,easing:E,fill:'forwards'});bg.animate([{transform:'none'},{transform:'scale(.96)',offset:1}],{duration:D,easing:E,fill:'forwards'});
+      let fin=0;const done=()=>{if(fin++)return;bg.remove();app.style.zIndex=z0;app.style.transformOrigin=o0};an.onfinish=done;setTimeout(done,D+300);
+    }else if(back&&S.tab===TA.tab){
+      const t=taFindTile();if(!t)return;const r=t.getBoundingClientRect();
+      const ov=taGhost(app,snap,scr,999);ov.style.boxShadow='0 18px 50px rgba(20,34,61,.3)';
+      const an=ov.animate([{transform:'none',borderRadius:'0px',opacity:1},{opacity:.9,offset:.5},{transform:taXf(r,A),borderRadius:'70px',opacity:0}],{duration:320,easing:'cubic-bezier(.4,0,.2,1)',fill:'forwards'});
+      an.onfinish=()=>ov.remove();setTimeout(()=>{try{ov.remove()}catch(x){}},800);
+      const g=app.querySelector('.grid');if(g){g.classList.remove('anim');void g.offsetWidth;g.classList.add('anim')}
+    }
+  };setTimeout(go,0);
+},true);
+let LAST_ANIM_TAB='';
 function body(){
-  const q=S.q.trim().toLowerCase();
+  const q=S.q.trim().toLowerCase();const anim=S.tab!==LAST_ANIM_TAB&&!q;LAST_ANIM_TAB=S.tab;
   let h=`<label class="search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14223D" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input id="q" aria-label="Search" placeholder="${S.tab==='home'?'':PHF()[S.tab]}" value="${esc(S.q)}">${S.tab==='home'&&!S.q?`<span class="marq mm" aria-hidden="true"><span>${PHF().home}</span></span>`:''}</label>`;
   if(S.tab==='home'){
     const r=HOME.filter(t=>!q||t.includes(q));
-    h+=r.length?`<div class="list pray">${r.map(t=>`<button class="mm">${t}</button>`).join('')}${q?'':homeTop()}</div>`:`<div class="empty mm">${T('ရှာမတွေ့ပါ','見つかりません','No results')}</div>`;
+    h+=r.length?`<div class="list pray">${r.map(t=>`<button class="mm">${t}</button>`).join('')}${q?'':homeTop()}</div>`:`${owlEmpty()}`;
   }else{
     const r=DATA[S.tab].filter(([,j,k,m])=>!q||(j+k+m+(TILE_JP[j]||[]).join('')+(TILE_EN[j]||'')).toLowerCase().includes(q));
-    h+=r.length?`<div class="grid">${r.map(([i,j,k,m],n)=>{const t=TONES[n%6];const kk={'ひらがな':'hira','カタカナ':'kata','ローマ字':'roma'}[j];return `<button class="tile"${j==='TextMe'?' data-a="chats"':''}${j==='五十音'?' data-a="goju"':''}${j==='名前'?' data-a="names"':''}${S.tab==='words'&&XPT[j]?` data-xp="${XPT[j]}"`:''}${S.tab==='words'&&TOPICS[j]?` data-topic="${j}"`:''}${S.tab==='talk'?` data-dlg="${j}"`:''}${S.tab==='practice'?` data-pro="${j}"`:''}${j==='JLPT'?' data-jhub="1"':''}${j.startsWith('JLPT N')?` data-jl="${j.slice(-1)}"`:''}${kk?` data-k="${kk}"`:''}><span class="ic" style="background:${t[0]};color:${t[1]}">${i}</span><span class="jp"${TILE_JP[j]&&TILE_JP[j][0].length>=7&&/[^\x00-\x7f]/.test(TILE_JP[j][0])?` style="font-size:${TILE_JP[j][0].length>=8?12:13.5}px;letter-spacing:-.4px;white-space:nowrap"`:''}>${TILE_JP[j]?TILE_JP[j][0]:j}</span><span class="kana">${S.furi?(TILE_JP[j]?TILE_JP[j][1]:k):''}</span><span class="mmt mm">${tileSub(j,m)}</span>${S.tab==='practice'&&!PRO_OK?'<span class="crown">👑</span>':''}</button>`}).join('')}</div>`:`<div class="empty mm">${T('ရှာမတွေ့ပါ','見つかりません','No results')}</div>`;
+    h+=r.length?`<div class="grid${anim?' anim':''}">${r.map(([i,j,k,m],n)=>{const t=TONES[n%6];const kk={'ひらがな':'hira','カタカナ':'kata','ローマ字':'roma'}[j];return `<button class="tile" style="--i:${Math.min(n,14)}"${j==='TextMe'?' data-a="chats"':''}${j==='五十音'?' data-a="goju"':''}${j==='名前'?' data-a="names"':''}${S.tab==='words'&&XPT[j]?` data-xp="${XPT[j]}"`:''}${S.tab==='words'&&TOPICS[j]?` data-topic="${j}"`:''}${S.tab==='talk'?` data-dlg="${j}"`:''}${S.tab==='practice'?` data-pro="${j}"`:''}${j==='JLPT'?' data-jhub="1"':''}${j.startsWith('JLPT N')?` data-jl="${j.slice(-1)}"`:''}${kk?` data-k="${kk}"`:''}><span class="ic" style="background:${t[0]};color:${t[1]}">${i}</span><span class="jp"${TILE_JP[j]&&TILE_JP[j][0].length>=7&&/[^\x00-\x7f]/.test(TILE_JP[j][0])?` style="font-size:${TILE_JP[j][0].length>=8?12:13.5}px;letter-spacing:-.4px;white-space:nowrap"`:''}>${TILE_JP[j]?TILE_JP[j][0]:j}</span><span class="kana">${S.furi?(TILE_JP[j]?TILE_JP[j][1]:k):''}</span><span class="mmt mm">${tileSub(j,m)}</span>${S.tab==='practice'&&!PRO_OK?'<span class="crown">👑</span>':''}</button>`}).join('')}</div>`:`${owlEmpty()}`;
   }
   return h;
 }
@@ -1277,7 +1335,7 @@ function renderNames(){
 </div>
 <div class="mm" style="font-size:13px;color:#4A5468;text-align:center">${T(`နာမည်စာလုံး ${NAMES.length} လုံး · နှိပ်ရင် အသံထွက်ပါတယ်`,`${NAMES.length}音節 · タップで発音`,`${NAMES.length} syllables · tap to hear`)}</div>
 <div style="background:#fff;border-radius:20px;border:1px solid var(--line);overflow:hidden">
-${list.map((n,i)=>`<button data-sp="${n.ks[0]}" style="width:100%;border:none;background:${S.kSay===n.ks[0]?'#FBE5E3':'transparent'};display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr);gap:10px;align-items:center;min-height:54px;padding:6px 16px;text-align:left;${i<list.length-1?'border-bottom:1px solid #E8ECF3;':''}"><span class="mm" style="font-size:19px;font-weight:700">${n.m}</span><span style="font-size:18px;color:#1F3A68;font-weight:700">${n.k}</span></button>`).join('')||`<div class="empty mm">${T('ရှာမတွေ့ပါ','見つかりません','No results')}</div>`}
+${list.map((n,i)=>`<button data-sp="${n.ks[0]}" style="width:100%;border:none;background:${S.kSay===n.ks[0]?'#FBE5E3':'transparent'};display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr);gap:10px;align-items:center;min-height:54px;padding:6px 16px;text-align:left;${i<list.length-1?'border-bottom:1px solid #E8ECF3;':''}"><span class="mm" style="font-size:19px;font-weight:700">${n.m}</span><span style="font-size:18px;color:#1F3A68;font-weight:700">${n.k}</span></button>`).join('')||`${owlEmpty()}`}
 </div>
 <div class="mm" style="font-size:12px;color:#6B7486;line-height:1.8;padding:0 4px">${T('နိုင်ငံခြားသား အမည်ကို カタカナ နဲ့ ရေးတဲ့အတွက် လူတစ်ယောက်နဲ့ တစ်ယောက် ကွဲလွဲနိုင်ပါတယ်။ အနီးစပ်ဆုံး ရေးထားပါတယ်။','外国人の名前のカタカナ表記は人によって異なる場合があります。できるだけ近い表記にしています。','Katakana spellings of foreign names can vary from person to person. These are the closest common forms.')}</div>
 </main>`;
@@ -1625,7 +1683,7 @@ ${chips}
 <label class="search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14223D" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input id="tq" aria-label="Search" placeholder="${T('ရှာရန်… (ဂျပန် / မြန်မာ / English)','検索…','Search… (Japanese / Myanmar / English)')}" value="${esc(S.tq||'')}"></label>
 ${tp.note?`<div class="mm" style="background:#FFF1DE;color:#6B4200;border-radius:16px;padding:12px 14px;font-size:14px;line-height:1.8">${T(...tp.note)}</div>`:''}
 ${pairs?`<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;padding:0 4px;font-size:13px;font-weight:800;color:#4A5468"><span>${T('ကိုယ့်မိသားစု','自分の家族（謙譲）','My family')}</span><span>${T('သူတစ်ပါး မိသားစု','他人の家族（尊敬）',"Someone else's")}</span></div>${pairs}`:''}
-${body||(!pairs?`<div class="empty mm">${T('ရှာမတွေ့ပါ','見つかりません','No results')}</div>`:'')}
+${body||(!pairs?`${owlEmpty()}`:'')}
 <div class="mm" style="font-size:13px;color:#4A5468;text-align:center">${T('နှိပ်ရင် အသံထွက်ပါတယ်','タップで発音','Tap to hear')}</div>
 </main>`;
   const ti=document.getElementById('tq');
@@ -12348,7 +12406,7 @@ function renderQS(){
   document.getElementById('app').innerHTML=`${pageHead(T('အမြန်ရှာ','クイック検索','Quick Search'),T(`စကားလုံး ${qsAll().length} လုံးထဲက ရှာမယ်`,`${qsAll().length}語から検索`,`Search ${qsAll().length} words`))}
 <main id="qm">
 <label class="search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14223D" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input id="qsq" aria-label="Search" placeholder="${T('ဂျပန် / မြန်မာ / English နဲ့ ရှာပါ','日本語・ミャンマー語・英語で検索','Search in Japanese / Myanmar / English')}" value="${esc(S.qsq||'')}"></label>
-${q?(res.length?res.map(wordRow).join(''):`<div class="empty mm">${T('ရှာမတွေ့ပါ','見つかりません','No results')}</div>`):`<div class="mm" style="text-align:center;color:#6B7486;padding:30px 10px;line-height:2">${T('ဥပမာ — すし、ရေ、water','例：すし・ရေ・water','e.g. すし, ရေ, water')}</div>`}
+${q?(res.length?res.map(wordRow).join(''):`${owlEmpty()}`):`<div class="mm" style="text-align:center;color:#6B7486;padding:30px 10px;line-height:2">${T('ဥပမာ — すし、ရေ、water','例：すし・ရေ・water','e.g. すし, ရေ, water')}</div>`}
 </main>`;
   const i=document.getElementById('qsq');
   if(i&&i.addEventListener){i.oninput=()=>{S.qsq=i.value;renderQS();const n=document.getElementById('qsq');if(n){n.focus();n.setSelectionRange(n.value.length,n.value.length)}};if(!q)i.focus()}
@@ -33626,8 +33684,8 @@ ${JXBEST[L]!=null?`<span class="mm" style="font-size:13px;color:#F5C036;font-wei
     const sc=z.qs.reduce((n,q,i)=>n+(z.picks[i]===q.a?1:0),0),pct=Math.round(sc*100/z.qs.length);
     if(!z.saved){z.saved=1;if(JXBEST[L]==null||pct>JXBEST[L]){JXBEST[L]=pct;try{localStorage.setItem(JX_KEY,JSON.stringify(JXBEST))}catch(e){}}}
     const ok=pct>=60;
-    body=`<div style="background:#fff;border-radius:24px;padding:24px 18px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;box-shadow:0 4px 14px rgba(20,34,61,.06)">
-<span style="font-size:13px;font-weight:800;color:${c}">JLPT N${L} 模擬試験</span>
+    body=`<div style="background:#fff;border-radius:24px;padding:20px 18px 24px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;box-shadow:0 4px 14px rgba(20,34,61,.06)">
+${owl(ok?'happy':'cheer',104)}<span style="font-size:13px;font-weight:800;color:${c}">JLPT N${L} 模擬試験</span>
 <b style="font-size:44px;color:var(--navy)">${pct}%</b><span style="font-size:15px;font-weight:700">${sc} / ${z.qs.length}</span>
 <span class="mm" style="font-size:15px;font-weight:700;color:${ok?'#0F6B5C':'#B8302A'}">${ok?T('🎉 ကောင်းပါတယ်! နောက်တစ်ဆင့် စမ်းကြည့်လို့ရပြီ','🎉 よくできました！','🎉 Well done!'):T('💪 ထပ်လေ့ကျင့်ပါ — ၆၀% ကျော်အောင် ကြိုးစားကြည့်','💪 60%以上を目指そう','💪 Keep practising — aim for 60%+')}</span></div>
 <div style="background:#fff;border-radius:22px;padding:8px 16px;box-shadow:0 4px 14px rgba(20,34,61,.06)">${JX_SEC.map(([k])=>{const [a,n]=per[k]||[0,0];const p=n?Math.round(a*100/n):0;return `<div style="display:flex;flex-direction:column;gap:6px;padding:10px 0;border-bottom:1px solid var(--line)"><div style="display:flex"><b class="mm" style="font-size:14px">${jxSecName(k)}</b><b style="margin-left:auto;font-size:14px;color:${c}">${a} / ${n}</b></div><span style="height:8px;border-radius:4px;background:#E8ECF3;overflow:hidden"><span style="display:block;height:100%;width:${p}%;background:${p>=60?'#0F6B5C':'#E8463A'}"></span></span></div>`}).join('')}</div>
@@ -33655,7 +33713,7 @@ function renderQuiz(){
   let body;
   if(done){
     const pct=Math.round(z.score/z.qs.length*100);
-    body=`<div style="background:#fff;border-radius:22px;padding:28px 18px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;box-shadow:0 4px 14px rgba(20,34,61,.06)"><span style="font-size:54px">${pct>=80?'🎉':pct>=50?'👍':'💪'}</span><b style="font-size:34px;color:var(--navy)">${z.score} / ${z.qs.length}</b><span class="mm" style="font-size:15px">${pct>=80?T('အရမ်းတော်တယ်!','すばらしい！','Excellent!'):pct>=50?T('ကောင်းတယ်၊ ဆက်ကြိုးစား!','いいね！','Good job!'):T('ထပ်ကြိုးစားကြည့်ပါ!','もう一度がんばろう！','Try again!')}</span></div>
+    body=`<div style="background:#fff;border-radius:22px;padding:28px 18px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;box-shadow:0 4px 14px rgba(20,34,61,.06)">${owl(pct>=50?'happy':'cheer',100)}<b style="font-size:34px;color:var(--navy)">${z.score} / ${z.qs.length}</b><span class="mm" style="font-size:15px">${pct>=80?T('အရမ်းတော်တယ်!','すばらしい！','Excellent!'):pct>=50?T('ကောင်းတယ်၊ ဆက်ကြိုးစား!','いいね！','Good job!'):T('ထပ်ကြိုးစားကြည့်ပါ!','もう一度がんばろう！','Try again!')}</span></div>
 <button data-a="qzagain" style="min-height:52px;border-radius:16px;border:none;background:var(--red);color:#fff;font-size:16px;font-weight:800">↻ ${T('နောက်တစ်ခါ','もう一度','Again')}</button>`;
   }else{
     const q=z.qs[z.i],p=z.pick;
@@ -33927,9 +33985,9 @@ Object.assign(S,{plan:'m12',payFrom:''});
 const planLabel=id=>{const p=PAY.plans.find(x=>x[0]===id)||PAY.plans[0];return p[1]===12?T('၁၂ လ (၁ နှစ်)','12か月','12 months'):T(`${'၀၁၂၃၄၅၆၇၈၉'.split('').reduce((a,c,i)=>a.replace(new RegExp(i,'g'),c),String(p[1]))} လ`,`${p[1]}か月`,`${p[1]} month${p[1]>1?'s':''}`)};
 function renderPaywall(){
   const plan=(id,title,price,sub,badge)=>`<button data-plan="${id}" style="position:relative;flex:1;border-radius:18px;padding:16px 10px;border:2.5px solid ${S.plan===id?'#E0A030':'#D5DCE8'};background:${S.plan===id?'#FFF8E8':'#fff'};display:flex;flex-direction:column;align-items:center;gap:4px">${badge?`<span style="position:absolute;top:-11px;background:#E8463A;color:#fff;font-size:11px;font-weight:800;border-radius:10px;padding:2px 8px">${badge}</span>`:''}<b style="font-size:15px">${title}</b><b style="font-size:24px;color:#1F3A68">${price}</b><span class="mm" style="font-size:12px;color:#6B7486">${sub}</span></button>`;
-  const ben=[['🎮',T('Quiz・Matching・Scramble・書き取り ဂိမ်းအားလုံး','クイズ・ゲームすべて','All quizzes & games')],['📝',T('JLPT模試・試験 စမ်းသပ်စာမေးပွဲ','JLPT模試・試験','JLPT mock tests')],['🎧',T('Podcast・歌・物語 အသံဖိုင်များ','ポッドキャスト・歌・物語','Podcast, songs & stories')],['💬',T('TextMe စကားပြော လေ့ကျင့်ခန်း','TextMe 会話練習','TextMe chat practice')],['📚',T('敬語・オノマトペ・ことわざ・Slang','敬語・オノマトペ・ことわざ','Keigo, onomatopoeia, proverbs, slang')],['🕶️',T('Dark Side နဲ့ 🔞 18+ အပိုင်း','Dark Side と 18+','Dark Side & 18+')]];
+  const ben=[['🎮',T('Quiz・Matching・Scramble・書き取り ဂိမ်းအားလုံး','クイズ・ゲームすべて','All quizzes & games')],['📝',T('JLPT Exam · N5–N1 စမ်းသပ်စာမေးပွဲ','JLPT 模擬試験 N5〜N1','JLPT mock exams N5–N1')],['🎧',T('Podcast・歌・物語 အသံဖိုင်များ','ポッドキャスト・歌・物語','Podcast, songs & stories')],['💬',T('TextMe စကားပြော လေ့ကျင့်ခန်း','TextMe 会話練習','TextMe chat practice')],['📚',T('敬語・オノマトペ・ことわざ・Slang','敬語・オノマトペ・ことわざ','Keigo, onomatopoeia, proverbs, slang')],['🕶️',T('Dark Side နဲ့ 🔞 18+ အပိုင်း','Dark Side と 18+','Dark Side & 18+')]];
   document.getElementById('app').innerHTML=`${pageHead('👑 Pro','MYAING Pro')}<main id="pw">
-<div style="background:linear-gradient(135deg,#1F3A68,#14223D);border-radius:22px;padding:22px 18px;color:#fff;text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px"><span style="font-size:44px">👑</span><b style="font-size:22px">MYAING Pro</b><span class="mm" style="font-size:14px;opacity:.85">${PRO_OK?T('Pro သုံးနေပါပြီ — ကျေးဇူးတင်ပါတယ်! 🙏','Pro会員です。ありがとうございます！','You are Pro — thank you! 🙏')+(PRO_EXP?`<br>${T('သက်တမ်း','有効期限','Valid until')}: ${PRO_EXP}`:''):T('Pro အပိုင်း အကုန်ကို ကန့်သတ်ချက်မရှိ သုံးလိုက်ပါ','Proの全機能が使い放題','Unlock everything in Pro')}</span></div>
+<div style="background:linear-gradient(135deg,#1F3A68,#14223D);border-radius:22px;padding:22px 18px;color:#fff;text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px">${PRO_OK?`<span style="background:#fff;border-radius:50%;padding:6px;line-height:0">${owl('happy',84)}</span>`:'<span style="font-size:44px">👑</span>'}<b style="font-size:22px">MYAING Pro</b><span class="mm" style="font-size:14px;opacity:.85">${PRO_OK?T('Pro သုံးနေပါပြီ — ကျေးဇူးတင်ပါတယ်! 🙏','Pro会員です。ありがとうございます！','You are Pro — thank you! 🙏')+(PRO_EXP?`<br>${T('သက်တမ်း','有効期限','Valid until')}: ${PRO_EXP}`:''):T('Pro အပိုင်း အကုန်ကို ကန့်သတ်ချက်မရှိ သုံးလိုက်ပါ','Proの全機能が使い放題','Unlock everything in Pro')}</span></div>
 <div style="background:#fff;border-radius:18px;padding:6px 14px;box-shadow:0 3px 10px rgba(20,34,61,.05)">${ben.map(b=>`<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #EEF1F6"><span style="font-size:22px">${b[0]}</span><span class="mm" style="flex:1;font-size:14px">${b[1]}</span><span style="color:#0F6B5C;font-weight:900">✓</span></div>`).join('')}</div>
 ${PRO_OK?`<button data-a="prooff" style="min-height:46px;border-radius:14px;border:1.5px solid #D5DCE8;background:#fff;font-weight:800">${T('Pro ကို ဒီဖုန်းမှာ ပိတ်မယ် (စမ်းသပ်ရန်)','この端末でProを解除（テスト用）','Turn off Pro on this phone (testing)')}</button>`:`
 <div style="display:flex;justify-content:center;gap:6px;flex-wrap:wrap">${PAY.methods.map(x=>`<span style="font-size:11px;font-weight:800;color:${x.fg||'#fff'};background:${x.color};border-radius:8px;padding:3px 8px">${x.name}</span>`).join('')}</div><div class="mm" style="background:#FFF1DE;color:#8A4B00;border:1.5px dashed #E0A030;border-radius:14px;padding:10px 14px;font-size:13.5px;line-height:1.8;text-align:center">⚠️ <b>${T('စမ်းသပ် ဈေးနှုန်း','試験価格','Trial pricing')}</b> — ${T('ဈေးနှုန်း အတည်မပြုရသေးပါ။ ပြောင်းလဲနိုင်ပါတယ်။','価格は未確定です。変更される場合があります。','Prices are not final and may change.')}</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 10px;padding-top:10px">${PAY.plans.map(p=>plan(p[0],planLabel(p[0]),p[2],p[3],p[4]?(p[0]==='m12'?T('အကျိုးအရှိဆုံး','おすすめ','Best value')+' · ':'')+'-'+p[4]:'')).join('')}</div>
@@ -36302,7 +36360,7 @@ function renderWelcome(){
   const soon=(ic,t)=>`<button data-soon="${T('အကောင့်','アカウント','Account')}" style="display:flex;align-items:center;justify-content:center;gap:10px;min-height:52px;border-radius:26px;border:1.5px solid #D5DCE8;background:#fff;color:#14223D;font-size:15px;font-weight:700"><span style="font-size:18px;font-weight:800">${ic}</span><span class="mm">${t}</span><span style="font-size:11px;font-weight:800;color:#8A5A12;background:#FFF1DE;border-radius:8px;padding:2px 7px">${T('မကြာမီ','準備中','Soon')}</span></button>`;
   document.getElementById('app').innerHTML=`<main style="padding:22px 20px calc(24px + env(safe-area-inset-bottom));gap:14px;background:linear-gradient(180deg,#EAF0FA 0%,#F3F5F9 45%)">
 <div style="display:flex;gap:6px">${lb('my','မြန်မာ')}${lb('ja','日本語')}${lb('en','English')}</div>
-<div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:10px 0 4px;text-align:center"><span style="border-radius:28px;box-shadow:0 12px 28px rgba(31,58,104,.3);display:block;line-height:0">${logo}</span><b style="font-size:24px;letter-spacing:2px;color:#1F3A68;margin-top:6px">MYAING STUDY</b><span class="mm" style="font-size:16px;font-weight:700;color:#14223D">${T('Myaing Study မှ ကြိုဆိုပါတယ် 🙏','ようこそ Myaing Study へ 🙏','Welcome to Myaing Study 🙏')}</span><span class="mm" style="font-size:13.5px;color:#4A5468">${T('ဂျပန်စာကို မြန်မာလို အလွယ်ဆုံး လေ့လာမယ်','ミャンマー語でかんたん日本語学習','Learn Japanese the easy way, in Myanmar')}</span></div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:10px 0 4px;text-align:center"><span style="position:relative;display:block;line-height:0"><span style="border-radius:28px;box-shadow:0 12px 28px rgba(31,58,104,.3);display:block;line-height:0">${logo}</span><span style="position:absolute;right:-66px;bottom:-14px">${owl('happy',78)}</span></span><b style="font-size:24px;letter-spacing:2px;color:#1F3A68;margin-top:6px">MYAING STUDY</b><span class="mm" style="font-size:16px;font-weight:700;color:#14223D">${T('Myaing Study မှ ကြိုဆိုပါတယ် 🙏','ようこそ Myaing Study へ 🙏','Welcome to Myaing Study 🙏')}</span><span class="mm" style="font-size:13.5px;color:#4A5468">${T('ဂျပန်စာကို မြန်မာလို အလွယ်ဆုံး လေ့လာမယ်','ミャンマー語でかんたん日本語学習','Learn Japanese the easy way, in Myanmar')}</span></div>
 ${feat('あ',T('ဟီရာဂါနာ → JLPT N1','ひらがな → JLPT N1','Hiragana → JLPT N1'),T('အခြေခံကနေ အဆင့်မြင့်အထိ','基礎から上級まで','From basics to advanced'))}
 ${feat('話',T('စကားပြော ၁၈,၅၀၀ ကြောင်း','会話 18,500文','18,500 dialog lines'),T('ဆေးရုံ၊ ဘဏ်၊ အလုပ်ခွင် … ၃၇ ခန်း','病院・銀行・職場など37場面','Hospital, bank, work … 37 scenes'))}
 ${feat('辞',T('Dictionary · ပြက္ခဒိန်','辞書・ミャンマー暦','Dictionary · Calendar'),T('ဂျပန် ⇄ မြန်မာ ⇄ English','日本語⇄ミャンマー語⇄英語','Japanese ⇄ Myanmar ⇄ English'))}
