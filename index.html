@@ -95,6 +95,7 @@ aside{position:absolute;left:0;top:0;bottom:0;width:min(320px,86%);background:#F
 .sh-ic{width:38px;height:38px;border-radius:12px;background:#E7ECF5;color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0}
 .chk{margin-left:auto;width:28px;height:28px;border-radius:14px;background:var(--navy);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 main>*,aside>*{flex-shrink:0}
+.gjw>button{content-visibility:auto;contain-intrinsic-size:auto 64px}
 .list.list.pray .mcard{margin:0 0 6px}.mcart svg{border-radius:0}.mctx{padding:10px 16px 4px}.mcm{font-weight:800;color:#6B4A00;font-size:18px;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}.mcm span{font-size:13px;font-weight:600;color:#9A7A3A}
 .mcr{display:flex;gap:10px;align-items:center;padding:8px 0;border-top:1px dashed #F1E3BE}.mcr:first-of-type{border-top:none}.mcr i{font-style:normal;font-size:22px;width:30px;text-align:center}.mcr small{display:block;font-size:12px;color:#9A7A3A}.mcr b{display:block;font-size:16px;color:#4A3300}.mcr em{display:block;font-style:normal;font-size:12px;color:#9A7A3A}
 .mcart{position:relative}.list.pray .mcnav{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;min-height:40px;border-bottom:none;border-radius:20px;border:none;background:rgba(255,255,255,.75);color:#4A3300;font-size:24px;line-height:1;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.15);padding:0;margin:0!important}.list.pray .mcnav.l{left:8px}.list.pray .mcnav.r{right:8px}
@@ -129,6 +130,15 @@ body.dark #app svg.owl{filter:hue-rotate(180deg) invert(1)}
 @keyframes spPop{0%{transform:scale(.3) rotate(-12deg);opacity:0}100%{transform:scale(1) rotate(0);opacity:1}}
 @keyframes spM{0%{transform:translateY(16px);opacity:0}100%{transform:none;opacity:1}}
 @keyframes spUp{0%{transform:translateY(10px);opacity:0}100%{transform:none;opacity:1}}
+
+#fest{position:fixed;inset:0;z-index:998;pointer-events:none;overflow:hidden}
+#fest .fi{position:absolute;bottom:-90px;will-change:transform,opacity;animation:fUp var(--d) linear var(--dl) both}
+#fest .fi>svg{display:block;animation:fSw var(--sw) ease-in-out infinite alternate}
+#fest .fl{transform-origin:50% 100%;animation:fFl .35s ease-in-out infinite alternate}
+@keyframes fUp{0%{transform:translate3d(0,0,0);opacity:0}6%{opacity:1}80%{opacity:1}100%{transform:translate3d(var(--dx),calc(-100vh - 140px),0);opacity:0}}
+@keyframes fSw{from{transform:rotate(-7deg) translateX(-6px)}to{transform:rotate(7deg) translateX(6px)}}
+@keyframes fFl{from{transform:scale(.9,1)}to{transform:scale(1.08,1.12)}}
+@media (prefers-reduced-motion:reduce){#fest{display:none}}
 @keyframes spDot{0%,100%{background:#C9D2E3;transform:none}50%{background:#E8463A;transform:translateY(-4px)}}
 body.dark #splash{background:#0B0F17}body.dark #splash .nm{color:#E6ECF7}
 #dm.dqon .dsh,#dm .dl.dhide{display:none!important}
@@ -505,12 +515,14 @@ function renderGoju(){
     return `<button data-sp="${say}" style="width:100%;border:none;background:#fff;border-radius:16px;padding:10px 14px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;align-items:center;text-align:left;box-shadow:0 3px 10px rgba(20,34,61,.05);min-height:56px;${S.kSay===say?'outline:2px solid #E8463A;':''}">
 <span style="display:flex;flex-direction:column;min-width:0"><span style="font-size:20px;font-weight:800;line-height:1.3">${top}</span>${sub?`<span style="font-size:12px;color:${w.kata?'#0F6B5C':'#6B7486'};font-weight:${w.kata?700:400}">${sub}</span>`:''}</span>
 <span style="display:flex;align-items:center;gap:8px;border-left:1px solid var(--line);padding-left:10px;min-width:0"><span style="flex:1;display:flex;flex-direction:column;gap:2px;min-width:0"><span class="mm" style="font-size:14px;font-weight:600;color:#1F3A68">${w.m}</span>${w.en?`<span style="font-size:12px;color:#4A5468">${w.en}</span>`:''}</span>${w.lv?`<span style="flex-shrink:0;font-size:11px;font-weight:800;color:#fff;background:${LVC[w.lv]};border-radius:8px;padding:2px 6px">N${w.lv}</span>`:''}</span></button>`};
+  GJ.word=word;GJ.ws=[];
   const secs=GOJU.map(g=>{
     const ws=g.words.filter(w=>(!q||(w.k+w.r+w.m+(w.en||'')).toLowerCase().includes(q))&&(!S.glv||w.lv===S.glv));
     if((q||S.glv)&&!ws.length)return '';
+    const gi=GJ.ws.push(ws)-1;
     return `<section id="g-${g.h}" style="display:flex;flex-direction:column;gap:8px">
 <div style="display:flex;align-items:center;gap:10px;padding-top:6px"><span style="width:44px;height:44px;border-radius:14px;background:#1F3A68;color:#fff;font-size:24px;font-weight:800;display:flex;align-items:center;justify-content:center">${g.h}</span><span style="font-size:22px;font-weight:800;color:#0F6B5C">${g.k}</span><span style="height:1px;flex:1;background:var(--line)"></span></div>
-${ws.map(word).join('')}</section>`}).join('');
+<div class="gjw" data-gi="${gi}" style="display:flex;flex-direction:column;gap:8px;min-height:${ws.length*70}px"></div></section>`}).join('');
   const total=GOJU.reduce((n,g)=>n+g.words.filter(w=>w.r!=='を'&&w.r!=='ん').length,0);
   document.getElementById('app').innerHTML=`
 <header><button class="hbtn" data-a="kback" aria-label="Back">${BACK}</button><div class="htitle"><b>五十音 · Kotoba</b><span class="mm">${T(`အက္ခရာစဉ်လိုက် စကားလုံး ${total} လုံး`,`五十音順 ${total}語`,`${total} words in kana order`)}</span></div><span style="width:44px"></span></header>
@@ -521,8 +533,18 @@ ${ws.map(word).join('')}</section>`}).join('');
 <div class="mm" style="font-size:13px;color:#4A5468;text-align:center">${T('စကားလုံးကို နှိပ်ရင် အသံထွက်ပါတယ် · JLPT အဆင့်က ခန့်မှန်းခြေပါ','タップで発音 · JLPTレベルは目安です','Tap to hear · JLPT levels are approximate')}</div>
 ${secs||`<div class="empty mm">${S.glv&&!q?T('N'+S.glv+' စကားလုံး မထည့်ရသေးပါ','N'+S.glv+'の単語はまだありません','No N'+S.glv+' words yet'):'ရှာမတွေ့ပါ'}</div>`}
 </main>`;
+  gjLazy();
   const gi=document.getElementById('gq');
-  if(gi)gi.oninput=()=>{S.gq=gi.value;renderGoju();const n=document.getElementById('gq');if(n){n.focus();n.setSelectionRange(n.value.length,n.value.length)}};
+  if(gi)gi.oninput=()=>{S.gq=gi.value;clearTimeout(GJ.t);GJ.t=setTimeout(()=>{if(S.view!=='goju')return;renderGoju();const n=document.getElementById('gq');if(n){n.focus();n.setSelectionRange(n.value.length,n.value.length)}},180)};
+}
+const GJ={ws:[],word:null,io:null,t:0};
+function gjFill(el){if(!el||el.dataset.done)return;el.dataset.done='1';const ws=GJ.ws[+el.dataset.gi]||[];const N=40;el.innerHTML=ws.slice(0,N).map(GJ.word).join('');let k=N;const more=()=>{if(k>=ws.length||!el.isConnected){el.style.minHeight='';return}el.insertAdjacentHTML('beforeend',ws.slice(k,k+120).map(GJ.word).join(''));k+=120;setTimeout(more,16)};el.style.minHeight=(ws.length*70)+'px';setTimeout(more,30);if(GJ.io)GJ.io.unobserve(el)}
+function gjLazy(){
+  if(GJ.io)GJ.io.disconnect();
+  const els=[...document.querySelectorAll('.gjw')];
+  els.slice(0,1).forEach(gjFill);
+  if('IntersectionObserver' in window){GJ.io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)gjFill(e.target)}),{root:document.getElementById('gm'),rootMargin:'900px 0px'});els.forEach(e=>{if(!e.dataset.done)GJ.io.observe(e)})}
+  else els.forEach(gjFill);
 }
 /* ---------- JLPT N5–N1 ---------- */
 const JK={ // kanji|on|kun|mm|example|reading
@@ -36459,12 +36481,12 @@ document.getElementById('app').addEventListener('click',e=>{
   if(b.dataset.jxplay&&S.jx){const it=S.jx.qs[S.jx.i];try{speechSynthesis.cancel()}catch(e){}let n=0;const nx=()=>{if(n<it.l.length)speakJa(it.l[n++][1],0.9,()=>setTimeout(nx,500))};nx();return}
   if(b.dataset.jhub!==undefined){let lv=5;try{lv=+(localStorage.getItem('myaing.jlv')||5)||5}catch(e){}S.jl=lv;S.jtab='';S.view='jlpt';S.kSay='';render();return}
   if(b.dataset.about){S.view='about';S.drawer=false;S.aboutSec=b.dataset.about;render();return}
-  if(b.dataset.t){S.tab=b.dataset.t;S.q='';S.drawer=false;render();return}
+  if(b.dataset.t){S.tab=b.dataset.t;S.q='';S.drawer=false;render();if(b.dataset.t==='home')festFly();return}
   if(b.dataset.chat!==undefined){S.chat=+b.dataset.chat;CONTACTS[S.chat].unread=false;S.view='chat';render();return}
   if(b.dataset.cm){const c=CONTACTS[S.chat];c.cm[b.dataset.cm]=!c.cm[b.dataset.cm];render();return}
   if(b.dataset.cmc){const c=CONTACTS[S.chat],k=b.dataset.cmc,a=CYC[k],i=a.findIndex(x=>x[0]===c.cm[k]);c.cm[k]=a[(i+1)%a.length][0];render();return}
   if(b.dataset.glv!==undefined){S.glv=+b.dataset.glv;render();return}
-  if(b.dataset.jump){const t=document.getElementById('g-'+b.dataset.jump);if(t&&t.scrollIntoView)t.scrollIntoView({behavior:'smooth',block:'start'});return}
+  if(b.dataset.jump){const t=document.getElementById('g-'+b.dataset.jump);if(t){gjFill(t.querySelector('.gjw'));if(t.scrollIntoView)t.scrollIntoView({block:'start'})}return}
   if(b.dataset.tjump!==undefined){const t=document.getElementById('tsec-'+b.dataset.tjump);if(t&&t.scrollIntoView)t.scrollIntoView({behavior:'smooth',block:'start'});return}
   if(b.dataset.delw!==undefined){if(confirm(T('ဒီစကားလုံးကို ဖျက်မလား?','この単語を削除しますか？','Delete this word?'))){MYW.splice(+b.dataset.delw,1);saveMyw()}const m=document.getElementById('jm'),y=m?m.scrollTop:0;render();const n=document.getElementById('jm');if(n)n.scrollTop=y;return}
   if(b.dataset.topic){S.tq='';S.topic=b.dataset.topic;S.view='topic';S.kSay='';render();const m=document.querySelector&&document.querySelector('main');if(m)m.scrollTop=0;return}
@@ -36477,6 +36499,7 @@ document.getElementById('app').addEventListener('click',e=>{
   if(b.dataset.jans){const [k,i]=b.dataset.jans.split(':');if(S.jans[k]===undefined){S.jans[k]=+i;jpMark(S.jl,S.jtab,k)}const m=document.getElementById('jm'),y=m?m.scrollTop:0;render();const n=document.getElementById('jm');if(n)n.scrollTop=y;return}
   if(b.dataset.jplay){const [,L,i]=b.dataset.jplay.match(/l(\d)-(\d+)/);const it=JL[L][+i];try{speechSynthesis.cancel()}catch(e){}let n=0;const nx=()=>{if(n<it.l.length)speakJa(it.l[n++][1],0.9,()=>setTimeout(nx,500))};nx();return}
   if(b.dataset.k){S.kana=b.dataset.k;S.kSay='';S.view='kana';render();const m=document.querySelector&&document.querySelector('main');if(m)m.scrollTop=0;return}
+  if(b.dataset.sp&&S.view==='goju'){S.kSay=b.dataset.sp;try{speechSynthesis.cancel()}catch(e){}speakJa(b.dataset.sp,0.8);document.querySelectorAll('#gm button[data-sp]').forEach(x=>{x.style.outline=x.dataset.sp===S.kSay?'2px solid #E8463A':''});return}
   if(b.dataset.sp){if(S.view==='jlpt'&&S.jtab)jpMarkSp(b.dataset.sp);S.kSay=b.dataset.sp;try{speechSynthesis.cancel()}catch(e){}speakJa(b.dataset.sp,0.8);const y=document.querySelector&&document.querySelector('main')?document.querySelector('main').scrollTop:0;render();const m=document.querySelector&&document.querySelector('main');if(m)m.scrollTop=y;return}
   if(b.dataset.c){cycle(b.dataset.c);render();return}
   if(b.dataset.g){SET[b.dataset.g]=!SET[b.dataset.g];saveSet();render();return}
@@ -36543,7 +36566,48 @@ document.getElementById('app').addEventListener('click',e=>{
 });
 if(!welcomed())S.view='welcome';
 render();
-(function(){const sp=document.getElementById('splash');if(!sp)return;const close=()=>{if(sp.classList.contains('out'))return;sp.classList.add('out');setTimeout(()=>sp.remove(),350)};sp.addEventListener('click',close);setTimeout(close,2200)})();
+
+/* ---------- Month floating art (12 Myanmar months: flower · festival · lights) ---------- */
+function festLum(h){const n=parseInt(h.slice(1),16);return ((n>>16)*299+((n>>8)&255)*587+(n&255)*114)/1000}
+function festDk(h,k){const n=parseInt(h.slice(1),16),f=x=>Math.round(x*(1-k)).toString(16).padStart(2,'0');return '#'+f(n>>16)+f((n>>8)&255)+f(n&255)}
+function festSVG(t,id,m){
+  const glow=`<defs><radialGradient id="fg${id}"><stop offset="0" stop-color="#FFE9A8" stop-opacity=".95"/><stop offset=".45" stop-color="#FFC24A" stop-opacity=".45"/><stop offset="1" stop-color="#FFB020" stop-opacity="0"/></radialGradient></defs>`;
+  const C=(typeof MCF!=='undefined'&&MCF[m])||['#fff','#eee','#F28DB8','#FFD2E6','#F3C845','round',5];
+  const lt=festLum(C[2])>215,acc=lt?festDk(C[1],.38):C[2];
+  if(t==='fl'&&typeof mcFlower==='function'){const cl=C[5]==='cluster';return `<svg width="70" height="70" viewBox="0 0 70 70" overflow="visible"><defs><radialGradient id="mpF${m}"><stop offset="0" stop-color="${C[3]}"/><stop offset="1" stop-color="${C[2]}"/></radialGradient></defs><g style="filter:drop-shadow(0 0 ${lt?1.5:0}px ${acc}) drop-shadow(0 2px 3px rgba(0,0,0,.2))">${mcFlower(m,35,C[5]==='lotus'?48:35,cl?16:26).replace(/url\(#mp\)/g,`url(#mpF${m})`)}</g></svg>`}
+  if(t==='pt')return `<svg width="22" height="26" viewBox="0 0 22 26"><path d="M11 1C19 7 21 16 11 25C1 16 3 7 11 1Z" fill="${lt?C[3]:C[2]}" stroke="${acc}" stroke-width="${lt?1.2:0}" opacity=".9"/><path d="M11 5C14 10 14 16 11 21" stroke="${lt?acc:C[3]}" stroke-width="1.4" fill="none"/></svg>`;
+  if(t==='md'&&typeof MCI!=='undefined'&&MCI[m]){const night=m===7||m===8,bg=night?'#2C3B78':acc;return `<svg width="62" height="62" viewBox="-50 -50 100 100"><circle r="47" fill="${bg}" opacity=".92"/><circle r="41" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="4 6" opacity=".7"/><g style="color:${bg}">${MCI[m]}</g></svg>`}
+  if(t==='drop')return `<svg width="30" height="40" viewBox="0 0 30 40"><path d="M15 2C22 13 27 20 27 26a12 12 0 0 1-24 0C3 20 8 13 15 2Z" fill="#6EC3F0" opacity=".85"/><path d="M9 25a6 6 0 0 0 5 7" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round" opacity=".8"/></svg>`;
+  if(t==='lamp')return `<svg width="54" height="62" viewBox="0 0 54 62">${glow}<ellipse cx="27" cy="26" rx="24" ry="26" fill="url(#fg${id})"/>
+<g class="fl"><path d="M27 8c5 7 7 12 7 16a7 7 0 0 1-14 0c0-4 2-9 7-16z" fill="#FF9A2E"/><path d="M27 15c3 4 4 7 4 9a4 4 0 0 1-8 0c0-2 1-5 4-9z" fill="#FFE27A"/></g>
+<path d="M6 36h42c-2 10-10 16-21 16S8 46 6 36z" fill="#B5562E"/><path d="M6 36h42c0 3-9 5-21 5S6 39 6 36z" fill="#D9794A"/><path d="M40 37c6-1 10 0 11 2-3 1-7 1-11 0z" fill="#B5562E"/>
+<path d="M14 45c8 3 18 3 26 0" stroke="#8E3F1F" stroke-width="1.5" fill="none" opacity=".6"/></svg>`;
+  return `<svg width="52" height="76" viewBox="0 0 52 76">${glow}<ellipse cx="26" cy="38" rx="25" ry="34" fill="url(#fg${id})"/>
+<path d="M26 2v8" stroke="#7A3B12" stroke-width="2"/><rect x="17" y="9" width="18" height="5" rx="2" fill="#7A3B12"/>
+<path d="M14 14h24c6 8 6 30 0 38H14c-6-8-6-30 0-38z" fill="#E8463A"/><path d="M20 14c-3 9-3 29 0 38M32 14c3 9 3 29 0 38M26 14v38" stroke="#B8302A" stroke-width="1.4" fill="none"/>
+<path d="M16 20h20c3 6 3 20 0 26H16c-3-6-3-20 0-26z" fill="#FFB347" opacity=".55"/>
+<rect x="17" y="52" width="18" height="5" rx="2" fill="#7A3B12"/><path d="M22 57l-2 12M26 57v14M30 57l2 12" stroke="#F5C036" stroke-width="2" stroke-linecap="round"/></svg>`;
+}
+const FEST_MIX={1:['fl','drop','pt','md','fl','drop','pt','fl','drop','md'],7:['fl','lamp','lan','lamp','fl','lan','lamp','md','fl','lan'],8:['lan','lamp','fl','lan','md','lamp','lan','fl','lamp','lan']};
+function festFly(n){
+  try{
+    if(matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    if(document.getElementById('fest'))return;
+    let m=0;try{const d=new Date();m=mcIdx(mmDay(d.getFullYear(),d.getMonth()+1,d.getDate()))}catch(e){}
+    if(!m)return;
+    const mix=FEST_MIX[m]||['fl','pt','md','fl','pt','fl','md','pt','fl','pt'];
+    const box=document.createElement('div');box.id='fest';box.setAttribute('aria-hidden','true');
+    n=n||mix.length;let h='',maxEnd=0;
+    for(let i=0;i<n;i++){
+      const t=mix[i%mix.length],x=4+((i*37+Math.random()*30)%86),sc=(t==='pt'||t==='drop'?.8:.65)+Math.random()*.45,dur=10+Math.random()*4,dl=(i/n)*5+Math.random()*.6,dx=(Math.random()*90-45)|0;
+      maxEnd=Math.max(maxEnd,dur+dl);
+      h+=`<div class="fi" style="left:${x.toFixed(1)}%;--d:${dur.toFixed(2)}s;--dl:${dl.toFixed(2)}s;--dx:${dx}px;--sw:${(2+Math.random()*1.6).toFixed(2)}s;scale:${sc.toFixed(2)}">${festSVG(t,i,m)}</div>`;
+    }
+    box.innerHTML=h;document.body.appendChild(box);
+    setTimeout(()=>box.remove(),(maxEnd+.3)*1000);
+  }catch(e){}
+}
+(function(){const sp=document.getElementById('splash');if(!sp){setTimeout(()=>festFly(),400);return}const close=()=>{if(sp.classList.contains('out'))return;sp.classList.add('out');setTimeout(()=>sp.remove(),350);setTimeout(()=>festFly(),150)};sp.addEventListener('click',close);setTimeout(close,2200)})();
 </script>
 <script>if("serviceWorker" in navigator&&location.protocol.startsWith("http")){addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}))}</script>
 </body>
