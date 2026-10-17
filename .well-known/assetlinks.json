@@ -1,0 +1,8 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.dokodemo.japanese",
+    "sha256_cert_fingerprints": ["EA:A2:50:73:DD:45:1C:82:ED:99:D8:FF:21:73:63:CE:06:E4:48:D6:14:52:58:52:55:16:43:EB:AF:EE:E3:94"]
+  }
+}]
