@@ -1,14 +1,14 @@
 {
   "id": "/",
-  "name": "Myaing Study",
-  "short_name": "Myaing",
-  "description": "ဂျပန်စာကို မြန်မာလို လေ့လာမယ်",
+  "name": "Dokodemo – Learn Japanese Anywhere",
+  "short_name": "Dokodemo",
+  "description": "どこでも日本語 · ဟီရာဂါနာ၊ ခတခါနာ၊ Kanji၊ ဝေါဟာရ၊ သဒ္ဒါ — JLPT N5–N1 အထိ မြန်မာလို လေ့လာနိုင်တဲ့ Study App",
   "lang": "my",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#1F3A68",
+  "background_color": "#14223D",
   "theme_color": "#1F3A68",
   "categories": [
     "education"
