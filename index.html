@@ -13804,7 +13804,7 @@ const JEX={};for(const [l,raw] of Object.entries(JEXTRA))JEX[l]=raw.split('\n').
 
 /* ---------- About / Contact / Privacy ---------- */
 // ▼ ဒီနေရာမှာ ကိုယ့်အချက်အလက် ဖြည့်ပါ (Email / Telegram username / Viber ဖုန်းနံပါတ်)
-const APP={name:'Dokodemo',ver:'1.0.93',year:2026,email:'JapaneseDokodemo@gmail.com',telegram:'DokodemoOfficial',viber:'',site:'https://myaingstudy.github.io/'};
+const APP={name:'Dokodemo',ver:'1.0.94',year:2026,email:'JapaneseDokodemo@gmail.com',telegram:'DokodemoOfficial',viber:'',site:'https://myaingstudy.github.io/'};
 function renderAbout(){
   const sec=(id,icon,title,body)=>`<section id="${id}" style="background:#fff;border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:10px;box-shadow:0 3px 10px rgba(20,34,61,.05)"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:20px">${icon}</span><b style="font-size:18px">${title}</b></div>${body}</section>`;
   const p=t=>`<p class="mm" style="margin:0;font-size:14px;line-height:1.9;color:#2B3446">${t}</p>`;
@@ -38176,8 +38176,12 @@ var a=document.getElementById('app');if(a){new MutationObserver(function(){reque
 function fit(el){try{var p=el.parentElement;if(!p)return;var cs=getComputedStyle(p),fs=parseFloat(cs.fontSize)||16;var k=cs.fontStyle+'|'+cs.fontWeight+'|'+cs.fontFamily+'|'+(document.fonts&&document.fonts.status);var r=C[k];
 if(!r){cv.font=cs.fontStyle+' '+cs.fontWeight+' 100px '+cs.fontFamily;var m=cv.measureText('o');var h=(m.actualBoundingBoxAscent||55)+(m.actualBoundingBoxDescent||1),w=(m.actualBoundingBoxLeft||0)+(m.actualBoundingBoxRight||55);var d=(h+w)/2;r=C[k]={d:d/100,desc:(m.actualBoundingBoxDescent||1)/100,side:Math.max(0,((m.width||d)-d)/2)/100}}
 var D=r.d*fs;el.style.width=el.style.height=D.toFixed(2)+'px';el.style.verticalAlign=(-r.desc*fs).toFixed(2)+'px';el.style.margin='0 '+(r.side*fs).toFixed(2)+'px'}catch(e){}}
-function all(){document.querySelectorAll('.dko').forEach(fit)}
-var a=document.getElementById('app');if(a)new MutationObserver(function(){requestAnimationFrame(all)}).observe(a,{childList:true,subtree:true});
+var SKIP={SCRIPT:1,STYLE:1,TEXTAREA:1,INPUT:1,TITLE:1,NOSCRIPT:1,OPTION:1};
+function wrap(root){try{var w=document.createTreeWalker(root||document.body,NodeFilter.SHOW_TEXT,{acceptNode:function(n){if(n.nodeValue.indexOf('Dokodemo')<0)return 2;for(var e=n.parentElement;e;e=e.parentElement){if(SKIP[e.tagName]||e.isContentEditable||e.namespaceURI==='http://www.w3.org/2000/svg'||e.classList.contains('dko'))return 2}return 1}}),L=[],n;
+while(n=w.nextNode())L.push(n);
+L.forEach(function(t){var parts=t.nodeValue.split('Dokodemo'),fr=document.createDocumentFragment();parts.forEach(function(p,i){if(i){fr.appendChild(document.createTextNode('Dok'));var d=document.createElement('span');d.className='dko';d.textContent='o';fr.appendChild(d);fr.appendChild(document.createTextNode('demo'))}if(p)fr.appendChild(document.createTextNode(p))});t.parentNode.replaceChild(fr,t)})}catch(e){}}
+var busy=0;function all(){busy=0;wrap(document.body);document.querySelectorAll('.dko').forEach(fit)}
+new MutationObserver(function(){if(!busy){busy=1;requestAnimationFrame(all)}}).observe(document.body,{childList:true,subtree:true,characterData:true});
 all();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){C={};all()});})();</script>
 <script>if("serviceWorker" in navigator&&location.protocol.startsWith("http")){addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}))}</script>
 </body>
