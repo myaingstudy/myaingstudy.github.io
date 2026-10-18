@@ -31,6 +31,7 @@ header{background:var(--navy);min-height:64px;padding:0 12px;display:flex;align-
 .htitle span{color:#AFC0DD;font-size:12px}
 main{flex:1;overflow-y:auto;padding:14px 14px 100px;display:flex;flex-direction:column;gap:14px}
 .search{display:flex;align-items:center;gap:10px;background:#fff;border-radius:28px;padding:0 18px;height:52px;box-shadow:0 4px 14px rgba(20,34,61,.08)}
+.search.tm .sv{display:none!important}.search.tm:focus-within .sv{display:flex!important}.search.tm:focus-within .te{display:none}.te{font-size:21px;line-height:1;width:22px;text-align:center;flex-shrink:0;animation:tePop .5s cubic-bezier(.3,1.5,.5,1) both}@keyframes tePop{from{transform:scale(.4) rotate(-20deg);opacity:0}to{transform:none;opacity:1}}
 .search{position:relative;overflow:hidden}
 .marq{position:absolute;left:48px;right:18px;top:0;bottom:0;overflow:hidden;pointer-events:none;display:flex;align-items:center;white-space:nowrap;color:#5A6478;font-size:15px}
 .marq span{display:inline-block;padding-left:100%;animation:marq 10s linear infinite}
@@ -234,6 +235,8 @@ document.addEventListener('click',e=>{
     }
   };requestAnimationFrame(go);
 },true);
+function timeIcon(){try{if(typeof mmDay==='function'){const d=new Date(),x=mmDay(d.getFullYear(),d.getMonth()+1,d.getDate());if(x&&x.sb===1)return '🙏'}}catch(e){}
+  const h=new Date().getHours();return h>=5&&h<7?'🌅':h>=7&&h<12?'☀️':h>=12&&h<17?'🌤️':h>=17&&h<19?'🌇':h>=19&&h<21?'🌆':'🌙'}
 function greetMsg(){const h=new Date().getHours();
   if(h>=5&&h<12)return T('Good Morning ☀️ မင်္ဂလာရှိသော နေ့လေးဖြစ်ပါစေ ❤️','おはようございます ☀️ 素敵な一日になりますように ❤️','Good Morning ☀️ Have a blessed day ❤️');
   if(h>=12&&h<17)return T('Good Afternoon 🌤️ မင်္ဂလာရှိသော နေ့လေးဖြစ်ပါစေ ❤️','こんにちは 🌤️ 素敵な一日になりますように ❤️','Good Afternoon 🌤️ Have a blessed day ❤️');
@@ -255,7 +258,7 @@ function sbMsg(){try{if(typeof mmDay!=='function')return '';const d=new Date();c
 let LAST_ANIM_TAB='';
 function body(){
   const q=S.q.trim().toLowerCase();const anim=S.tab!==LAST_ANIM_TAB&&!q;LAST_ANIM_TAB=S.tab;
-  let h=`<label class="search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14223D" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input id="q" aria-label="Search" placeholder="${S.tab==='home'?'':PHF()[S.tab]}" value="${esc(S.q)}">${S.tab==='home'&&!S.q?`<span class="marq mm" aria-hidden="true"><span style="animation-duration:${Math.max(10,Math.round(PHF().home.length*0.2))}s">${PHF().home}</span></span>`:''}</label>`;
+  let h=`<label class="search${S.tab==='home'&&!S.q?' tm':''}"><span class="sv" style="display:flex"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14223D" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span>${S.tab==='home'&&!S.q?`<span class="te" aria-hidden="true">${timeIcon()}</span>`:''}<input id="q" aria-label="Search" placeholder="${S.tab==='home'?'':PHF()[S.tab]}" value="${esc(S.q)}">${S.tab==='home'&&!S.q?`<span class="marq mm" aria-hidden="true"><span style="animation-duration:${Math.max(10,Math.round(PHF().home.length*0.2))}s">${PHF().home}</span></span>`:''}</label>`;
   if(S.tab==='home'){
     const r=HOME.filter(t=>!q||t.includes(q));
     h+=r.length?`<div class="list pray">${r.map(t=>`<button class="mm">${t}</button>`).join('')}${q?'':homeTop()}</div>`:`${owlEmpty()}`;
@@ -13835,7 +13838,7 @@ const JEX={};for(const [l,raw] of Object.entries(JEXTRA))JEX[l]=raw.split('\n').
 
 /* ---------- About / Contact / Privacy ---------- */
 // ▼ ဒီနေရာမှာ ကိုယ့်အချက်အလက် ဖြည့်ပါ (Email / Telegram username / Viber ဖုန်းနံပါတ်)
-const APP={name:'Dokodemo',ver:'1.0.97',year:2026,email:'JapaneseDokodemo@gmail.com',telegram:'DokodemoOfficial',viber:'',site:'https://myaingstudy.github.io/'};
+const APP={name:'Dokodemo',ver:'1.0.98',year:2026,email:'JapaneseDokodemo@gmail.com',telegram:'DokodemoOfficial',viber:'',site:'https://myaingstudy.github.io/'};
 function renderAbout(){
   const sec=(id,icon,title,body)=>`<section id="${id}" style="background:#fff;border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:10px;box-shadow:0 3px 10px rgba(20,34,61,.05)"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:20px">${icon}</span><b style="font-size:18px">${title}</b></div>${body}</section>`;
   const p=t=>`<p class="mm" style="margin:0;font-size:14px;line-height:1.9;color:#2B3446">${t}</p>`;
