@@ -24,13 +24,13 @@ html,body{margin:0;height:100%;background:#DDE3EE}
 body{font-family:'M PLUS Rounded 1c','Noto Sans Myanmar',sans-serif;color:var(--ink);-webkit-tap-highlight-color:transparent}
 button{font:inherit;cursor:pointer;color:inherit}
 .mm{font-family:'Noto Sans Myanmar',sans-serif;line-height:1.7}
-#app{max-width:480px;margin:0 auto;height:100%;background:var(--bg);display:flex;flex-direction:column;position:relative;overflow:hidden}
+#app{max-width:none;margin:0 auto;height:100%;background:var(--bg);display:flex;flex-direction:column;position:relative;overflow:hidden}
 header{background:var(--navy);min-height:64px;padding:0 12px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;padding-top:env(safe-area-inset-top)}
 .hbtn{width:44px;height:44px;border-radius:22px;border:none;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center}
 .htitle{display:flex;flex-direction:column;align-items:center;line-height:1.25}
 .htitle b{color:#fff;font-size:19px;font-weight:800;letter-spacing:1.5px}
 .htitle span{color:#AFC0DD;font-size:12px}
-main{flex:1;overflow-y:auto;padding:14px 14px 120px;display:flex;flex-direction:column;gap:14px}
+main{flex:1;overflow-y:auto;padding:14px 14px 100px;display:flex;flex-direction:column;gap:14px}
 .search{display:flex;align-items:center;gap:10px;background:#fff;border-radius:28px;padding:0 18px;height:52px;box-shadow:0 4px 14px rgba(20,34,61,.08)}
 .search{position:relative;overflow:hidden}
 .marq{position:absolute;left:48px;right:18px;top:0;bottom:0;overflow:hidden;pointer-events:none;display:flex;align-items:center;white-space:nowrap;color:#5A6478;font-size:15px}
@@ -44,6 +44,7 @@ main{flex:1;overflow-y:auto;padding:14px 14px 120px;display:flex;flex-direction:
 .list button:last-child{border-bottom:none}
 .dko{display:inline-block;width:.56em;height:.56em;border-radius:50%;background:#E8463A;margin:0 .03em;vertical-align:-.02em;flex-shrink:0}
 .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (min-width:640px){.grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}}
 .grid.anim .tile{animation:tileIn .26s cubic-bezier(.2,.8,.3,1) both;animation-delay:calc(var(--i,0)*18ms)}
 .grid.anim .tile .ic{animation:icPop .32s cubic-bezier(.3,1.6,.5,1) both;animation-delay:calc(var(--i,0)*18ms + 60ms)}
 @keyframes tileIn{from{opacity:0;transform:translateY(16px) scale(.96)}to{opacity:1;transform:none}}
@@ -55,14 +56,15 @@ main{flex:1;overflow-y:auto;padding:14px 14px 120px;display:flex;flex-direction:
 .tile .kana{font-size:11px;color:var(--muted);line-height:1.2;min-height:13px}
 .tile .mmt{font-size:13px;font-weight:600;color:var(--navy);text-align:center}
 .empty{text-align:center;color:var(--muted);padding:24px 0}
-nav{position:absolute;left:12px;right:12px;bottom:calc(14px + env(safe-area-inset-bottom));background:#fff;border-radius:30px;box-shadow:0 8px 28px rgba(20,34,61,.16);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));padding:8px 4px}
-nav button{border:none;background:transparent;min-height:58px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:12px;font-weight:700;color:#7A8396}
+nav{position:absolute;left:50%;transform:translateX(-50%);width:min(520px,calc(100% - 24px));bottom:calc(10px + env(safe-area-inset-bottom));background:#fff;border-radius:26px;box-shadow:0 6px 22px rgba(20,34,61,.16);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));padding:3px 2px;z-index:6}
+nav button{border:none;background:transparent;min-height:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:10.5px;font-weight:700;color:#7A8396}
+nav button>svg{width:22px;height:22px}
 nav button.on{color:var(--navy)}
 nav button{position:relative;transition:color .2s}
-nav button.on::after{content:'';position:absolute;bottom:4px;left:50%;width:18px;height:3px;margin-left:-9px;border-radius:2px;background:var(--red);animation:navBar .3s cubic-bezier(.2,.85,.25,1)}
+nav button.on::after{content:'';position:absolute;bottom:2px;left:50%;width:18px;height:3px;margin-left:-9px;border-radius:2px;background:var(--red);animation:navBar .3s cubic-bezier(.2,.85,.25,1)}
 @keyframes navBar{from{transform:scaleX(0)}to{transform:none}}
 nav button:active .sq,nav button:active svg{transform:scale(.88);transition:transform .1s}
-nav .sq{width:28px;height:28px;border-radius:8px;background:#A9B3C6;color:#fff;font-size:16px;font-weight:800;display:flex;align-items:center;justify-content:center}
+nav .sq{width:23px;height:23px;border-radius:7px;background:#A9B3C6;color:#fff;font-size:13.5px;font-weight:800;display:flex;align-items:center;justify-content:center}
 .shade{position:absolute;inset:0;border:none;background:rgba(10,18,34,.45)}
 aside{position:absolute;left:0;top:0;bottom:0;width:min(320px,86%);background:#F7F8FB;border-radius:0 26px 26px 0;padding:18px 14px 24px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding-top:calc(18px + env(safe-area-inset-top))}
 .prof{background:#EEF2F9;border-radius:24px;padding:22px;display:flex;flex-direction:column;align-items:center;gap:10px}
@@ -3116,15 +3118,18 @@ Object.assign(S,{topic:'家族'});
 Object.assign(S,{tq:''});
 function renderTopic(){
   const tp=TOPICS[S.topic],sel=x=>S.kSay===x?'outline:2px solid #E8463A;':'';
-  const q=(S.tq||'').trim().toLowerCase();
+  if(S.tlist===undefined){try{S.tlist=localStorage.getItem('myaing.tlist')==='1'}catch(e){S.tlist=false}}
+  const L=S.tlist,q=(S.tq||'').trim().toLowerCase();
   const hit=w=>!q||[w.k,w.r,w.mm,w.en].join(' ').toLowerCase().includes(q);
+  const shuf=a=>{if(!S.tshuf)return a;let x=S.tshuf;const r=()=>(x=(x*1103515245+12345)%2147483648)/2147483648;const b=a.slice();for(let i=b.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b};
   const jp=(k,r)=>`<span style="font-size:20px;font-weight:800;line-height:1.3">${k}</span>${k!==r&&S.furi?`<span style="font-size:12px;color:#6B7486">${r}</span>`:''}`;
   const lvb=l=>l?`<span style="font-size:11px;font-weight:800;color:#fff;background:${LVC[l]};border-radius:8px;padding:2px 6px">N${l}</span>`:'';
   const card=w=>`<div style="display:flex;gap:6px;align-items:stretch"><button data-sp="${w.r}" style="flex:1;min-width:0;border:none;background:#fff;border-radius:16px;padding:10px 14px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:10px;align-items:center;text-align:left;box-shadow:0 3px 10px rgba(20,34,61,.05);${sel(w.r)}">
 <span style="display:flex;flex-direction:column;min-width:0">${jp(w.k,w.r)}</span>
 <span style="display:flex;flex-direction:column;gap:2px;border-left:1px solid var(--line);padding-left:10px;min-width:0"><span style="display:flex;align-items:center;gap:6px"><span class="mm" style="flex:1;font-size:14px;font-weight:700;color:#1F3A68">${w.mm}</span>${lvb(w.lv)}</span><span style="font-size:13px;color:#4A5468">${w.en}</span></span></button>${favBtn(w)}</div>`;
-  const pairsAll=tp.P.filter(p=>!q||[p.ak,p.ar,p.bk,p.br,p.mm,p.en].join(' ').toLowerCase().includes(q));
-  const pairs=pairsAll.map(p=>`<div style="background:#fff;border-radius:18px;box-shadow:0 3px 10px rgba(20,34,61,.06);overflow:hidden">
+  const row=(k,r,mm,en,lv,w)=>{k=k||'';r=r||k;mm=mm||'';en=en||'';const open=S.texp===r;return `<div style="background:#fff;border-bottom:1px solid var(--line)"><button data-sp="${r}" data-tx="${esc(r)}" style="width:100%;border:none;background:${S.kSay===r?'#FFF6F5':'transparent'};min-height:52px;padding:8px 14px;display:flex;align-items:center;gap:10px;text-align:left"><span style="display:flex;flex-direction:column;min-width:0;flex:0 1 auto;max-width:52%"><span style="font-size:17px;font-weight:700;line-height:1.35;color:#14223D">${k}</span>${k!==r&&S.furi?`<span style="font-size:11.5px;color:#6B7486">${r}</span>`:''}</span><span class="mm" style="flex:1;text-align:right;font-size:14.5px;color:#1F3A68;line-height:1.6">${mm}</span></button>${open?`<div style="display:flex;align-items:center;gap:8px;padding:0 14px 10px"><span style="flex:1;font-size:13px;color:#4A5468">${en}</span>${lvb(lv)}${w?favBtn(w):''}</div>`:''}</div>`};
+  const pairsAll=shuf(tp.P.filter(p=>!q||[p.ak,p.ar,p.bk,p.br,p.mm,p.en].join(' ').toLowerCase().includes(q)));
+  const pairs=L?(pairsAll.length?`<div style="border-radius:16px;overflow:hidden;box-shadow:0 3px 10px rgba(20,34,61,.05)">${pairsAll.map(p=>row(`${p.ak} / ${p.bk}`,p.ar,p.mm,`${p.en} · ${p.br}`,p.lv,null)).join('')}</div>`:''):pairsAll.map(p=>`<div style="background:#fff;border-radius:18px;box-shadow:0 3px 10px rgba(20,34,61,.06);overflow:hidden">
 <div style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:#F3F5F9"><span class="mm" style="flex:1;font-size:15px;font-weight:700;color:#1F3A68">${p.mm}</span><span style="font-size:13px;color:#4A5468">${p.en}</span>${lvb(p.lv)}</div>
 <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)">
 <button data-sp="${p.ar}" style="border:none;background:transparent;padding:10px 14px;display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;${sel(p.ar)}">${jp(p.ak,p.ar)}</button>
@@ -3132,21 +3137,26 @@ function renderTopic(){
 </div></div>`).join('');
   const secs=tp.SEC||[{t:tp.P.length?['ဆက်စပ် စကားလုံးများ','関連語','Related words']:null,W:tp.W}];
   const total=tp.P.length+secs.reduce((n,s)=>n+s.W.length,0);
-  const body=secs.map((s,i)=>{const ws=s.W.filter(hit);if(!ws.length)return '';
-    return `${s.t?`<div id="tsec-${i}" style="display:flex;align-items:baseline;gap:8px;padding:10px 4px 0"><b style="font-size:17px">${T(...s.t)}</b></div>`:''}${ws.map(card).join('')}`}).join('');
+  const body=secs.map((s,i)=>{const ws=shuf(s.W.filter(hit));if(!ws.length)return '';
+    const hd=s.t?`<div id="tsec-${i}" style="display:flex;align-items:baseline;gap:8px;padding:10px 4px 0"><b style="font-size:17px">${T(...s.t)}</b><span style="font-size:12px;color:#8A93A5">${ws.length}</span></div>`:'';
+    return hd+(L?`<div style="border-radius:16px;overflow:hidden;box-shadow:0 3px 10px rgba(20,34,61,.05)">${ws.map(w=>row(w.k,w.r,w.mm,w.en,w.lv,w)).join('')}</div>`:ws.map(card).join(''))}).join('');
   const chips=tp.SEC?`<div style="background:#fff;border-bottom:1px solid var(--line);display:flex;gap:6px;overflow-x:auto;padding:8px 10px;flex-shrink:0">${tp.SEC.map((s,i)=>`<button data-tjump="${i}" style="flex:0 0 auto;min-height:40px;padding:0 14px;border-radius:20px;border:1.5px solid #D5DCE8;background:#fff;font-size:14px;font-weight:700;color:#1F3A68;white-space:nowrap">${T(...s.t).replace(/ \(.*\)|（.*）/,'')}</button>`).join('')}</div>`:'';
+  const hb=(a,on,svg,lab)=>`<button class="hbtn" data-a="${a}" aria-label="${lab}" style="width:40px;${on?'background:#fff;':''}">${svg(on?'#1F3A68':'#fff')}</button>`;
+  const icList=c=>`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="2.4" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>`;
+  const icCard=c=>`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="2.2"><rect x="3.5" y="4" width="17" height="7" rx="2"/><rect x="3.5" y="13" width="17" height="7" rx="2"/></svg>`;
+  const icShuf=c=>`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>`;
   document.getElementById('app').innerHTML=`
-<header><button class="hbtn" data-a="kback" aria-label="Back">${BACK}</button><div class="htitle"><b>${T(...tp.title)}</b><span class="mm">${T(`${total} လုံး · 日本語 · မြန်မာ · English`,`${total}語 · 日本語・ミャンマー語・英語`,`${total} words · Japanese · Myanmar · English`)}</span></div><span style="width:44px"></span></header>
+<header><button class="hbtn" data-a="kback" aria-label="Back">${BACK}</button><div class="htitle" style="min-width:0;flex:1"><b>${T(...tp.title)}</b><span class="mm">${T(`${total} လုံး · 日本語 · မြန်မာ · English`,`${total}語 · 日本語・ミャンマー語・英語`,`${total} words · Japanese · Myanmar · English`)}</span></div><span style="display:flex;gap:2px">${hb('tshuf',!!S.tshuf,icShuf,'Shuffle')}${hb('tview',false,L?icCard:icList,L?'Card view':'List view')}</span></header>
 ${chips}
 <main id="tm">
-<label class="search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14223D" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input id="tq" aria-label="Search" placeholder="${T('ရှာရန်… (ဂျပန် / မြန်မာ / English)','検索…','Search… (Japanese / Myanmar / English)')}" value="${esc(S.tq||'')}"></label>
+<label class="search" style="position:sticky;top:-14px;z-index:4;box-shadow:0 6px 16px rgba(20,34,61,.12)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14223D" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input id="tq" aria-label="Search" placeholder="${T('ရှာရန်… (ဂျပန် / မြန်မာ / English)','検索…','Search… (Japanese / Myanmar / English)')}" value="${esc(S.tq||'')}"></label>
 ${tp.note?`<div class="mm" style="background:#FFF1DE;color:#6B4200;border-radius:16px;padding:12px 14px;font-size:14px;line-height:1.8">${T(...tp.note)}</div>`:''}
-${pairs?`<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;padding:0 4px;font-size:13px;font-weight:800;color:#4A5468"><span>${T('ကိုယ့်မိသားစု','自分の家族（謙譲）','My family')}</span><span>${T('သူတစ်ပါး မိသားစု','他人の家族（尊敬）',"Someone else's")}</span></div>${pairs}`:''}
+${pairs?`${L?'':`<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;padding:0 4px;font-size:13px;font-weight:800;color:#4A5468"><span>${T('ကိုယ့်မိသားစု','自分の家族（謙譲）','My family')}</span><span>${T('သူတစ်ပါး မိသားစု','他人の家族（尊敬）',"Someone else's")}</span></div>`}${pairs}`:''}
 ${body||(!pairs?`${owlEmpty()}`:'')}
-<div class="mm" style="font-size:13px;color:#4A5468;text-align:center">${T('နှိပ်ရင် အသံထွက်ပါတယ်','タップで発音','Tap to hear')}</div>
-</main>`;
+<div class="mm" style="font-size:13px;color:#4A5468;text-align:center">${T(L?'နှိပ်ရင် အသံထွက်ပြီး English နဲ့ အဆင့် ပြပါတယ်':'နှိပ်ရင် အသံထွက်ပါတယ်',L?'タップで発音・詳細':'タップで発音',L?'Tap to hear and see details':'Tap to hear')}</div>
+</main>${navHTML()}`;
   const ti=document.getElementById('tq');
-  if(ti)ti.oninput=()=>{S.tq=ti.value;renderTopic();const n=document.getElementById('tq');if(n){n.focus();n.setSelectionRange(n.value.length,n.value.length)}};
+  if(ti)ti.oninput=()=>{const m=document.getElementById('tm'),y=m?m.scrollTop:0;S.tq=ti.value;renderTopic();const n=document.getElementById('tq');if(n){n.focus();n.setSelectionRange(n.value.length,n.value.length)}};
 }
 /* ---------- More topics (JP · MM · EN) ---------- */
 const TOPIC_RAW={
@@ -37853,6 +37863,13 @@ function playFrom(list,i){
   };
   step(0);
 }
+function navHTML(){const sq=(c,col,t)=>`<span class="sq" style="background:${S.tab===t?col:'#A9B3C6'}">${c}</span>`;return `<nav>
+<button data-a="open" class="${S.drawer?'on':''}"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round"><path d="M4 6h16" stroke="#E8463A"/><path d="M4 12h16" stroke="#1F3A68"/><path d="M4 18h16" stroke="#E0A030"/></svg>Menu</button>
+${navBtn('words','Discovery',sq('語','#1F3A68','words'))}
+${navBtn('home','Home',sq('ど','#E8463A','home'))}
+${navBtn('talk','Dialog',sq('話','#E8463A','talk'))}
+${navBtn('practice','Pro',sq('練','#0F6B5C','practice'))}
+</nav>`}
 function navBtn(t,label,icon){return `<button data-t="${t}" class="${S.tab===t&&!S.drawer?'on':''}">${icon}${label}</button>`}
 /* ---------- Usage statistics (Google Analytics 4) — anonymous, opt-out in Menu ---------- */
 const GA_ID='G-RML4B2XTPV';
@@ -37902,7 +37919,7 @@ function fxAfter(p){
   if(!fxOK()){FX.tile=false;FX.back=null;return}
   const app=document.getElementById('app'),main=app.querySelector('main');
   // 1) drawer open
-  if(S.drawer&&!p.drawer){const as=app.querySelector('aside'),sh=app.querySelector('.shade');
+  if(S.drawer&&!p.drawer){FX.back=null;const as=app.querySelector('aside'),sh=app.querySelector('.shade');
     if(as)as.animate([{transform:'translateX(-104%)'},{transform:'none'}],{duration:300,easing:FX.E});
     if(sh)sh.animate([{opacity:0},{opacity:1}],{duration:300,easing:'ease-out'});
     if(main)main.animate([{transform:'none'},{transform:'translateX(18px)'}],{duration:300,easing:FX.E,fill:'forwards'});
@@ -37932,6 +37949,12 @@ function fxAfter(p){
 function fxKey(){return [S.view,S.pro||'',S.topic||'',S.jtab||'',S.dlg||'',S.ut&&S.ut.i,S.ut&&S.ut.lk].join('|')}
 const _renderFX0=_render;
 _render=function(){const p={view:S.view,tab:S.tab,drawer:!!S.drawer,key:fxKey()};_renderFX0();try{fxAfter(FX.prev||p)}catch(e){}FX.prev={view:S.view,tab:S.tab,drawer:!!S.drawer,key:fxKey()}};
+
+
+/* ---------- Bottom nav on every page ---------- */
+function ensureNav(){const app=document.getElementById('app');if(!app||S.view==='main'||S.view==='welcome'||S.view==='jexam')return;if(app.querySelector(':scope>nav')||app.querySelector('.pills,#cf'))return;app.insertAdjacentHTML('beforeend',navHTML())}
+try{new MutationObserver(()=>ensureNav()).observe(document.getElementById('app'),{childList:true})}catch(e){}
+document.addEventListener('click',e=>{const t=e.target.closest&&e.target.closest('#app>nav [data-t],#app>nav [data-a="open"]');if(!t||S.view==='main'||!fxOK())return;const app=document.getElementById('app');FX.back={html:app.innerHTML,scr:[...app.querySelectorAll('main,[id]')].map(x=>x.scrollTop)}},true);
 
 function render(){if(S.tab!=='home'||S.view)S.mcm=0;setTimeout(gaView,0);_render()}
 function _render(){
@@ -37973,13 +37996,7 @@ if(S.view==='quiz'){renderQuiz();return}
   document.getElementById('app').innerHTML=`
 <header>${S.tab==='home'?`<button class="hbtn" data-a="study" aria-label="Study">${BOOK}</button>`:`<span style="width:44px;display:flex;justify-content:center">${LOGO('#fff')}</span>`}<div class="htitle"><b>${t}</b><span class="mm">${s}</span></div><button class="hbtn" data-a="chats" aria-label="Chats"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></button></header>
 <main id="main">${body()}</main>
-<nav>
-<button data-a="open" class="${S.drawer?'on':''}"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round"><path d="M4 6h16" stroke="#E8463A"/><path d="M4 12h16" stroke="#1F3A68"/><path d="M4 18h16" stroke="#E0A030"/></svg>Menu</button>
-${navBtn('words','Discovery',sq('語','#1F3A68','words'))}
-${navBtn('home','Home',sq('ど','#E8463A','home'))}
-${navBtn('talk','Dialog',sq('話','#E8463A','talk'))}
-${navBtn('practice','Pro',sq('練','#0F6B5C','practice'))}
-</nav>${proModalHTML()}${SET.bubble&&!S.drawer&&!S.proModal?`<button data-a="qs" aria-label="Quick search" style="position:absolute;right:18px;bottom:calc(96px + env(safe-area-inset-bottom));width:58px;height:58px;border-radius:29px;border:none;background:var(--red);box-shadow:0 8px 22px rgba(232,70,58,.45);display:flex;align-items:center;justify-content:center;z-index:5"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></button>`:''}${drawer()}`;
+${navHTML()}${proModalHTML()}${SET.bubble&&!S.drawer&&!S.proModal?`<button data-a="qs" aria-label="Quick search" style="position:absolute;right:18px;bottom:calc(76px + env(safe-area-inset-bottom));width:58px;height:58px;border-radius:29px;border:none;background:var(--red);box-shadow:0 8px 22px rgba(232,70,58,.45);display:flex;align-items:center;justify-content:center;z-index:5"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></button>`:''}${drawer()}`;
   const q=document.getElementById('q');
   q.oninput=()=>{S.q=q.value;document.getElementById('main').innerHTML=body();bindSearch(true)};
 }
@@ -37998,7 +38015,7 @@ document.getElementById('app').addEventListener('click',e=>{
   if(b.dataset.wlang){SET.lang=b.dataset.wlang;saveSet();render();return}
   if(b.dataset.mc!==undefined){mcGo(+b.dataset.mc);return}
   if(b.dataset.jch!==undefined){S.jch=b.dataset.jch;const m0=document.querySelector('main');render();const m1=document.querySelector('main');if(m1&&m0)m1.scrollTop=0;return}
-  if(kaClick(b))return;if(utClick(b))return;if(b.dataset.a==='qrshow'){S.qrOn=true;render();return}
+  if(kaClick(b))return;if(utClick(b))return;if(b.dataset.a==='qrshow'){S.qrOn=true;render();return}if(b.dataset.a==='tview'&&S.view==='topic'){S.tlist=!S.tlist;S.texp='';try{localStorage.setItem('myaing.tlist',S.tlist?'1':'0')}catch(e){}renderTopic();return}if(b.dataset.a==='tshuf'&&S.view==='topic'){S.tshuf=S.tshuf?0:(Date.now()%2147483000)+1;renderTopic();const m=document.getElementById('tm');if(m)m.scrollTop=0;toast(S.tshuf?T('🔀 ကျပန်း စီထားပါတယ်','🔀 シャッフルしました','🔀 Shuffled'):T('↺ မူလအစဉ်','↺ 元の順番','↺ Original order'));return}if(b.dataset.tx!==undefined&&S.view==='topic'){S.texp=S.texp===b.dataset.tx?'':b.dataset.tx}
   if(b.dataset.a==='nall'){S.nAll=!S.nAll;nmUpd();return}
   if(b.dataset.jxl){S.jx={L:+b.dataset.jxl,st:'setup'};render();return}
   if(b.dataset.jxs){jxStart(S.jx.L);render();const m=document.getElementById('jxm');if(m)m.scrollTop=0;return}
@@ -38008,7 +38025,7 @@ document.getElementById('app').addEventListener('click',e=>{
   if(b.dataset.jxplay&&S.jx){const it=S.jx.qs[S.jx.i];try{speechSynthesis.cancel()}catch(e){}let n=0;const nx=()=>{if(n<it.l.length)speakJa(it.l[n++][1],0.9,()=>setTimeout(nx,500))};nx();return}
   if(b.dataset.jhub!==undefined){let lv=5;try{lv=+(localStorage.getItem('myaing.jlv')||5)||5}catch(e){}S.jl=lv;S.jtab='';S.view='jlpt';S.kSay='';render();return}
   if(b.dataset.about){S.view='about';S.drawer=false;S.aboutSec=b.dataset.about;render();return}
-  if(b.dataset.t){S.tab=b.dataset.t;S.q='';S.drawer=false;render();if(b.dataset.t==='home')festFly();return}
+  if(b.dataset.t){S.tab=b.dataset.t;S.q='';S.drawer=false;S.view='main';render();if(b.dataset.t==='home')festFly();return}
   if(b.dataset.chat!==undefined){S.chat=+b.dataset.chat;CONTACTS[S.chat].unread=false;S.view='chat';render();return}
   if(b.dataset.cm){const c=CONTACTS[S.chat];c.cm[b.dataset.cm]=!c.cm[b.dataset.cm];render();return}
   if(b.dataset.cmc){const c=CONTACTS[S.chat],k=b.dataset.cmc,a=CYC[k],i=a.findIndex(x=>x[0]===c.cm[k]);c.cm[k]=a[(i+1)%a.length][0];render();return}
@@ -38016,7 +38033,7 @@ document.getElementById('app').addEventListener('click',e=>{
   if(b.dataset.jump){const t=document.getElementById('g-'+b.dataset.jump);if(t){gjFill(t.querySelector('.gjw'));if(t.scrollIntoView)t.scrollIntoView({block:'start'})}return}
   if(b.dataset.tjump!==undefined){const t=document.getElementById('tsec-'+b.dataset.tjump);if(t&&t.scrollIntoView)t.scrollIntoView({behavior:'smooth',block:'start'});return}
   if(b.dataset.delw!==undefined){if(confirm(T('ဒီစကားလုံးကို ဖျက်မလား?','この単語を削除しますか？','Delete this word?'))){MYW.splice(+b.dataset.delw,1);saveMyw()}const m=document.getElementById('jm'),y=m?m.scrollTop:0;render();const n=document.getElementById('jm');if(n)n.scrollTop=y;return}
-  if(b.dataset.topic){S.tq='';S.topic=b.dataset.topic;S.view='topic';S.kSay='';render();const m=document.querySelector&&document.querySelector('main');if(m)m.scrollTop=0;return}
+  if(b.dataset.topic){S.tq='';S.topic=b.dataset.topic;S.view='topic';S.kSay='';S.tshuf=0;S.texp='';render();const m=document.querySelector&&document.querySelector('main');if(m)m.scrollTop=0;return}
   if(b.dataset.jl){S.jl=+b.dataset.jl;S.kl=0;S.kk=0;S.ksn=null;if(S.view!=='jlpt'){S.jtab=''}S.view='jlpt';S.kSay='';render();const m=document.getElementById('jm');if(m)m.scrollTop=0;return}
   if(b.dataset.jt){S.jtab=b.dataset.jt;S.kSay='';render();return}
   if(b.dataset.kl){if(!PRO_OK&&+b.dataset.kl>=2){toast(T('Kanji သင်ခန်းစာ ၁–၂ က အစမ်းပါ · ကျန်တာကို Pro နဲ့ ဖွင့်ပါ','レッスン1〜2は無料体験 · 続きはProで','Lessons 1–2 are free · unlock the rest with Pro'));S.view='paywall';render();return}S.kl=+b.dataset.kl;S.kk=0;S.ksn=null;S.kSay='';render();const m=document.getElementById('jm');if(m)m.scrollTop=0;return}
@@ -38051,7 +38068,7 @@ document.getElementById('app').addEventListener('click',e=>{
   if(b.dataset.soon){toast(T(`${b.dataset.soon} — မကြာမီ ရောက်လာပါမယ်`,`${b.dataset.soon}は準備中です`,`${b.dataset.soon} — coming soon`));return}
   const a=b.dataset.a;if(!a)return;
   const acts={
-    open:()=>S.drawer=true, close:()=>S.drawer=false,
+    open:()=>{S.view='main';S.drawer=true}, close:()=>S.drawer=false,
     study:()=>{S.view='study';S.drawer=false}, review:()=>{S.view='review';S.rvMode='review';S.drawer=false;S.rv=null}, feedback:()=>{S.view='review';S.rvMode='feedback';S.drawer=false;S.rv=null}, back:()=>{stopPlay();S.view='main';S.sortOpen=false},
     sort:()=>S.sortOpen=true, sortclose:()=>S.sortOpen=false,
     hl:()=>{S.hide='left';S.reveal={}}, hr:()=>{S.hide='right';S.reveal={}}, sa:()=>{S.hide='none';S.reveal={}},
