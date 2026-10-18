@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Dokodemo – Learn Japanese Anywhere</title>
-<meta name="theme-color" content="#14223D">
 <meta name="description" content="Dokodemo · どこでも日本語 · Learn Japanese Anywhere — ဟီရာဂါနာ၊ ခတခါနာ၊ Kanji၊ ဝေါဟာရ၊ သဒ္ဒါ JLPT N5–N1 အထိ မြန်မာလို လေ့လာနိုင်တဲ့ Study App">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -26,9 +25,9 @@ button{font:inherit;cursor:pointer;color:inherit}
 .mm{font-family:'Noto Sans Myanmar',sans-serif;line-height:1.7}
 #app{max-width:none;margin:0 auto;height:100%;background:var(--bg);display:flex;flex-direction:column;position:relative;overflow:hidden}
 header{background:var(--navy);min-height:64px;padding:0 12px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;padding-top:env(safe-area-inset-top)}
-.hbtn{width:44px;height:44px;border-radius:22px;border:none;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center}
+.hbtn{width:44px;height:44px;border-radius:22px;border:none;background:transparent;display:flex;align-items:center;justify-content:center}
 .htitle{display:flex;flex-direction:column;align-items:center;line-height:1.25}
-.htitle b{color:#fff;font-size:19px;font-weight:800;letter-spacing:1.5px}
+.htitle b{color:#fff;font-size:20px;font-weight:600;letter-spacing:.3px}
 .htitle span{color:#AFC0DD;font-size:12px}
 main{flex:1;overflow-y:auto;padding:14px 14px 100px;display:flex;flex-direction:column;gap:14px}
 .search{display:flex;align-items:center;gap:10px;background:#fff;border-radius:28px;padding:0 18px;height:52px;box-shadow:0 4px 14px rgba(20,34,61,.08)}
@@ -13805,7 +13804,7 @@ const JEX={};for(const [l,raw] of Object.entries(JEXTRA))JEX[l]=raw.split('\n').
 
 /* ---------- About / Contact / Privacy ---------- */
 // ▼ ဒီနေရာမှာ ကိုယ့်အချက်အလက် ဖြည့်ပါ (Email / Telegram username / Viber ဖုန်းနံပါတ်)
-const APP={name:'Dokodemo',ver:'1.0.85',year:2026,email:'JapaneseDokodemo@gmail.com',telegram:'DokodemoOfficial',viber:'',site:'https://myaingstudy.github.io/'};
+const APP={name:'Dokodemo',ver:'1.0.86',year:2026,email:'JapaneseDokodemo@gmail.com',telegram:'DokodemoOfficial',viber:'',site:'https://myaingstudy.github.io/'};
 function renderAbout(){
   const sec=(id,icon,title,body)=>`<section id="${id}" style="background:#fff;border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:10px;box-shadow:0 3px 10px rgba(20,34,61,.05)"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:20px">${icon}</span><b style="font-size:18px">${title}</b></div>${body}</section>`;
   const p=t=>`<p class="mm" style="margin:0;font-size:14px;line-height:1.9;color:#2B3446">${t}</p>`;
@@ -38002,7 +38001,7 @@ if(S.view==='quiz'){renderQuiz();return}
   const [t,s]=HEADF()[S.tab];
   const sq=(c,col,t)=>`<span class="sq" style="background:${S.tab===t?col:'#A9B3C6'}">${c}</span>`;
   document.getElementById('app').innerHTML=`
-<header>${S.tab==='home'?`<button class="hbtn" data-a="study" aria-label="Study">${BOOK}</button>`:`<span style="width:44px;display:flex;justify-content:center">${LOGO('#fff')}</span>`}<div class="htitle"><b>${t}</b><span class="mm">${s}</span></div><button class="hbtn" data-a="chats" aria-label="Chats"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></button></header>
+<header>${S.tab==='home'?`<button class="hbtn" data-a="study" aria-label="Study">${BOOK}</button>`:`<span style="width:44px;display:flex;justify-content:center">${LOGO('#fff')}</span>`}<div class="htitle"><b>${t}</b><span class="mm">${s}</span></div><button class="hbtn" data-a="chats" aria-label="Chats"><svg width="26" height="26" viewBox="0 0 24 24" fill="#fff" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></button></header>
 <main id="main">${body()}</main>
 ${navHTML()}${proModalHTML()}${SET.bubble&&!S.drawer&&!S.proModal?`<button data-a="qs" aria-label="Quick search" style="position:absolute;right:18px;bottom:calc(76px + env(safe-area-inset-bottom));width:58px;height:58px;border-radius:29px;border:none;background:var(--red);box-shadow:0 8px 22px rgba(232,70,58,.45);display:flex;align-items:center;justify-content:center;z-index:5"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></button>`:''}${drawer()}`;
   const q=document.getElementById('q');
@@ -38163,6 +38162,8 @@ function festFly(n){
 }
 (function(){const sp=document.getElementById('splash');if(!sp){setTimeout(()=>festFly(),400);return}const close=()=>{if(sp.classList.contains('out'))return;sp.classList.add('out');setTimeout(()=>sp.remove(),350);setTimeout(()=>festFly(),150)};sp.addEventListener('click',close);setTimeout(close,2200)})();
 </script>
+<script>(function(){function sync(){try{var h=document.querySelector('#app header')||document.querySelector('#app .phd')||document.querySelector('header');var c='#1F3A68';if(h){var bg=getComputedStyle(h).backgroundColor;if(bg&&bg!=='transparent'&&!/rgba\([^)]*,\s*0\)/.test(bg))c=bg;}document.querySelectorAll('meta[name="theme-color"]').forEach(function(m){m.setAttribute('content',c)});}catch(e){}}
+var a=document.getElementById('app');if(a){new MutationObserver(function(){requestAnimationFrame(sync)}).observe(a,{childList:true});}sync();})();</script>
 <script>if("serviceWorker" in navigator&&location.protocol.startsWith("http")){addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}))}</script>
 </body>
 </html>
