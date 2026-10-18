@@ -13842,7 +13842,7 @@ const JEX={};for(const [l,raw] of Object.entries(JEXTRA))JEX[l]=raw.split('\n').
 
 /* ---------- About / Contact / Privacy ---------- */
 // ▼ ဒီနေရာမှာ ကိုယ့်အချက်အလက် ဖြည့်ပါ (Email / Telegram username / Viber ဖုန်းနံပါတ်)
-const APP={name:'Dokodemo',ver:'1.0.107',year:2026,email:'JapaneseDokodemo@gmail.com',telegram:'DokodemoOfficial',viber:'',site:'https://myaingstudy.github.io/'};
+const APP={name:'Dokodemo',ver:'1.0.108',year:2026,email:'JapaneseDokodemo@gmail.com',telegram:'DokodemoOfficial',viber:'',site:'https://myaingstudy.github.io/'};
 function renderAbout(){
   const sec=(id,icon,title,body)=>`<section id="${id}" style="background:#fff;border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:10px;box-shadow:0 3px 10px rgba(20,34,61,.05)"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:20px">${icon}</span><b style="font-size:18px">${title}</b></div>${body}</section>`;
   const p=t=>`<p class="mm" style="margin:0;font-size:14px;line-height:1.9;color:#2B3446">${t}</p>`;
@@ -38223,7 +38223,7 @@ var a=document.getElementById('app');if(a){new MutationObserver(function(){reque
 <script>(function(){var cv=document.createElement('canvas').getContext('2d'),C={};
 function fit(el){try{var p=el.parentElement;if(!p)return;var cs=getComputedStyle(p),fs=parseFloat(cs.fontSize)||16;var k=cs.fontStyle+'|'+cs.fontWeight+'|'+cs.fontFamily+'|'+(document.fonts&&document.fonts.status);var r=C[k];
 if(!r){cv.font=cs.fontStyle+' '+cs.fontWeight+' 100px '+cs.fontFamily;var m=cv.measureText('o');var h=(m.actualBoundingBoxAscent||55)+(m.actualBoundingBoxDescent||1),w=(m.actualBoundingBoxLeft||0)+(m.actualBoundingBoxRight||55);var d=(h+w)/2;r=C[k]={d:d/100,desc:(m.actualBoundingBoxDescent||1)/100,side:Math.max(0,((m.width||d)-d)/2)/100}}
-var D=r.d*fs;el.style.width=el.style.height=D.toFixed(2)+'px';el.style.verticalAlign=(-r.desc*fs).toFixed(2)+'px';el.style.margin='0 '+(r.side*fs).toFixed(2)+'px'}catch(e){}}
+var D=r.d*fs;el.style.width=el.style.height=D.toFixed(2)+'px';el.style.verticalAlign=(-r.desc*fs).toFixed(2)+'px';var ls=parseFloat(cs.letterSpacing)||0,gp=r.side*fs+0.06*fs;el.style.margin='0 '+(gp+ls).toFixed(2)+'px 0 '+gp.toFixed(2)+'px'}catch(e){}}
 var SKIP={SCRIPT:1,STYLE:1,TEXTAREA:1,INPUT:1,TITLE:1,NOSCRIPT:1,OPTION:1};
 function wrap(root){try{var w=document.createTreeWalker(root||document.body,NodeFilter.SHOW_TEXT,{acceptNode:function(n){if(n.nodeValue.indexOf('Dokodemo')<0)return 2;for(var e=n.parentElement;e;e=e.parentElement){if(SKIP[e.tagName]||e.isContentEditable||e.namespaceURI==='http://www.w3.org/2000/svg'||e.classList.contains('dko'))return 2}return 1}}),L=[],n;
 while(n=w.nextNode())L.push(n);
