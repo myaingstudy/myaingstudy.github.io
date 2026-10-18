@@ -221,7 +221,7 @@ document.addEventListener('click',e=>{
     if(tile){
       const bg=taGhost(app,snap,scr,0);const dim=document.createElement('div');dim.style.cssText='position:absolute;inset:0;background:#14223D;opacity:0';bg.appendChild(dim);
       for(const t of bg.querySelectorAll('.grid .tile')){const j=t.querySelector('.jp');if(j&&j.textContent===TA.txt)t.style.visibility='hidden'}
-      const D=400,E='cubic-bezier(.2,.8,.2,1)',z0=app.style.zIndex,o0=app.style.transformOrigin;app.style.zIndex='1';app.style.transformOrigin='0 0';
+      const D=480,E='cubic-bezier(.2,.8,.2,1)',z0=app.style.zIndex,o0=app.style.transformOrigin;app.style.zIndex='1';app.style.transformOrigin='0 0';
       const an=app.animate([{transform:taXf(TA.rect,A),borderRadius:'70px',opacity:0,boxShadow:'0 18px 50px rgba(20,34,61,.35)'},{opacity:1,offset:.25},{transform:'none',borderRadius:'0px',opacity:1,boxShadow:'0 18px 50px rgba(20,34,61,0)'}],{duration:D,easing:E});
       dim.animate([{opacity:0},{opacity:.28}],{duration:D,easing:E,fill:'forwards'});bg.animate([{transform:'none'},{transform:'scale(.96)',offset:1}],{duration:D,easing:E,fill:'forwards'});
       let fin=0;const done=()=>{if(fin++)return;bg.remove();app.style.zIndex=z0;app.style.transformOrigin=o0};an.onfinish=done;setTimeout(done,D+300);
@@ -13804,7 +13804,7 @@ const JEX={};for(const [l,raw] of Object.entries(JEXTRA))JEX[l]=raw.split('\n').
 
 /* ---------- About / Contact / Privacy ---------- */
 // ▼ ဒီနေရာမှာ ကိုယ့်အချက်အလက် ဖြည့်ပါ (Email / Telegram username / Viber ဖုန်းနံပါတ်)
-const APP={name:'Dokodemo',ver:'1.0.87',year:2026,email:'JapaneseDokodemo@gmail.com',telegram:'DokodemoOfficial',viber:'',site:'https://myaingstudy.github.io/'};
+const APP={name:'Dokodemo',ver:'1.0.88',year:2026,email:'JapaneseDokodemo@gmail.com',telegram:'DokodemoOfficial',viber:'',site:'https://myaingstudy.github.io/'};
 function renderAbout(){
   const sec=(id,icon,title,body)=>`<section id="${id}" style="background:#fff;border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:10px;box-shadow:0 3px 10px rgba(20,34,61,.05)"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:20px">${icon}</span><b style="font-size:18px">${title}</b></div>${body}</section>`;
   const p=t=>`<p class="mm" style="margin:0;font-size:14px;line-height:1.9;color:#2B3446">${t}</p>`;
@@ -37933,22 +37933,30 @@ function fxAfter(p){
     if(as)setTimeout(()=>fxStagger(as),0);return}
   // 2) back → old page slides out to the right, new page slides in from the left
   if(FX.back&&app.innerHTML!==FX.back.html){const b=FX.back;FX.back=null;FX.tile=false;
+    const tl=S.view==='main'&&S.tab===TA.tab?taFindTile():null;
+    if(tl){const A=app.getBoundingClientRect(),r=tl.getBoundingClientRect();const D=420,E='cubic-bezier(.3,.75,.2,1)';
+      const ov=taGhost(app,b.html,b.scr,999);ov.style.boxShadow='0 18px 50px rgba(20,34,61,.3)';
+      tl.style.visibility='hidden';
+      const an=ov.animate([{transform:'none',borderRadius:'0px',opacity:1},{opacity:1,offset:.55},{transform:taXf(r,A),borderRadius:'60px',opacity:0}],{duration:D,easing:E,fill:'forwards'});
+      const fin=()=>{try{ov.remove()}catch(x){}tl.style.visibility=''};an.onfinish=fin;setTimeout(fin,D+400);
+      if(main)main.animate([{transform:'scale(.96)',opacity:.6},{transform:'none',opacity:1}],{duration:D,easing:E});
+      return}
     const g=taGhost(app,b.html,b.scr,999);g.style.boxShadow='-14px 0 34px rgba(20,34,61,.22)';
-    g.animate([{transform:'none'},{transform:'translateX(102%)'}],{duration:360,easing:'cubic-bezier(.25,.8,.25,1)',fill:'forwards'}).onfinish=()=>g.remove();setTimeout(()=>{try{g.remove()}catch(x){}},900);
-    app.animate([{transform:'translateX(-26%)',filter:'brightness(.88)'},{transform:'none',filter:'none'}],{duration:360,easing:'cubic-bezier(.25,.8,.25,1)'});
+    g.animate([{transform:'none'},{transform:'translateX(102%)'}],{duration:400,easing:'cubic-bezier(.25,.8,.25,1)',fill:'forwards'}).onfinish=()=>g.remove();setTimeout(()=>{try{g.remove()}catch(x){}},900);
+    app.animate([{transform:'translateX(-26%)',filter:'brightness(.88)'},{transform:'none',filter:'none'}],{duration:400,easing:'cubic-bezier(.25,.8,.25,1)'});
     const gr=app.querySelector('.grid');if(gr){gr.classList.remove('anim');void gr.offsetWidth;gr.classList.add('anim')}
     return}
   FX.back=null;
   // 3) tab switch inside main → slide by direction
   if(S.view==='main'&&p.view==='main'&&p.tab!==S.tab){const d=FX.TABS.indexOf(S.tab)-FX.TABS.indexOf(p.tab)>0?1:-1;
-    if(main)main.animate([{transform:`translateX(${d*42}px)`,opacity:.25},{transform:'none',opacity:1}],{duration:340,easing:FX.E});
-    const ht=app.querySelector('header .htitle');if(ht)ht.animate([{transform:'translateY(8px)',opacity:0},{transform:'none',opacity:1}],{duration:260,easing:FX.E});
+    if(main)main.animate([{transform:'scale(.97)',opacity:0},{transform:'none',opacity:1}],{duration:320,delay:70,easing:'cubic-bezier(.2,.8,.2,1)',fill:'backwards'});void d;
+    const ht=app.querySelector('header .htitle');if(ht)ht.animate([{opacity:0},{opacity:1}],{duration:300,delay:60,easing:'ease-out',fill:'backwards'});
     const on=app.querySelector('nav button.on .sq');if(on)on.animate([{transform:'scale(.6)'},{transform:'scale(1.18)',offset:.6},{transform:'none'}],{duration:340,easing:'ease-out'});
     if(S.tab==='home'&&main)fxStagger(main.querySelector('.list')||main);
     FX.tile=false;return}
   // 4) forward to a new page (not from a tile zoom) → push from the right + content stagger
   if(p.view!==S.view||p.key!==fxKey()){
-    if(!FX.tile&&p.view!==S.view)app.animate([{transform:'translateX(30%)',opacity:.4},{transform:'none',opacity:1}],{duration:360,easing:FX.E});
+    if(!FX.tile&&p.view!==S.view)app.animate([{transform:'translateX(30%)',opacity:.4},{transform:'none',opacity:1}],{duration:420,easing:FX.E});
     if(S.view!=='main'&&main&&!main.querySelector('.grid'))fxStagger(main);
   }
   FX.tile=false;
