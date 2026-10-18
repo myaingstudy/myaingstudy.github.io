@@ -35514,7 +35514,7 @@ const PAY={
     {id:'wave',icon:IC_WAVE,name:'Wave Pay',color:'#FFD400',fg:'#14223D',cur:'MMK',qr:'',fields:[]}
   ]
 };
-const PRO_SECRET=(a=>a.map(c=>String.fromCharCode(c^23)).reverse().join(''))([38, 97, 58, 120, 101, 103, 58, 112, 121, 126, 118, 110, 122]);
+const PRO_SECRET=(a=>a.map(c=>String.fromCharCode(c^23)).reverse().join(''))([39, 99, 33, 33, 110, 37, 34, 127, 67, 47, 127, 122, 71, 125, 109, 70, 64, 116, 66, 116, 92, 96, 95, 118, 113, 94, 70, 78, 94, 127, 97, 109]);
 let PRO_EXP='';try{PRO_EXP=localStorage.getItem('myaing.proexp')||''}catch(e){}
 function proUID(){let u='';try{u=localStorage.getItem('myaing.uid')||''}catch(e){}if(!u){const c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';for(let i=0;i<6;i++)u+=c[Math.floor(Math.random()*c.length)];try{localStorage.setItem('myaing.uid',u)}catch(e){}}return u}
 function proHash(str){let h=2166136261>>>0;for(const ch of str){h^=ch.charCodeAt(0);h=Math.imul(h,16777619)>>>0}const c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';let o='';for(let i=0;i<6;i++){o+=c[h%32];h=(Math.floor(h/32)^Math.imul(h,31))>>>0}return o}
