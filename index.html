@@ -283,8 +283,10 @@ ${ADMUI()?`<button class="row" data-a="share"><svg width="22" height="22" viewBo
 <div class="box">
 <button class="row" data-a="pro"><span style="width:22px;text-align:center;font-size:18px">👑</span><span class="lb" style="white-space:nowrap">${DKW} Pro</span><span class="mm" style="font-weight:800;color:${PRO_OK?(proTrialLeft()>0?'#2C5596':'#0F6B5C'):'#E0A030'};white-space:nowrap">${PRO_OK?(proTrialLeft()>0?T(`🎁 ကျန် ${proTrialLeft()} ရက်`,`🎁 残り${proTrialLeft()}日`,`🎁 ${proTrialLeft()} days left`):(PRO_EXP?'Active':'♾ Lifetime')):T('ဝယ်မယ်','登録','Upgrade')}</span>${CH}</button>
 <button class="row" data-copy="${proUID()}"><span style="width:22px;text-align:center;font-size:12px;font-weight:900;color:#1F3A68;border:2px solid #1F3A68;border-radius:6px;line-height:16px;flex-shrink:0">ID</span><span class="lb" style="display:flex;flex-direction:column;gap:2px"><span>${T('ကျွန်ုပ်၏ ID','ユーザーID','My User ID')}</span><b style="letter-spacing:3px;color:var(--navy);font-size:17px">${proUID()}</b></span><span style="font-size:11.5px;font-weight:800;color:#2C5596;background:#EEF2FA;border-radius:8px;padding:4px 10px;white-space:nowrap">${T('ကူးမယ်','コピー','Copy')}</span></button>
-<button class="row" data-a="review"><span style="width:22px;text-align:center;font-size:19px;color:#F5B400">★</span><span class="lb">${T('သုံးသပ်ချက် · ကြယ်ပေးမယ်','レビュー（評価）','Review · Rate the app')}</span>${CH}</button>
-<button class="row" data-a="feedback"><span style="width:22px;text-align:center;font-size:17px">💡</span><span class="lb">${T('အကြံပြုချက် ပို့မယ်','フィードバック','Feedback · Suggestions')}</span>${CH}</button>
+<button class="row" data-a="review"><span style="width:22px;text-align:center;font-size:17px">✍️</span><span class="lb">${T('သုံးသပ်ချက် ရေးမယ်','レビューを書く','Review')}</span>${CH}</button>
+<button class="row" data-a="rate"><span style="width:22px;text-align:center;font-size:19px;color:#F5B400">★</span><span class="lb">${T('App ကို ကြယ်ပေးမယ်','アプリを評価','Rate the App')}</span>${CH}</button>
+<button class="row" data-a="feedback"><span style="width:22px;text-align:center;font-size:17px">💬</span><span class="lb">${T('အမှား / အခက်အခဲ ပြောပြမယ်','フィードバック','Feedback')}</span>${CH}</button>
+<button class="row" data-a="suggest"><span style="width:22px;text-align:center;font-size:17px">💡</span><span class="lb">${T('အကြံပြုချက် ပေးမယ်','ご提案','Suggestions')}</span>${CH}</button>
 <button class="row" data-about="ab-about"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1F3A68" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg><span class="lb">${T(DKW+' အကြောင်း','このアプリについて','About')}</span>${CH}</button>
 <button class="row" data-about="ab-contact"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1F3A68" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><span class="lb">${T('ဆက်သွယ်ရန်','お問い合わせ','Contact')}</span>${CH}</button>
 <button class="row" data-about="ab-privacy"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1F3A68" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg><span class="lb">${T('ကိုယ်ရေးမူဝါဒ','プライバシーポリシー','Privacy Policy')}</span>${CH}</button>
@@ -13803,7 +13805,7 @@ const JEX={};for(const [l,raw] of Object.entries(JEXTRA))JEX[l]=raw.split('\n').
 
 /* ---------- About / Contact / Privacy ---------- */
 // ▼ ဒီနေရာမှာ ကိုယ့်အချက်အလက် ဖြည့်ပါ (Email / Telegram username / Viber ဖုန်းနံပါတ်)
-const APP={name:'Dokodemo',ver:'1.0.82',year:2026,email:'JapaneseDokodemo@gmail.com',telegram:'DokodemoOfficial',viber:'',site:'https://myaingstudy.github.io/'};
+const APP={name:'Dokodemo',ver:'1.0.84',year:2026,email:'JapaneseDokodemo@gmail.com',telegram:'DokodemoOfficial',viber:'',site:'https://myaingstudy.github.io/'};
 function renderAbout(){
   const sec=(id,icon,title,body)=>`<section id="${id}" style="background:#fff;border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:10px;box-shadow:0 3px 10px rgba(20,34,61,.05)"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:20px">${icon}</span><b style="font-size:18px">${title}</b></div>${body}</section>`;
   const p=t=>`<p class="mm" style="margin:0;font-size:14px;line-height:1.9;color:#2B3446">${t}</p>`;
@@ -13934,45 +13936,45 @@ const RV_LAB=()=>[null,T('အားမရဘူး','不満','Poor'),T('သိ�
 const RV_KIND=()=>[['idea',T('💡 အကြံပြုချက်','💡 提案','💡 Idea')],['bug',T('🐞 အမှားတွေ့','🐞 不具合','🐞 Bug')],['word',T('📚 စကားလုံး ထပ်ထည့်စေချင်','📚 単語の追加','📚 Add words')],['other',T('💬 တခြား','💬 その他','💬 Other')]];
 function rvStars(r){return [1,2,3,4,5].map(i=>`<button data-rv="${i}" aria-label="${i} star" style="border:none;background:transparent;min-width:52px;min-height:52px;padding:0;display:flex;align-items:center;justify-content:center"><svg width="42" height="42" viewBox="0 0 24 24" style="pointer-events:none"><path d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.4l-5.8 3.1 1.1-6.5L2.6 9.4l6.5-.9z" fill="${i<=r?'#F5B400':'#E3E8F0'}" stroke="${i<=r?'#E0A000':'#CDD5E2'}" stroke-width="1" stroke-linejoin="round"/></svg></button>`).join('')}
 function renderReview(){
-  const fb=S.rvMode==='feedback';
-  if(!S.rv){const o=rvLoad();S.rv={r:o?o.r:0,c:'',k:'idea'}}
+  const m=S.rvMode||'review',stars=m==='rate',txt=m!=='rate';
+  const KD={feedback:[['bug',T('🐞 အမှားတွေ့','🐞 不具合','🐞 Bug')],['other',T('💬 အခက်အခဲ / တခြား','💬 その他','💬 Problem / other')]],suggest:[['idea',T('💡 Feature အသစ်','💡 新機能','💡 New feature')],['word',T('📚 စကားလုံး ထပ်ထည့်စေချင်','📚 単語の追加','📚 Add words')]]}[m];
+  if(!S.rv){const o=rvLoad();S.rv={r:o?o.r:0,c:'',k:KD?KD[0][0]:'review'}}
   const o=rvLoad(),L=RV_LAB();
+  const M={review:{h:'Review',sub:T('App အကြောင်း သုံးသပ်ချက် ရေးပေးပါ','アプリのレビューを書く','Write a review of the app'),q:T('ဘယ်လို ခံစားရလဲ?','使ってみていかがですか？','What do you think of the app?'),ph:T('ဥပမာ — သုံးရလွယ်တယ်၊ အသံထွက် ကောင်းတယ်၊ JLPT အတွက် အသုံးဝင်တယ်…','例：使いやすい、発音が良い…','e.g. Easy to use, great audio, helpful for JLPT…'),col:'#E8463A',max:500},
+    rate:{h:'Rate the App',sub:T('ကြယ်နဲ့ အမှတ်ပေးပါ','星で評価','Rate with stars'),col:'#F5A000'},
+    feedback:{h:'Feedback',sub:T('အမှား၊ အခက်အခဲ တွေ့ရင် ပြောပြပါ','不具合・困ったことを報告','Report bugs or problems'),q:T('ဘာဖြစ်နေလဲ?','どんな問題ですか？','What happened?'),ph:T('ဘယ်စာမျက်နှာမှာ ဘာဖြစ်လဲ ရေးပေးပါ (ဥပမာ — Kanji N4 မှာ အသံမထွက်ဘူး)','どの画面で何が起きたか書いてください','Which screen and what happened (e.g. no sound in Kanji N4)'),col:'#1F3A68',max:1000},
+    suggest:{h:'Suggestions',sub:T('App ပိုကောင်းအောင် အကြံပေးပါ','アプリをより良くするご提案','Ideas to make the app better'),q:T('ဘာထပ်ထည့်စေချင်လဲ?','どんな提案ですか？','What would you like to see?'),ph:T('ထပ်ထည့်စေချင်တဲ့ feature၊ စကားလုံး၊ သင်ခန်းစာ… ရေးပေးပါ','追加してほしい機能・単語・レッスンなど','Features, words or lessons you would like…'),col:'#0F6B5C',max:1000}}[m];
   const card='background:#fff;border-radius:22px;padding:16px;display:flex;flex-direction:column;gap:10px;box-shadow:0 3px 10px rgba(20,34,61,.05)';
-  const top=fb?'':`<div style="${card};align-items:center;gap:6px;padding:18px 16px">
-<b class="mm" style="font-size:17px;text-align:center">${T(DKW+' ကို ဘယ်လောက် ကြိုက်လဲ?',DKW+'はいかがですか？','How do you like '+DKW+'?')}</b>
+  const top=stars?`<div style="${card};align-items:center;gap:8px;padding:24px 16px">
+<span style="font-size:44px">⭐</span><b class="mm" style="font-size:17px;text-align:center">${T(DKW+' ကို ဘယ်လောက် ကြိုက်လဲ?',DKW+'はいかがですか？','How do you like '+DKW+'?')}</b>
 <div id="rvst" style="display:flex;gap:2px">${rvStars(S.rv.r)}</div>
-<span id="rvlab" class="mm" style="font-size:15px;font-weight:800;color:#9A5A00;min-height:24px">${S.rv.r?S.rv.r+' / 5 · '+L[S.rv.r]:T('ကြယ်ကို နှိပ်ပါ','星をタップ','Tap a star')}</span></div>`;
-  const kinds=fb?`<div id="rvk" style="display:flex;flex-wrap:wrap;gap:6px">${RV_KIND().map(([k,l])=>`<button data-rvk="${k}" class="mm" style="min-height:38px;padding:0 12px;border-radius:19px;border:1.5px solid ${S.rv.k===k?'#1F3A68':'#D5DCE8'};background:${S.rv.k===k?'#1F3A68':'#fff'};color:${S.rv.k===k?'#fff':'#1F3A68'};font-size:13px;font-weight:700">${l}</button>`).join('')}</div>`:'';
-  document.getElementById('app').innerHTML=`${fb?pageHead('Feedback',T('အကြံပြုချက် · အမှားတွေ့ရင် ပြောပြပါ','ご意見・不具合の報告','Ideas · bug reports')):pageHead('Review',T('App ကို ကြယ်ပေးပြီး အမှတ်ပေးပါ','アプリを評価','Rate the app'))}
-<main id="rvm" style="display:flex;flex-direction:column;gap:14px">${top}
-<div style="${card}">
-<b class="mm" style="font-size:15px">${fb?T('ဘာအကြောင်းလဲ?','どんな内容ですか？','What is it about?'):T('Review စာ (မထည့်လည်းရ)','レビュー（任意）','Your review (optional)')}</b>${kinds}
-<textarea id="rvc" class="mm" maxlength="${fb?1000:300}" rows="${fb?6:3}" placeholder="${fb?T('အကြံပြုချင်တာ၊ တွေ့တဲ့အမှား၊ ထပ်ထည့်စေချင်တဲ့ စကားလုံး… ရေးပေးပါ','提案・見つけた間違い・追加してほしい単語など…','Ideas, mistakes you found, words to add…'):T('ဥပမာ — သုံးရလွယ်တယ်၊ အသံထွက် ကောင်းတယ်…','例：使いやすい、発音が良い…','e.g. Easy to use, great audio…')}" style="width:100%;box-sizing:border-box;border:1.5px solid #D5DCE8;border-radius:14px;padding:12px;font-size:15px;line-height:1.8;font-family:inherit;resize:vertical">${esc(S.rv.c)}</textarea>
-<span class="mm" style="font-size:12px;color:#6B7486">${T('နာမည်၊ ဖုန်းနံပါတ် မရေးပါနဲ့။ ရေးထားတဲ့စာနဲ့ App ID ကိုပဲ App ပိုင်ရှင်ဆီ ပို့ပါမယ်။','氏名や電話番号は書かないでください。内容とアプリIDのみ運営者に送られます。','Please don\'t include your name or phone. Only your message and App ID are sent to the app owner.')}</span>
-<button id="rvgo" style="min-height:52px;border:none;border-radius:26px;background:${fb?'#1F3A68':'#E8463A'};color:#fff;font-size:16px;font-weight:800">${T('ပို့မယ်','送信','Send')}</button>
-${FB_FORM.url?'':`<span class="mm" style="font-size:12px;color:#6B7486;text-align:center">${T('ပို့မယ် နှိပ်ရင် Email app ပွင့်လာပါမယ်။ အဲဒီမှာ ပို့ (Send) ကို ထပ်နှိပ်ပေးပါ။','送信を押すとメールアプリが開きます。そこで送信してください。','Your email app will open — tap Send there.')}</span>`}
-</div>
-${!fb&&o?`<div class="mm" style="font-size:13px;color:#4A5468;text-align:center">${T('နောက်ဆုံး ပေးခဲ့တဲ့ Review','前回の評価','Your last review')}: ${'★'.repeat(o.r)}${'☆'.repeat(5-o.r)} · ${o.d}</div>`:''}
-<button data-a="${fb?'review':'feedback'}" class="mm" style="min-height:44px;border:none;background:transparent;color:#1F3A68;font-size:14px;font-weight:700;text-decoration:underline">${fb?T('★ App ကို ကြယ်ပေးမယ် (Review)','★ アプリを評価する','★ Rate the app instead'):T('💡 အကြံပြုချက် / အမှား ပို့မယ် (Feedback)','💡 ご意見・不具合を送る','💡 Send feedback instead')}</button>
+<span id="rvlab" class="mm" style="font-size:15px;font-weight:800;color:#9A5A00;min-height:24px">${S.rv.r?S.rv.r+' / 5 · '+L[S.rv.r]:T('ကြယ်ကို နှိပ်ပါ','星をタップ','Tap a star')}</span>
+${o?`<span class="mm" style="font-size:13px;color:#4A5468">${T('နောက်ဆုံး ပေးခဲ့တာ','前回の評価','Last rating')}: ${'★'.repeat(o.r)}${'☆'.repeat(5-o.r)} · ${o.d}</span>`:''}</div>`:'';
+  const kinds=KD?`<div id="rvk" style="display:flex;flex-wrap:wrap;gap:6px">${KD.map(([k,l])=>`<button data-rvk="${k}" class="mm" style="min-height:38px;padding:0 12px;border-radius:19px;border:1.5px solid ${S.rv.k===k?M.col:'#D5DCE8'};background:${S.rv.k===k?M.col:'#fff'};color:${S.rv.k===k?'#fff':'#1F3A68'};font-size:13px;font-weight:700">${l}</button>`).join('')}</div>`:'';
+  const form=txt?`<div style="${card}"><b class="mm" style="font-size:15px">${M.q}</b>${kinds}
+<textarea id="rvc" class="mm" maxlength="${M.max}" rows="6" placeholder="${M.ph}" style="width:100%;box-sizing:border-box;border:1.5px solid #D5DCE8;border-radius:14px;padding:12px;font-size:15px;line-height:1.7;resize:vertical;font-family:inherit">${esc(S.rv.c||'')}</textarea>
+<span class="mm" style="font-size:12px;color:#6B7486">${T('စာထဲမှာ ဖုန်းနံပါတ်၊ လိပ်စာ စတာတွေ မရေးပါနဲ့။','メッセージに電話番号や住所は書かないでください。','Please don\'t include your name or phone in the message.')}</span></div>`:'';
+  document.getElementById('app').innerHTML=`${pageHead(M.h,M.sub)}
+<main id="rvm" style="display:flex;flex-direction:column;gap:14px">${top}${form}
+<button id="rvgo" style="min-height:52px;border:none;border-radius:26px;background:${M.col};color:#fff;font-size:16px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:8px"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M21 4L3 11l6 2 2 6 3-4 5 4z" fill="#fff"/></svg>${T('Telegram နဲ့ ပို့မယ်','Telegramで送る','Send via Telegram')}</button>
+<span class="mm" style="font-size:12.5px;color:#6B7486;text-align:center;line-height:1.7">${T(`Telegram ပွင့်လာပြီး စာက ရေးပြီးသား ဖြစ်နေပါမယ်။ <b>Send</b> ကို နှိပ်ရုံပါပဲ (@${APP.telegram})`,`Telegramが開き、メッセージが入力済みになります。送信を押すだけです（@${APP.telegram}）`,`Telegram opens with your message ready — just tap <b>Send</b> (@${APP.telegram})`)}</span>
 </main>`;
-  const c=document.getElementById('rvc');c.oninput=()=>{S.rv.c=c.value};
+  const c=document.getElementById('rvc');if(c)c.oninput=()=>{S.rv.c=c.value};
   const st=document.getElementById('rvst');if(st)st.onclick=e=>{const b=e.target.closest('[data-rv]');if(!b)return;S.rv.r=+b.dataset.rv;st.innerHTML=rvStars(S.rv.r);document.getElementById('rvlab').textContent=S.rv.r+' / 5 · '+RV_LAB()[S.rv.r]};
   const kk=document.getElementById('rvk');if(kk)kk.onclick=e=>{const b=e.target.closest('[data-rvk]');if(!b)return;S.rv.k=b.dataset.rvk;renderReview()};
   document.getElementById('rvgo').onclick=rvSend;
 }
-function rvSend(){const fb=S.rvMode==='feedback',r=fb?0:S.rv.r,cm=(S.rv.c||'').trim(),kind=fb?S.rv.k:'review';
-  if(!fb&&!r){toast(T('ကြယ် အရင်ရွေးပါ ⭐','先に星を選んでください ⭐','Please choose stars first ⭐'));return}
-  if(fb&&!cm){toast(T('စာ အရင်ရေးပါ ✏️','内容を入力してください ✏️','Please write a message ✏️'));document.getElementById('rvc').focus();return}
+function rvSend(){const m=S.rvMode||'review',r=m==='rate'?S.rv.r:0,cm=(S.rv.c||'').trim(),kind=(m==='feedback'||m==='suggest')?S.rv.k:'review';
+  if(m==='rate'&&!r){toast(T('ကြယ် အရင်ရွေးပါ ⭐','先に星を選んでください ⭐','Please choose stars first ⭐'));return}
+  if(m!=='rate'&&!cm){toast(T('စာ အရင်ရေးပါ ✏️','内容を入力してください ✏️','Please write a message ✏️'));const c=document.getElementById('rvc');if(c)c.focus();return}
   const n=new Date(),d=n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0');
-  if(!fb)try{localStorage.setItem(RV_KEY,JSON.stringify({r,d}))}catch(e){}
-  try{if(gaOn()){gaInit();fb?gtag('event','feedback_send',{kind}):gtag('event','app_rating',{rating:r})}}catch(e){}
-  const done=()=>{toast(T('ကျေးဇူးတင်ပါတယ် 🙏','ありがとうございます 🙏','Thank you 🙏'));S.rv=null;S.view='main';render()};
-  if(FB_FORM.url){const f=new URLSearchParams();if(r)f.append(FB_FORM.rating,String(r));if(FB_FORM.comment)f.append(FB_FORM.comment,cm);if(FB_FORM.kind)f.append(FB_FORM.kind,kind);if(FB_FORM.uid)f.append(FB_FORM.uid,proUID());if(FB_FORM.ver)f.append(FB_FORM.ver,APP.ver);
-    fetch(FB_FORM.url,{method:'POST',mode:'no-cors',body:f}).then(done).catch(()=>toast(T('အင်တာနက် စစ်ပြီး ပြန်ပို့ပါ','通信を確認して再送してください','Check your connection and try again')));return}
-  const kl=fb?(RV_KIND().find(x=>x[0]===kind)||['',''])[1]:'';
-  const body=`${fb?kl:'★ '+r+'/5'}\n\n${cm}\n\n---\nApp ID: ${proUID()} · v${APP.ver}`;
-  location.href='mailto:'+APP.email+'?subject='+encodeURIComponent(fb?'Dokodemo Feedback':'Dokodemo Review ★'+r)+'&body='+encodeURIComponent(body);
-  toast(T('ကျေးဇူးတင်ပါတယ် 🙏','ありがとうございます 🙏','Thank you 🙏'))}
+  if(r)try{localStorage.setItem(RV_KEY,JSON.stringify({r,d}))}catch(e){}
+  try{if(gaOn()){gaInit();r?gtag('event','app_rating',{rating:r}):gtag('event','feedback_send',{kind:m+':'+kind})}}catch(e){}
+  const KL={review:'✍️ Review',rate:'⭐ Rate the App',feedback:'💬 Feedback',suggest:'💡 Suggestion'}[m],KK={bug:'Bug',other:'Problem / other',idea:'New feature',word:'Add words',review:''}[kind]||'';
+  const msg=`${KL} — Dokodemo${KK?'\nType: '+KK:''}${r?'\nRating: '+'★'.repeat(r)+'☆'.repeat(5-r)+' ('+r+'/5)':''}${cm?'\n\n'+cm:''}\n\n— App ID: ${proUID()} · v${APP.ver}`;
+  try{window.open('https://t.me/'+APP.telegram+'?text='+encodeURIComponent(msg),'_blank','noopener')}catch(e){location.href='https://t.me/'+APP.telegram+'?text='+encodeURIComponent(msg)}
+  toast(T('Telegram ပွင့်လာရင် Send ကို နှိပ်ပေးပါ 🙏','Telegramで送信を押してください 🙏','Tap Send in Telegram 🙏'));S.rv=null;setTimeout(()=>{S.view='main';render()},400);
+}
 /* ---------- Dialog scenes ---------- */
 const DLG_RAW=`@一般
 #基本
@@ -38075,7 +38077,7 @@ document.getElementById('app').addEventListener('click',e=>{
   const a=b.dataset.a;if(!a)return;
   const acts={
     open:()=>{S.view='main';S.drawer=true}, close:()=>S.drawer=false,
-    study:()=>{S.view='study';S.drawer=false}, review:()=>{S.view='review';S.rvMode='review';S.drawer=false;S.rv=null}, feedback:()=>{S.view='review';S.rvMode='feedback';S.drawer=false;S.rv=null}, back:()=>{stopPlay();S.view='main';S.sortOpen=false},
+    study:()=>{S.view='study';S.drawer=false}, review:()=>{S.view='review';S.rvMode='review';S.drawer=false;S.rv=null}, rate:()=>{S.view='review';S.rvMode='rate';S.drawer=false;S.rv=null}, suggest:()=>{S.view='review';S.rvMode='suggest';S.drawer=false;S.rv=null}, feedback:()=>{S.view='review';S.rvMode='feedback';S.drawer=false;S.rv=null}, back:()=>{stopPlay();S.view='main';S.sortOpen=false},
     sort:()=>S.sortOpen=true, sortclose:()=>S.sortOpen=false,
     hl:()=>{S.hide='left';S.reveal={}}, hr:()=>{S.hide='right';S.reveal={}}, sa:()=>{S.hide='none';S.reveal={}},
     clear:()=>{if(S.words.length&&confirm(T('သိမ်းထားသော စကားလုံးအားလုံး ဖျက်မလား?','保存した単語をすべて削除しますか？','Delete all saved words?'))){stopPlay();S.words=[]}},
