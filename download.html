@@ -3,7 +3,7 @@
 <title>Dokodemo — ဒေါင်းလုဒ်</title>
 <meta name="theme-color" content="#1F3A68"><link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg"><link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta property="og:title" content="Dokodemo — どこでも日本語 · Learn Japanese Anywhere"><meta property="og:description" content="ဟီရာဂါနာကနေ JLPT N1 အထိ · စကားပြော ၁၈,၅၀၀ ကြောင်း · M Dictionary · မြန်မာ ပြက္ခဒိန် · အခမဲ့"><meta property="og:image" content="https://myaingstudy.github.io/og-image.jpg"><meta property="og:url" content="https://myaingstudy.github.io/download.html"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Dokodemo — どこでも日本語 · Learn Japanese Anywhere"><meta property="og:description" content="ဟီရာဂါနာကနေ JLPT N1 အထိ · စကားပြော ၁၈,၅၀၀ ကြောင်း · 辞書 Dictionary · မြန်မာ ပြက္ခဒိန် · အခမဲ့"><meta property="og:image" content="https://myaingstudy.github.io/og-image.jpg"><meta property="og:url" content="https://myaingstudy.github.io/download.html"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{--navy:#1F3A68;--red:#E8463A;--ink:#14223D;--muted:#6B7486;--bg:#F3F5F9}
@@ -40,8 +40,11 @@ small{color:var(--muted)}
 <div id="t-ios" style="margin-top:10px" hidden><ol><li><b>Safari</b> နဲ့ ဒီစာမျက်နှာကို ဖွင့်ပါ (Chrome မရပါ)။</li><li>အောက်ခြေက <b>မျှဝေ ခလုတ် (□↑)</b> ကို နှိပ်ပါ။</li><li>အောက်ဆွဲပြီး <b>“Add to Home Screen”</b> (ホーム画面に追加) ကို နှိပ်ပါ။</li><li>ညာဘက်အပေါ် <b>“Add”</b> နှိပ်ရင် Dokodemo icon ပေါ်လာပါမယ်။</li></ol></div>
 <small>တစ်ခါ ဖွင့်ပြီးရင် အင်တာနက် မရှိလည်း သုံးလို့ ရပါတယ်။ အင်တာနက် ရှိတဲ့အခါ ဗားရှင်းအသစ်ကို အလိုအလျောက် ရပါတယ်။</small></div>
 
-<div class="feat"><div><b>辞 M Dictionary</b>စကားလုံး ၂,၅၀၀ ကျော်</div><div><b>話 Dialog</b>စကားပြော ၁၈,၅၀၀ ကြောင်း</div><div><b>暦 M Calendar</b>ဥပုသ် · ပွဲတော် · ပိတ်ရက်</div><div><b>N1 JLPT</b>N5 ကနေ N1 အထိ</div></div>
+<div class="feat"><div><b>辞書 Dictionary</b>စကားလုံး ၂,၅၀၀ ကျော်</div><div><b>話 Dialog</b>စကားပြော ၁၈,၅၀၀ ကြောင်း</div><div><b>暦 ミャンマー暦</b>ဥပုသ် · ပွဲတော် · ပိတ်ရက်</div><div><b>N1 JLPT</b>N5 ကနေ N1 အထိ</div></div>
 
+<div class="card" id="qrcard" style="text-align:center"><h2>📷 ဖုန်းနဲ့ Scan ဖတ်ပြီး ဒေါင်းမယ်</h2>
+<img src="qr-apk.png" alt="Dokodemo APK QR code — bit.ly/DokodemoApk" width="220" height="220" style="display:block;margin:6px auto;border-radius:12px;border:1px solid #E3E8F0">
+<b style="font-size:15px">bit.ly/DokodemoApk</b><br><small>Android ဖုန်းရဲ့ ကင်မရာနဲ့ scan ဖတ်ရင် Dokodemo.apk ကို တန်းဒေါင်းလို့ရပါတယ်။</small></div>
 <div class="card" id="apk-soon"><h2>🤖 Android APK ထည့်နည်း</h2><ol>
 <li>အပေါ်က <b>“Android APK ဒေါင်းလုဒ်”</b> ကို နှိပ်ပါ။ (Chrome က “ဒေါင်းလုဒ် လုပ်မလား” မေးရင် <b>Download</b>)</li>
 <li>ဒေါင်းပြီးရင် <b>Open / 開く</b> ကို နှိပ်ပါ။ (သို့) <b>Files</b> app → <b>Downloads</b> ထဲက <b>Dokodemo.apk</b> ကို နှိပ်ပါ။</li>
@@ -55,6 +58,7 @@ small{color:var(--muted)}
 </div>
 <script>
 const ua=navigator.userAgent||'';if(/FBAN|FBAV|FB_IAB|Instagram|Line\/|Viber|Messenger/i.test(ua))document.getElementById('inapp').hidden=false;
+if(/Android|iPhone|iPad|iPod|Mobile/i.test(ua))document.getElementById('qrcard').hidden=true;
 if(/iPhone|iPad|iPod/i.test(ua)){document.getElementById('apk').hidden=true;document.querySelector('[data-t=ios]').click&&setTimeout(()=>document.querySelector('[data-t=ios]').click(),0)}
 document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===b));document.getElementById('t-and').hidden=b.dataset.t!=='and';document.getElementById('t-ios').hidden=b.dataset.t!=='ios'});
 let dp=null;addEventListener('beforeinstallprompt',e=>{e.preventDefault();dp=e;document.getElementById('inst').hidden=false});
