@@ -175,7 +175,7 @@ talk:[['般', '一般', 'いっぱん', 'သာမန်သုံး'], ['病', 
 practice:[['試', 'JLPT', 'N5 – N1', 'အဆင့်လိုက် လေ့လာ'], ['模', 'JLPT模試', 'もし', 'JLPT စမ်းသပ်စာမေးပွဲ · N5–N1'], ['票', '投票', 'とうひょう', 'စစ်တမ်း'], ['声', 'Podcast', 'ポッドキャスト', 'အသံဖိုင်'], ['歌', '歌', 'うた', 'သီချင်းများ'], ['鏡', 'Mirror', 'ミラー', 'ပြောင်းပြန်စကား'], ['反', '反対語', 'はんたいご', 'ဆန့်ကျင်ဘက်'], ['若', '若者言葉', 'わかものことば', 'လူငယ်သုံးစကား'], ['問', 'Quiz JP', 'クイズ', 'ဂျပန် မေးခွန်း'], ['答', 'Quiz MM', 'クイズ', 'မြန်မာ မေးခွန်း'], ['星', '有名人', 'ゆうめいじん', 'ထင်ရှားသူများ'], ['合', 'Matching', 'マッチング', 'စကားလုံးတွဲမယ်'], ['並', 'Scramble', 'ならべかえ', 'စာလုံးစီမယ်'], ['信', 'TextMe', 'メッセージ', 'စာပို့မယ်'], ['豆', 'Wow', 'まめちしき', 'စိတ်ဝင်စားစရာ'], ['書', '書き取り', 'かきとり', 'ကြားရာရေး'], ['宿', '宿題', 'しゅくだい', 'အိမ်စာ'], ['物', '物語', 'ものがたり', 'ပုံပြင်များ'], ['ど', 'MYAING', 'どこでも', 'App အကြောင်း'], ['諺', 'ことわざ', '', 'စကားပုံများ'], ['裏', 'Dark Side', 'うらがわ', 'ရိုင်းစိုင်းစကား'], ['注', '注意', 'ちゅうい', 'သတိပြုရန်'], ['敬', '敬語', 'けいご', 'ယဉ်ကျေးစကား'], ['音', 'オノマトペ', '', 'အသံစွဲစကား']]
 };
 const HEADF=()=>({home:[DKW,'どこでも日本語'],words:['Discovery',T('単語 · ဝေါဟာရ','単語','Vocabulary')],talk:['Dialog',T('会話 · စကားပြော','会話','Conversation')],practice:['Pro',T('練習 · လေ့ကျင့်ခန်း','練習','Practice')]});
-const PHF=()=>({home:T('မင်္ဂလာရှိသော နေ့လေးဖြစ်ပါစေ ❤️','素敵な一日になりますように ❤️','Have a blessed day ❤️'),words:T('ဝေါဟာရ ရှာရန်…','単語を検索…','Search vocabulary…'),talk:T('စကားပြော ရှာရန်…','会話を検索…','Search conversations…'),practice:T('လေ့ကျင့်ခန်း ရှာရန်…','練習を検索…','Search practice…')});
+const PHF=()=>({home:(()=>{const g=greetMsg(),m=sbMsg();return m?g+'　　'+m:g})(),words:T('ဝေါဟာရ ရှာရန်…','単語を検索…','Search vocabulary…'),talk:T('စကားပြော ရှာရန်…','会話を検索…','Search conversations…'),practice:T('လေ့ကျင့်ခန်း ရှာရန်…','練習を検索…','Search practice…')});
 const TONES=[['#E7ECF5','#1F3A68'],['#FBE5E3','#B8302A'],['#E3F1EE','#0F6B5C'],['#FFF1DE','#9A5A00'],['#EEE8F8','#5B3FA6'],['#E2F0F8','#17699A']];
 const CH='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#14223D" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>';
 const LOGO=(f)=>`<svg width="36" height="36" viewBox="0 0 150 150" aria-hidden="true"><rect width="150" height="150" rx="40" fill="#14223D"/><path d="M20 120 V92 L75 110 L130 92 V120 C108 114 90 116 75 128 C60 116 42 114 20 120 Z" fill="#fff" stroke="#fff" stroke-width="5" stroke-linejoin="round"/><path d="M75 112 V124" stroke="#14223D" stroke-width="3.5" stroke-linecap="round"/><g transform="translate(75 62)"><path d="M-52 0a52 15 0 0 1 104 0" transform="rotate(-18)" fill="none" stroke="#F5C036" stroke-width="5.5" stroke-linecap="round"/><circle r="36" fill="#1F3A68"/><path d="M-36 0h72M0-36c-14 12-14 60 0 72M0-36c14 12 14 60 0 72" stroke="#4469A8" stroke-width="2.6" fill="none"/><text x="-3" y="6" font-size="36" font-weight="900" fill="#fff" text-anchor="middle" font-family="Hiragino Sans,Noto Sans JP,sans-serif">ど</text><path d="M-52 0a52 15 0 0 0 104 0" transform="rotate(-18)" fill="none" stroke="#F5C036" stroke-width="5.5" stroke-linecap="round"/><circle cx="44" cy="-26" r="10" fill="#E8463A" stroke="#14223D" stroke-width="3"/></g></svg>`;
@@ -234,10 +234,28 @@ document.addEventListener('click',e=>{
     }
   };requestAnimationFrame(go);
 },true);
+function greetMsg(){const h=new Date().getHours();
+  if(h>=5&&h<12)return T('Good Morning ☀️ မင်္ဂလာရှိသော နေ့လေးဖြစ်ပါစေ ❤️','おはようございます ☀️ 素敵な一日になりますように ❤️','Good Morning ☀️ Have a blessed day ❤️');
+  if(h>=12&&h<17)return T('Good Afternoon 🌤️ မင်္ဂလာရှိသော နေ့လေးဖြစ်ပါစေ ❤️','こんにちは 🌤️ 素敵な一日になりますように ❤️','Good Afternoon 🌤️ Have a blessed day ❤️');
+  if(h>=17&&h<21)return T('Good Evening 🌇 မင်္ဂလာရှိသော နေ့လေးဖြစ်ပါစေ ❤️','こんばんは 🌇 素敵な一日になりますように ❤️','Good Evening 🌇 Have a blessed day ❤️');
+  return T('Good Night 🌙 အိပ်မက်လှလှ မက်ပါစေ ✨','おやすみなさい 🌙 いい夢を見てね ✨','Good Night 🌙 Sweet dreams ✨')}
+/* ---------- Sabbath (ဥပုသ်) reminder for the Home marquee ---------- */
+function sbKind(x){if(!x)return null;const mn=x.mn||['','',''];
+  if(x.mp===1)return [mn[0]+'လပြည့်နေ့',mn[1]+'の満月',mn[2]+' full moon'];
+  if(x.mp===3)return [mn[0]+'လကွယ်နေ့',mn[1]+'の新月',mn[2]+' new moon'];
+  if(x.mp===0)return ['လဆန်း ၈ ရက် အဋ္ဌမီနေ့','上弦の八日','8th waxing day'];
+  return ['လဆုတ် ၈ ရက် အဋ္ဌမီနေ့','下弦の八日','8th waning day']}
+function sbMsg(){try{if(typeof mmDay!=='function')return '';const d=new Date();const x=mmDay(d.getFullYear(),d.getMonth()+1,d.getDate());if(!x)return '';
+  if(x.sb===1){const k=sbKind(x);return T('☸ ယနေ့သည် ဗုဒ္ဓဘာသာဝင်တို့၏ နေ့ထူးနေ့မြတ်ဖြစ်သော ဥပုသ်နေ့ ('+k[0]+') ဖြစ်ပါသည်။ မိမိတို့ တတ်စွမ်းနိုင်သမျှ ကုသိုလ်ကောင်းမှုများကို ဆည်းပူးအားထုတ်နိုင်ကြပါရန် နှိုးဆော်အပ်ပါသည်။ 🙏',
+    '☸ 今日は仏教徒にとって大切な布薩日（'+k[1]+'）です。できる限り善い行いを心がけましょう。🙏','☸ Today is the Buddhist Sabbath day ('+k[2]+'). May we all do as many good deeds as we can. 🙏')}
+  if(x.sb===2){const t=new Date(d.getFullYear(),d.getMonth(),d.getDate()+1);const k=sbKind(mmDay(t.getFullYear(),t.getMonth()+1,t.getDate()));if(!k)return '';
+    return T('☸ ယနေ့ အဖိတ်နေ့ ဖြစ်ပါသည်။ မနက်ဖြန်သည် ဗုဒ္ဓဘာသာဝင်တို့၏ နေ့ထူးနေ့မြတ်ဖြစ်သော ဥပုသ်နေ့ ('+k[0]+') ဖြစ်ပါသဖြင့် ကုသိုလ်ကောင်းမှုများ ပြုလုပ်နိုင်ရန် ကြိုတင်ပြင်ဆင်ထားနိုင်ကြပါရန် သတိပေးအပ်ပါသည်။ 🙏',
+    '☸ 明日は仏教徒にとって大切な布薩日（'+k[1]+'）です。善い行いの準備をしておきましょう。🙏','☸ Tomorrow is the Buddhist Sabbath day ('+k[2]+'). Let us prepare to do good deeds. 🙏')}
+  return ''}catch(e){return ''}}
 let LAST_ANIM_TAB='';
 function body(){
   const q=S.q.trim().toLowerCase();const anim=S.tab!==LAST_ANIM_TAB&&!q;LAST_ANIM_TAB=S.tab;
-  let h=`<label class="search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14223D" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input id="q" aria-label="Search" placeholder="${S.tab==='home'?'':PHF()[S.tab]}" value="${esc(S.q)}">${S.tab==='home'&&!S.q?`<span class="marq mm" aria-hidden="true"><span>${PHF().home}</span></span>`:''}</label>`;
+  let h=`<label class="search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14223D" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input id="q" aria-label="Search" placeholder="${S.tab==='home'?'':PHF()[S.tab]}" value="${esc(S.q)}">${S.tab==='home'&&!S.q?`<span class="marq mm" aria-hidden="true"><span style="animation-duration:${Math.max(10,Math.round(PHF().home.length*0.2))}s">${PHF().home}</span></span>`:''}</label>`;
   if(S.tab==='home'){
     const r=HOME.filter(t=>!q||t.includes(q));
     h+=r.length?`<div class="list pray">${r.map(t=>`<button class="mm">${t}</button>`).join('')}${q?'':homeTop()}</div>`:`${owlEmpty()}`;
@@ -13817,7 +13835,7 @@ const JEX={};for(const [l,raw] of Object.entries(JEXTRA))JEX[l]=raw.split('\n').
 
 /* ---------- About / Contact / Privacy ---------- */
 // ▼ ဒီနေရာမှာ ကိုယ့်အချက်အလက် ဖြည့်ပါ (Email / Telegram username / Viber ဖုန်းနံပါတ်)
-const APP={name:'Dokodemo',ver:'1.0.95',year:2026,email:'JapaneseDokodemo@gmail.com',telegram:'DokodemoOfficial',viber:'',site:'https://myaingstudy.github.io/'};
+const APP={name:'Dokodemo',ver:'1.0.97',year:2026,email:'JapaneseDokodemo@gmail.com',telegram:'DokodemoOfficial',viber:'',site:'https://myaingstudy.github.io/'};
 function renderAbout(){
   const sec=(id,icon,title,body)=>`<section id="${id}" style="background:#fff;border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:10px;box-shadow:0 3px 10px rgba(20,34,61,.05)"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:20px">${icon}</span><b style="font-size:18px">${title}</b></div>${body}</section>`;
   const p=t=>`<p class="mm" style="margin:0;font-size:14px;line-height:1.9;color:#2B3446">${t}</p>`;
