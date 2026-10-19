@@ -2,13 +2,14 @@ name: Sabbath push
 
 on:
   schedule:
-    - cron: '0 22 * * *'   # every day 07:00 Japan time
+    - cron: '0 22 * * *'   # every day 07:00 Japan time (Sabbath)
+    - cron: '0 11 * * *'   # every day 20:00 Japan time (Study)
   workflow_dispatch:
     inputs:
       mode:
-        description: 'auto = today only if Sabbath/eve · test = send a test message'
+        description: 'auto = Sabbath (only if today is Sabbath/eve) · study = study reminder · test = test message'
         type: choice
-        options: [auto, test]
+        options: [auto, study, test]
         default: test
 
 jobs:
@@ -23,4 +24,4 @@ jobs:
       - run: node push.js
         env:
           FIREBASE_SA: ${{ secrets.FIREBASE_SA }}
-          MODE: ${{ github.event.inputs.mode || 'auto' }}
+          MODE: ${{ github.event.inputs.mode || (github.event.schedule == '0 11 * * *' && 'study' || 'auto') }}
