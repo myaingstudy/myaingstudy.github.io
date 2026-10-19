@@ -1,0 +1,26 @@
+name: Sabbath push
+
+on:
+  schedule:
+    - cron: '0 22 * * *'   # every day 07:00 Japan time
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'auto = today only if Sabbath/eve · test = send a test message'
+        type: choice
+        options: [auto, test]
+        default: test
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install firebase-admin@12 --no-save --no-audit --no-fund
+      - run: node scripts/push.js
+        env:
+          FIREBASE_SA: ${{ secrets.FIREBASE_SA }}
+          MODE: ${{ github.event.inputs.mode || 'auto' }}
