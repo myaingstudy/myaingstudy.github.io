@@ -277,7 +277,7 @@ function drawer(){
   if(!S.drawer)return '';
   return `<button class="shade" data-a="close" aria-label="Close menu"></button>
 <aside>
-<div class="prof"><span class="av"><svg width="40" height="40" viewBox="0 0 24 24" fill="#fff"><circle cx="12" cy="8.5" r="4"/><path d="M4 21a8 8 0 0 1 16 0z"/></svg></span><b style="font-size:17px">${T('ဧည့်သည်မုဒ်','ゲストモード','Guest Mode')}</b><button class="login" data-soon="Login"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/></svg>${T('အကောင့်ဝင်ရန်','ログイン','Login')}</button></div>
+<div class="prof">${acctHTML()}</div>
 <span class="sec">${T('ကိုယ်ပိုင်ဆက်တင်','個人設定','Personalization')}</span>
 <div class="box">
 <button class="row" data-c="lang"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1F3A68" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg><span class="lb">${T('ဘာသာစကား','言語','Language')}</span><span style="font-weight:700;color:#0F6B5C">${lab('lang')}</span>${CH}</button>
@@ -295,7 +295,7 @@ ${GA_ID?`<button class="row" data-g="noga"><svg width="22" height="22" viewBox="
 <button class="row" data-a="exch"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0F6B5C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h14l-3-3M20 16H6l3 3"/></svg><span class="lb">${T('ငွေလဲနှုန်း','両替','Exchange')} <small style="color:#6B7486">¥ ↔ Ks</small></span>${CH}</button>
 <button class="row" data-a="tips"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9A5A00" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.8.8 1 1.5 1 2.5h6c0-1 .2-1.7 1-2.5A6 6 0 0 0 12 3z"/></svg><span class="lb">${T('သိကောင်းစရာ','ヒント','Tips')}</span>${CH}</button>
 <button class="row" data-a="pushtg"><span style="width:22px;text-align:center;font-size:18px">🔔</span><span class="lb" style="display:flex;flex-direction:column;gap:1px"><span>${T('ဥပုသ်နေ့ သတိပေးချက်','布薩日の通知','Sabbath reminders')}</span><small style="color:#6B7486;font-size:11.5px">${T('ဥပုသ်・အဖိတ်နေ့ မနက် ၇ နာရီ','布薩日・前日の朝7時','Sabbath & eve · 7:00 am')}</small></span>${sw(pushTopicOn('sb'))}</button>
-<button class="row" data-a="pushst"><span style="width:22px;text-align:center;font-size:18px">📚</span><span class="lb" style="display:flex;flex-direction:column;gap:1px"><span>${T('စာလုပ်ချိန် သတိပေးချက်','勉強リマインダー','Study reminder')}</span><small style="color:#6B7486;font-size:11.5px">${T('နေ့တိုင်း ညနေ ၈ နာရီ','毎日 夜8時','Every day · 8:00 pm')}</small></span>${sw(pushTopicOn('st'))}</button>
+<button class="row" data-a="pushst"><span style="width:22px;text-align:center;font-size:18px">📚</span><span class="lb" style="display:flex;flex-direction:column;gap:1px"><span>${T('စာလုပ်ချိန် သတိပေးချက်','勉強リマインダー','Study reminder')}</span><small style="color:#6B7486;font-size:11.5px">${T('နေ့တိုင်း ညနေ ၈ နာရီ','毎日 夜8時','Every day · 8:00 pm')}</small></span>${sw(pushTopicOn('st'))}</button>${ADMUI()?`<button class="row" data-a="stats"><span style="width:22px;text-align:center;font-size:18px">📊</span><span class="lb">${T('သုံးသူ အရေအတွက် (Admin)','利用者数（管理者）','User count (Admin)')}</span></button>`:''}
 ${(ADMUI()||CFG().share)?`<button class="row" data-a="share"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E8463A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg><span class="lb">${T('သူငယ်ချင်းကို မျှဝေမယ်','友だちにシェア','Share with friends')} <small style="color:#6B7486">bit.ly/dokodemoapk</small></span>${CH}</button>`:''}
 ${(ADMUI()||CFG().website)?`<a class="row" href="${IS_IOS()?APP.site+'download.html':'https://bit.ly/dokodemoapk'}" target="_blank" rel="noopener" style="text-decoration:none;color:inherit"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1F3A68" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg><span class="lb">${T('ဝက်ဘ်ဆိုက်','ウェブサイト','Website')} <small style="color:#6B7486">${IS_IOS()?'myaingstudy.github.io':'bit.ly/dokodemoapk'}</small></span>${CH}</a>`:''}
 </div>
@@ -319,7 +319,7 @@ ${(ADMUI()||CFG().website)?`<a class="row" href="${IS_IOS()?APP.site+'download.h
 ${(ADMUI()||CFG().copyright)?`<button class="row" data-about="ab-credits"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1F3A68" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M15 9.5a3.5 3.5 0 1 0 0 5"/></svg><span class="lb">${T('မူပိုင်ခွင့်','著作権','Copyright')}</span>${CH}</button>`:''}
 <button class="row" data-a="vertap" style="cursor:default;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1F3A68" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg><span class="lb">${T('ဗားရှင်း','バージョン','Version')}</span><span style="font-weight:700;color:#0F6B5C">${APP.ver}</span></button>
 </div>
-<div style="text-align:center;font-size:12px;color:#8A93A5;padding:6px 0 18px">© ${APP.year} ${DKW}<br>Made in Japan by the Dokodemo Team</div>
+<div style="text-align:center;font-size:12px;color:#8A93A5;padding:6px 0 18px">© ${APP.year} ${DKW}<br>Made in Japan by the Dokodemo Team<br><a href="${APP.site}privacy.html" target="_blank" rel="noopener" style="color:#1F3A68">Privacy Policy</a></div>
 </aside>`;
 }
 const BOOK='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4h7a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H2z"/><path d="M22 4h-7a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h8z"/></svg>';
@@ -13853,7 +13853,7 @@ const JEX={};for(const [l,raw] of Object.entries(JEXTRA))JEX[l]=raw.split('\n').
 
 /* ---------- About / Contact / Privacy ---------- */
 // ▼ ဒီနေရာမှာ ကိုယ့်အချက်အလက် ဖြည့်ပါ (Email / Telegram username / Viber ဖုန်းနံပါတ်)
-const APP={name:'Dokodemo',ver:'1.0.111',year:2026,email:'JapaneseDokodemo@gmail.com',telegram:'DokodemoOfficial',viber:'',site:'https://myaingstudy.github.io/'};
+const APP={name:'Dokodemo',ver:'1.0.112',year:2026,email:'JapaneseDokodemo@gmail.com',telegram:'DokodemoOfficial',viber:'',site:'https://myaingstudy.github.io/'};
 function renderAbout(){
   const sec=(id,icon,title,body)=>`<section id="${id}" style="background:#fff;border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:10px;box-shadow:0 3px 10px rgba(20,34,61,.05)"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:20px">${icon}</span><b style="font-size:18px">${title}</b></div>${body}</section>`;
   const p=t=>`<p class="mm" style="margin:0;font-size:14px;line-height:1.9;color:#2B3446">${t}</p>`;
@@ -37979,6 +37979,73 @@ async function pushDisable(k){k=k||'sb';pushSetFlag(k,false);
   if(pushFlag('sb')||pushFlag('st')){render();toast(msg);if(t){try{await fsSave(t)}catch(e){}}return}
   try{localStorage.removeItem('myaing.push')}catch(e){}render();toast(msg);
   if(t){try{await fetch(fsURL(t),{method:'DELETE'})}catch(e){}try{const m=await fbMsg();await m.deleteToken()}catch(e){}}}
+/* ---------- Google account: cloud backup / sync of study progress (Firebase Auth + Firestore) ---------- */
+const SYNC_KEYS=['myaing.set','myaing.fav','myaing.words','myaing.jprog','myaing.jexam','myaing.jlv','myaing.hw','myaing.review','myaing.tlist','myaing.dict.recent','myaing.uid','myaing.pro','myaing.proexp','myaing.adult'];
+function ACCT(){try{return JSON.parse(localStorage.getItem('myaing.acct')||'null')}catch(e){return null}}
+function snapLocal(){const o={};for(const k of SYNC_KEYS){try{const v=localStorage.getItem(k);if(v!==null)o[k]=v}catch(e){}}return o}
+async function fbAuth(){const b='https://www.gstatic.com/firebasejs/10.12.2/';await loadJS(b+'firebase-app-compat.js');await loadJS(b+'firebase-auth-compat.js');if(!firebase.apps.length)firebase.initializeApp(FB_CFG);return firebase.auth()}
+function userURL(uid){return 'https://firestore.googleapis.com/v1/projects/'+FB_CFG.projectId+'/databases/(default)/documents/users/'+uid}
+async function idTok(){const a=await fbAuth();const u=a.currentUser||await new Promise(r=>{const un=a.onAuthStateChanged(x=>{un();r(x)})});if(!u)throw new Error('signed out');return {u,t:await u.getIdToken()}}
+async function cloudGet(){const {u,t}=await idTok();const r=await fetch(userURL(u.uid),{headers:{Authorization:'Bearer '+t}});if(r.status===404)return null;if(!r.ok)throw new Error('get '+r.status);const j=await r.json();const f=j.fields||{};return {d:f.d?JSON.parse(f.d.stringValue):{},ts:f.ts?f.ts.timestampValue:''}}
+let _lastPut='';
+async function cloudPut(force){const snap=JSON.stringify(snapLocal());if(!force&&snap===_lastPut)return;const {u,t}=await idTok();
+  const r=await fetch(userURL(u.uid),{method:'PATCH',headers:{'Content-Type':'application/json',Authorization:'Bearer '+t},body:JSON.stringify({fields:{d:{stringValue:snap},ts:{timestampValue:new Date().toISOString()}}})});
+  if(!r.ok)throw new Error('put '+r.status);_lastPut=snap;try{localStorage.setItem('myaing.synced',String(Date.now()))}catch(e){}}
+function restoreCloud(d){for(const k of SYNC_KEYS){try{if(k in d)localStorage.setItem(k,d[k])}catch(e){}}try{localStorage.setItem('myaing.synced',String(Date.now()))}catch(e){}location.reload()}
+async function acctLogin(){
+  if(!/^https:$/.test(location.protocol)||!/github\.io$/.test(location.hostname)){toast(T('🔐 Website (myaingstudy.github.io) ဒါမှမဟုတ် APK မှာ ဖွင့်ပြီးမှ Login ဝင်လို့ရပါတယ်','🔐 Webサイトまたはアプリでログインできます','🔐 Open the website or the app to log in'));return}
+  if(!confirm(T('Google account နဲ့ ဝင်မလား?\n\n☁️ စာလုပ်မှတ်တမ်း၊ Favorites၊ Settings နဲ့ Pro ကို Cloud မှာ သိမ်းထားပြီး ဖုန်းပြောင်းရင်လည်း ပြန်ယူလို့ရပါမယ်။\n🔒 သိမ်းတာက ဒီ data တွေပဲ ဖြစ်ပြီး ကိုယ်တိုင်ပဲ ဖတ်လို့ရပါတယ်။ ဘယ်အချိန်မဆို ဖျက်လို့ရပါတယ်။','Googleアカウントでログインしますか？\n\n☁️ 学習記録・お気に入り・設定・Proをクラウドに保存し、機種変更しても引き継げます。\n🔒 保存されるのはこれらのデータのみで、本人だけが読めます。いつでも削除できます。','Log in with Google?\n\n☁️ Your progress, favorites, settings and Pro are backed up to the cloud so you can restore them on another device.\n🔒 Only this data is stored, only you can read it, and you can delete it anytime.')))return;
+  toast(T('🔐 Login ဝင်နေပါတယ်…','🔐 ログイン中…','🔐 Logging in…'));
+  try{const a=await fbAuth();const pv=new firebase.auth.GoogleAuthProvider();pv.setCustomParameters({prompt:'select_account'});
+    let res;try{res=await a.signInWithPopup(pv)}catch(e){if(e&&/popup|environment|operation-not-supported/.test(e.code||'')){try{sessionStorage.setItem('myaing.redir','1')}catch(x){}await a.signInWithRedirect(pv);return}throw e}
+    await acctAfter(res.user)}
+  catch(e){console.warn(e);toast(T('❌ Login မအောင်မြင်ပါ — နောက်တစ်ခါ ပြန်စမ်းပါ','❌ ログインできませんでした','❌ Login failed — please try again'))}}
+async function acctAfter(u){if(!u)return;
+  try{localStorage.setItem('myaing.acct',JSON.stringify({n:u.displayName||'',e:u.email||'',p:u.photoURL||''}))}catch(e){}
+  const c=await cloudGet();const loc=snapLocal();
+  if(c&&Object.keys(c.d).length&&JSON.stringify(c.d)!==JSON.stringify(loc)){
+    const dt=c.ts?new Date(c.ts).toLocaleString():'';
+    if(confirm(T('☁️ Cloud မှာ သိမ်းထားတဲ့ မှတ်တမ်း ရှိပါတယ် ('+dt+')\n\nOK = Cloud က မှတ်တမ်းကို ဒီဖုန်းထဲ ယူမယ်\nCancel = ဒီဖုန်းထဲက မှတ်တမ်းကို Cloud မှာ သိမ်းမယ်','☁️ クラウドに保存された記録があります（'+dt+'）\n\nOK = クラウドの記録をこの端末に復元\nキャンセル = この端末の記録をクラウドに保存','☁️ A cloud backup exists ('+dt+')\n\nOK = restore it to this device\nCancel = save this device’s data to the cloud'))){restoreCloud(c.d);return}}
+  await cloudPut(true);render();toast(T('✅ Login ဝင်ပြီးပါပြီ — မှတ်တမ်းတွေ Cloud မှာ အလိုအလျောက် သိမ်းပေးပါမယ် ☁️','✅ ログインしました — 自動でクラウドに保存します ☁️','✅ Logged in — your progress is now backed up ☁️'))}
+async function acctLogout(){if(!confirm(T('Logout ထွက်မလား? (ဒီဖုန်းထဲက မှတ်တမ်းတွေ မပျက်ပါဘူး)','ログアウトしますか？（この端末の記録は消えません）','Log out? (data on this device is kept)')))return;
+  try{await cloudPut()}catch(e){}try{const a=await fbAuth();await a.signOut()}catch(e){}
+  try{localStorage.removeItem('myaing.acct');localStorage.removeItem('myaing.synced')}catch(e){}render();toast(T('👋 Logout ထွက်ပြီးပါပြီ','👋 ログアウトしました','👋 Logged out'))}
+async function acctDelete(){if(!confirm(T('Cloud ထဲက မှတ်တမ်းကို အပြီးဖျက်မလား?\n(ဒီဖုန်းထဲက မှတ်တမ်းတွေ မပျက်ပါဘူး)','クラウドのデータを削除しますか？\n（この端末の記録は消えません）','Delete your cloud backup?\n(data on this device is kept)')))return;
+  try{const {u,t}=await idTok();await fetch(userURL(u.uid),{method:'DELETE',headers:{Authorization:'Bearer '+t}});const a=await fbAuth();try{await u.delete()}catch(e){}await a.signOut()}catch(e){console.warn(e)}
+  try{localStorage.removeItem('myaing.acct');localStorage.removeItem('myaing.synced')}catch(e){}render();toast(T('🗑 Cloud မှတ်တမ်း ဖျက်ပြီးပါပြီ','🗑 クラウドのデータを削除しました','🗑 Cloud backup deleted'))}
+function acctHTML(){const a=ACCT();
+  if(!a)return `<span class="av"><svg width="40" height="40" viewBox="0 0 24 24" fill="#fff"><circle cx="12" cy="8.5" r="4"/><path d="M4 21a8 8 0 0 1 16 0z"/></svg></span><b style="font-size:17px">${T('ဧည့်သည်မုဒ်','ゲストモード','Guest Mode')}</b><button class="login" data-a="login"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/></svg>${T('Google နဲ့ ဝင်ရန်','Googleでログイン','Log in with Google')}</button><small style="color:#6B7486;font-size:11.5px;text-align:center">${T('ဝင်ထားရင် ဖုန်းပြောင်းလည်း မှတ်တမ်း မပျောက်ပါ','ログインすると機種変更しても記録が残ります','Log in to keep your progress across devices')}</small>`;
+  const ini=(a.n||a.e||'?').trim().charAt(0).toUpperCase();let ts=0;try{ts=+localStorage.getItem('myaing.synced')||0}catch(e){}
+  const av=a.p?`<img src="${esc(a.p)}" referrerpolicy="no-referrer" alt="" style="width:68px;height:68px;border-radius:34px;object-fit:cover">`:`<span style="color:#fff;font-size:28px;font-weight:800">${esc(ini)}</span>`;
+  return `<span class="av" style="overflow:hidden">${av}</span><b style="font-size:17px">${esc(a.n||'')}</b><small style="color:#6B7486;font-size:12px;margin-top:-6px">${esc(a.e||'')}</small><small style="color:#0F6B5C;font-size:12px">☁️ ${ts?T('သိမ်းပြီး ','保存済み ','Synced ')+new Date(ts).toLocaleString([], {month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}):T('သိမ်းနေပါတယ်…','保存中…','Syncing…')}</small><div style="display:flex;gap:8px"><button class="login" data-a="logout" style="background:#fff;color:#1F3A68;border:1.5px solid #C9D2E3;min-height:38px;font-size:14px">${T('Logout','ログアウト','Log out')}</button><button class="login" data-a="acctdel" style="background:#fff;color:#B3261E;border:1.5px solid #F0C7C3;min-height:38px;font-size:14px">${T('Cloud ဖျက်ရန်','データ削除','Delete data')}</button></div>`}
+/* auto backup: on leaving the app and every 2 minutes while open */
+setTimeout(async function(){if(!ACCT()||!/github\.io$/.test(location.hostname))return;
+  try{const a=await fbAuth();try{const rr=await a.getRedirectResult();if(rr&&rr.user){await acctAfter(rr.user);return}}catch(e){}
+    a.onAuthStateChanged(u=>{if(!u&&ACCT()){try{localStorage.removeItem('myaing.acct')}catch(e){}render()}});
+    await cloudPut(true);
+    document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'&&ACCT())cloudPut().catch(()=>{})});
+    setInterval(()=>{if(ACCT())cloudPut().catch(()=>{})},120000)}catch(e){}},3000);
+/* finish a redirect login that was started on this device */
+setTimeout(async function(){if(ACCT()||!/github\.io$/.test(location.hostname))return;try{if(!sessionStorage.getItem('myaing.redir'))return;sessionStorage.removeItem('myaing.redir');const a=await fbAuth();const rr=await a.getRedirectResult();if(rr&&rr.user)await acctAfter(rr.user)}catch(e){}},1500);
+
+/* ---------- Anonymous daily usage count (no personal data): stats/{random id} = {d,l,p,a,v} ---------- */
+setTimeout(function(){try{if(!/^https:$/.test(location.protocol)||!/github\.io$/.test(location.hostname))return;
+  const today=new Date(Date.now()+9*3600e3).toISOString().slice(0,10);if(localStorage.getItem('myaing.statd')===today)return;
+  let sid=localStorage.getItem('myaing.sid');if(!sid){sid=Array.from(crypto.getRandomValues(new Uint8Array(12)),b=>b.toString(16).padStart(2,'0')).join('');localStorage.setItem('myaing.sid',sid)}
+  const ua=navigator.userAgent||'',pl=IS_IOS()?'ios':/Android/i.test(ua)?'android':'pc',st=!!(navigator.standalone||matchMedia('(display-mode: standalone)').matches);
+  fetch('https://firestore.googleapis.com/v1/projects/'+FB_CFG.projectId+'/databases/(default)/documents/stats/'+sid+'?key='+FB_CFG.apiKey,{method:'PATCH',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({fields:{d:{stringValue:today},l:{stringValue:SET.lang||'my'},p:{stringValue:pl},a:{booleanValue:st},v:{stringValue:APP.ver}}})}).then(r=>{if(r.ok)localStorage.setItem('myaing.statd',today)}).catch(()=>{})}catch(e){}},6000);
+/* admin: read the counts (needs Google login with the admin account set in Firestore rules) */
+async function statCount(since){const {t}=await idTok();const q={structuredAggregationQuery:{structuredQuery:{from:[{collectionId:'stats'}]},aggregations:[{alias:'n',count:{}}]}};
+  if(since)q.structuredAggregationQuery.structuredQuery.where={fieldFilter:{field:{fieldPath:'d'},op:'GREATER_THAN_OR_EQUAL',value:{stringValue:since}}};
+  const r=await fetch('https://firestore.googleapis.com/v1/projects/'+FB_CFG.projectId+'/databases/(default)/documents:runAggregationQuery',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+t},body:JSON.stringify(q)});
+  if(!r.ok)throw new Error(r.status);const j=await r.json();return +((j[0]&&j[0].result&&j[0].result.aggregateFields.n.integerValue)||0)}
+async function showStats(){if(!ACCT()){toast(T('📊 Admin Google account နဲ့ Login အရင်ဝင်ပါ','📊 先に管理者アカウントでログインしてください','📊 Log in with the admin account first'));return}
+  toast('📊 …');try{const day=n=>new Date(Date.now()+9*3600e3-n*864e5).toISOString().slice(0,10);
+    const [a,b,c,d]=await Promise.all([statCount(day(0)),statCount(day(6)),statCount(day(29)),statCount('')]);
+    toast(T(`📊 သုံးသူ — ဒီနေ့ ${a} · ၇ ရက် ${b} · ၃၀ ရက် ${c} · စုစုပေါင်း ${d}`,`📊 利用者 — 今日 ${a}・7日 ${b}・30日 ${c}・合計 ${d}`,`📊 Users — today ${a} · 7 days ${b} · 30 days ${c} · total ${d}`))}
+  catch(e){toast(T('📊 ကြည့်ခွင့် မရှိပါ (Rules ထဲက Admin email စစ်ပါ)','📊 権限がありません','📊 No permission (check the admin email in the rules)'))}}
+
 /* keep the saved token & language fresh (weekly, or when the app language changes) */
 setTimeout(async function(){try{if(!PUSH_ON()||!pushOK()||Notification.permission!=='granted')return;const old=localStorage.getItem('myaing.push'),lang=localStorage.getItem('myaing.pushlang'),ts=+localStorage.getItem('myaing.pushts')||0;
   if(lang===(SET.lang||'my')&&Date.now()-ts<7*864e5)return;const t=await pushGetToken();if(!t)return;if(t!==old){try{await fetch(fsURL(old),{method:'DELETE'})}catch(e){}localStorage.setItem('myaing.push',t)}await fsSave(t)}catch(e){}},4000);
@@ -38150,7 +38217,7 @@ document.getElementById('app').addEventListener('click',e=>{
   if(b.dataset.wlang){SET.lang=b.dataset.wlang;saveSet();render();return}
   if(b.dataset.mc!==undefined){mcGo(+b.dataset.mc);return}
   if(b.dataset.jch!==undefined){S.jch=b.dataset.jch;const m0=document.querySelector('main');render();const m1=document.querySelector('main');if(m1&&m0)m1.scrollTop=0;return}
-  if(kaClick(b))return;if(utClick(b))return;if(b.dataset.a==='qrshow'){S.qrOn=true;render();return}if(b.dataset.a==='pushtg'){pushTopicOn('sb')?pushDisable('sb'):pushEnable('sb');return}if(b.dataset.a==='pushst'){pushTopicOn('st')?pushDisable('st'):pushEnable('st');return}if(b.dataset.a==='vertap'){const n=Date.now();VTAP=VTAP.filter(t=>n-t<3000);VTAP.push(n);if(VTAP.length>=7){VTAP=[];const on=!ADMUI();try{localStorage.setItem('myaing.admui',on?'1':'0')}catch(e){}toast(on?T('🛠 Admin mode ဖွင့်ပြီးပါပြီ — ပိတ်ထားတဲ့ Menu တွေကိုပါ မြင်ရပါမယ်','🛠 管理者モード ON','🛠 Admin mode on'):T('Admin mode ပိတ်ပြီးပါပြီ','管理者モード OFF','Admin mode off'));render()}return}if(b.dataset.a==='tview'&&S.view==='topic'){S.tlist=!S.tlist;S.texp='';try{localStorage.setItem('myaing.tlist',S.tlist?'1':'0')}catch(e){}renderTopic();return}if(b.dataset.a==='tshuf'&&S.view==='topic'){S.tshuf=S.tshuf?0:(Date.now()%2147483000)+1;renderTopic();const m=document.getElementById('tm');if(m)m.scrollTop=0;toast(S.tshuf?T('🔀 ကျပန်း စီထားပါတယ်','🔀 シャッフルしました','🔀 Shuffled'):T('↺ မူလအစဉ်','↺ 元の順番','↺ Original order'));return}if(b.dataset.tx!==undefined&&S.view==='topic'){S.texp=S.texp===b.dataset.tx?'':b.dataset.tx}
+  if(kaClick(b))return;if(utClick(b))return;if(b.dataset.a==='qrshow'){S.qrOn=true;render();return}if(b.dataset.a==='login'){acctLogin();return}if(b.dataset.a==='logout'){acctLogout();return}if(b.dataset.a==='acctdel'){acctDelete();return}if(b.dataset.a==='stats'){showStats();return}if(b.dataset.a==='pushtg'){pushTopicOn('sb')?pushDisable('sb'):pushEnable('sb');return}if(b.dataset.a==='pushst'){pushTopicOn('st')?pushDisable('st'):pushEnable('st');return}if(b.dataset.a==='vertap'){const n=Date.now();VTAP=VTAP.filter(t=>n-t<3000);VTAP.push(n);if(VTAP.length>=7){VTAP=[];const on=!ADMUI();try{localStorage.setItem('myaing.admui',on?'1':'0')}catch(e){}toast(on?T('🛠 Admin mode ဖွင့်ပြီးပါပြီ — ပိတ်ထားတဲ့ Menu တွေကိုပါ မြင်ရပါမယ်','🛠 管理者モード ON','🛠 Admin mode on'):T('Admin mode ပိတ်ပြီးပါပြီ','管理者モード OFF','Admin mode off'));render()}return}if(b.dataset.a==='tview'&&S.view==='topic'){S.tlist=!S.tlist;S.texp='';try{localStorage.setItem('myaing.tlist',S.tlist?'1':'0')}catch(e){}renderTopic();return}if(b.dataset.a==='tshuf'&&S.view==='topic'){S.tshuf=S.tshuf?0:(Date.now()%2147483000)+1;renderTopic();const m=document.getElementById('tm');if(m)m.scrollTop=0;toast(S.tshuf?T('🔀 ကျပန်း စီထားပါတယ်','🔀 シャッフルしました','🔀 Shuffled'):T('↺ မူလအစဉ်','↺ 元の順番','↺ Original order'));return}if(b.dataset.tx!==undefined&&S.view==='topic'){S.texp=S.texp===b.dataset.tx?'':b.dataset.tx}
   if(b.dataset.a==='nall'){S.nAll=!S.nAll;nmUpd();return}
   if(b.dataset.jxl){S.jx={L:+b.dataset.jxl,st:'setup'};render();return}
   if(b.dataset.jxs){jxStart(S.jx.L);render();const m=document.getElementById('jxm');if(m)m.scrollTop=0;return}
