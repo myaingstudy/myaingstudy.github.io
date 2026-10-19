@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: 20
       - run: npm install firebase-admin@12 --no-save --no-audit --no-fund
-      - run: node scripts/push.js
+      - run: node push.js
         env:
           FIREBASE_SA: ${{ secrets.FIREBASE_SA }}
           MODE: ${{ github.event.inputs.mode || 'auto' }}
