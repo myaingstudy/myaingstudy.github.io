@@ -294,6 +294,7 @@ ${GA_ID?`<button class="row" data-g="noga"><svg width="22" height="22" viewBox="
 <button class="row" data-a="study"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1F3A68" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4h7a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H2z"/><path d="M22 4h-7a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h8z"/></svg><span class="lb">${T('လေ့လာရန်','学習','Study')}</span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#14223D" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="8" r="3.2"/><path d="M3 20a6 6 0 0 1 12 0"/><circle cx="17" cy="9" r="2.5"/><path d="M16.5 14a4.5 4.5 0 0 1 4.5 6"/></svg></button>
 <button class="row" data-a="exch"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0F6B5C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h14l-3-3M20 16H6l3 3"/></svg><span class="lb">${T('ငွေလဲနှုန်း','両替','Exchange')} <small style="color:#6B7486">¥ ↔ Ks</small></span>${CH}</button>
 <button class="row" data-a="tips"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9A5A00" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.8.8 1 1.5 1 2.5h6c0-1 .2-1.7 1-2.5A6 6 0 0 0 12 3z"/></svg><span class="lb">${T('သိကောင်းစရာ','ヒント','Tips')}</span>${CH}</button>
+<button class="row" data-a="pushtg"><span style="width:22px;text-align:center;font-size:18px">🔔</span><span class="lb" style="display:flex;flex-direction:column;gap:1px"><span>${T('ဥပုသ်နေ့ သတိပေးချက်','布薩日の通知','Sabbath reminders')}</span><small style="color:#6B7486;font-size:11.5px">${T('ဥပုသ်・အဖိတ်နေ့ မနက် ၇ နာရီ','布薩日・前日の朝7時','Sabbath & eve · 7:00 am')}</small></span>${sw(PUSH_ON())}</button>
 ${(ADMUI()||CFG().share)?`<button class="row" data-a="share"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E8463A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg><span class="lb">${T('သူငယ်ချင်းကို မျှဝေမယ်','友だちにシェア','Share with friends')} <small style="color:#6B7486">bit.ly/dokodemoapk</small></span>${CH}</button>`:''}
 ${(ADMUI()||CFG().website)?`<a class="row" href="${IS_IOS()?APP.site+'download.html':'https://bit.ly/dokodemoapk'}" target="_blank" rel="noopener" style="text-decoration:none;color:inherit"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1F3A68" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg><span class="lb">${T('ဝက်ဘ်ဆိုက်','ウェブサイト','Website')} <small style="color:#6B7486">${IS_IOS()?'myaingstudy.github.io':'bit.ly/dokodemoapk'}</small></span>${CH}</a>`:''}
 </div>
@@ -5635,6 +5636,8 @@ SPF|နေကာအဆင့်|SPF|1
 スペース|နေရာ|space|3
 コンパクト|ကျစ်လျစ်|compact|2`,
 '感情':`楽しい,たのしい|ပျော်စရာကောင်းသော|fun|5
+パートナー|လက်တွဲဖော်|partner|3
+触れ合う,ふれあう|အချင်းချင်း ထိတွေ့သည် / ရင်းနှီးသည်|to touch each other / connect|2
 面白い,おもしろい|စိတ်ဝင်စားစရာ / ရယ်စရာ|interesting / funny|5
 つまらない|ပျင်းစရာကောင်းသော|boring|5
 好き,すき|ကြိုက်သော|like|5
@@ -10206,6 +10209,13 @@ DIY|ကိုယ်တိုင်လုပ်ခြင်း|DIY|2
 胸,むね|ရင်ဘတ်|chest|3
 腰,こし|ခါး|lower back / hips|3
 お尻,おしり|တင်ပါး|buttocks|3
+肛門,こうもん|စအို|anus|2
+性器,せいき|လိင်အင်္ဂါ|genitals|2
+陰茎,いんけい|လိင်တံ (ဆေးဝေါဟာရ)|penis (medical term)|1
+膣,ちつ|မိန်းမကိုယ် (ဆေးဝေါဟာရ)|vagina (medical term)|1
+乳首,ちくび|နို့သီးခေါင်း|nipple|2
+腰を下ろす,こしをおろす|ဖင်ချထိုင်သည်|to sit down|3
+座り込む,すわりこむ|ဖင်ထိုင်ချလိုက်သည်|to plop down / sit down|2
 へそ|ချက်|navel|2
 肘,ひじ|တံတောင်ဆစ်|elbow|2
 手首,てくび|လက်ကောက်ဝတ်|wrist|2
@@ -13842,7 +13852,7 @@ const JEX={};for(const [l,raw] of Object.entries(JEXTRA))JEX[l]=raw.split('\n').
 
 /* ---------- About / Contact / Privacy ---------- */
 // ▼ ဒီနေရာမှာ ကိုယ့်အချက်အလက် ဖြည့်ပါ (Email / Telegram username / Viber ဖုန်းနံပါတ်)
-const APP={name:'Dokodemo',ver:'1.0.108',year:2026,email:'JapaneseDokodemo@gmail.com',telegram:'DokodemoOfficial',viber:'',site:'https://myaingstudy.github.io/'};
+const APP={name:'Dokodemo',ver:'1.0.110',year:2026,email:'JapaneseDokodemo@gmail.com',telegram:'DokodemoOfficial',viber:'',site:'https://myaingstudy.github.io/'};
 function renderAbout(){
   const sec=(id,icon,title,body)=>`<section id="${id}" style="background:#fff;border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:10px;box-shadow:0 3px 10px rgba(20,34,61,.05)"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:20px">${icon}</span><b style="font-size:18px">${title}</b></div>${body}</section>`;
   const p=t=>`<p class="mm" style="margin:0;font-size:14px;line-height:1.9;color:#2B3446">${t}</p>`;
@@ -35387,6 +35397,28 @@ const ADULT=[
 ['エッチ','エッチ','လိင်ဆက်ဆံမှု / ညစ်ညမ်းတဲ့ (ပေါ့ပေါ့ပြောပုံ)','sex / naughty'],
 ['セックス','セックス','လိင်ဆက်ဆံမှု','sex'],
 ['生','なま','ကွန်ဒုံးမသုံးဘဲ — ⚠️ ကာလသားရောဂါ၊ မရည်ရွယ်ဘဲ ကိုယ်ဝန်ရနိုင်','without a condom']]],
+['性の基本','လိင်ဆိုင်ရာ အခြေခံ','Sex basics',[
+['性','せい','လိင် / လိင်ပိုင်းဆိုင်ရာ','sex / sexuality'],
+['性的','せいてき','လိင်ပိုင်းဆိုင်ရာ (ဥပမာ 性的な話 = လိင်ပိုင်းဆိုင်ရာ စကား)','sexual'],
+['性行為','せいこうい','လိင်ဆက်ဆံမှု (ယဉ်ကျေးတဲ့ / ဆေးဝေါဟာရ)','sexual intercourse'],
+['性欲','せいよく','လိင်စိတ်','sexual desire'],
+['欲望','よくぼう','ဆန္ဒ / တပ်မက်မှု','desire'],
+['快感','かいかん','သာယာမှု','pleasure'],
+['オーガズム','オーガズム','အထွတ်အထိပ် သာယာမှု','orgasm'],
+['愛撫する','あいぶする','ပွတ်သပ်ယုယသည်','to caress'],
+['挿入','そうにゅう','ထည့်သွင်းခြင်း (လိင်ဆက်ဆံရာတွင်)','penetration'],
+['挿入する','そうにゅうする','ထည့်သွင်းသည်','to penetrate'],
+['アナルセックス','アナルセックス','စအိုမှတစ်ဆင့် လိင်ဆက်ဆံခြင်း','anal sex'],
+['アナルセックスをしたい','アナルセックスをしたい','စအိုမှတစ်ဆင့် ဆက်ဆံချင်သည် (ရိုင်းတဲ့ အပြောစကား — ဖင်ချင်သည်)','to want anal sex'],
+['アナルセックスをする','アナルセックスをする','စအိုမှတစ်ဆင့် လိင်ဆက်ဆံသည်','to have anal sex'],
+['アナルセックスをされる','アナルセックスをされる','စအိုမှတစ်ဆင့် ဆက်ဆံခံရသည် (受身形)','to receive anal sex']]],
+['同意・気持ち','သဘောတူညီမှု・ခံစားချက်','Consent & feelings',[
+['痛い','いたい','နာတယ်','it hurts'],
+['優しくして','やさしくして','ညင်ညင်သာသာ လုပ်ပေးပါ','be gentle'],
+['やめて','やめて','⚠️ ရပ်ပါ — ဖော်က ဒီလိုပြောရင် ချက်ချင်း ရပ်ရပါမယ်','stop'],
+['いや','いや','မလုပ်ချင်ဘူး / မကြိုက်ဘူး','no / I don\'t want to'],
+['大丈夫？','だいじょうぶ','အဆင်ပြေရဲ့လား (ဖော်ကို မေးတာ)','are you okay?'],
+['いいよ','いいよ','ရတယ် / သဘောတူတယ်','okay / yes']]],
 ['体・医学','ခန္ဓာကိုယ်・ဆေးပညာ','Body & medical',[
 ['初潮','しょちょう','ပထမဆုံး ဓမ္မတာ လာခြင်း (ဆေးဝေါဟာရ)','menarche'],
 ['生理','せいり','ဓမ္မတာ','period'],
@@ -37911,6 +37943,32 @@ function playFrom(list,i){
   step(0);
 }
 function ADMUI(){try{return localStorage.getItem('myaing.admui')==='1'}catch(e){return false}}
+/* ---------- Push notifications: Sabbath (ဥပုသ်) reminders via Firebase Cloud Messaging ---------- */
+const FB_CFG={"apiKey":"AIzaSyD9P_ur4AeKnTChUpc90IKb3cVO2siNNxE","authDomain":"dokodemo-push.firebaseapp.com","projectId":"dokodemo-push","storageBucket":"dokodemo-push.firebasestorage.app","messagingSenderId":"942835095638","appId":"1:942835095638:web:e62989a4ab6692f22543f7"};
+const FB_VAPID='BH58AGt-SrANZspF1kkAcxEPLVOkZYNnwftR9Gq-xPe7SIgX2uGz5GDgcVepZ8u6Xyy1hixthhIVxRGsyU5Li7w';
+function PUSH_ON(){try{return !!localStorage.getItem('myaing.push')}catch(e){return false}}
+function pushOK(){return 'Notification' in window&&'serviceWorker' in navigator&&'PushManager' in window&&location.protocol==='https:'&&/github\.io$/.test(location.hostname)}
+function loadJS(u){return new Promise((res,rej)=>{if(document.querySelector('script[src="'+u+'"]'))return res();const s=document.createElement('script');s.src=u;s.onload=res;s.onerror=rej;document.head.appendChild(s)})}
+async function fbMsg(){const b='https://www.gstatic.com/firebasejs/10.12.2/';await loadJS(b+'firebase-app-compat.js');await loadJS(b+'firebase-messaging-compat.js');if(!firebase.apps.length)firebase.initializeApp(FB_CFG);return firebase.messaging()}
+function fsURL(t){return 'https://firestore.googleapis.com/v1/projects/'+FB_CFG.projectId+'/databases/(default)/documents/pushTokens/'+encodeURIComponent(t)+'?key='+FB_CFG.apiKey}
+async function fsSave(t){const r=await fetch(fsURL(t),{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({fields:{token:{stringValue:t},lang:{stringValue:(SET.lang||'my')},ts:{timestampValue:new Date().toISOString()}}})});if(!r.ok)throw new Error('save '+r.status);try{localStorage.setItem('myaing.pushlang',SET.lang||'my');localStorage.setItem('myaing.pushts',String(Date.now()))}catch(e){}}
+async function pushGetToken(){const reg=await navigator.serviceWorker.register('sw.js');await navigator.serviceWorker.ready;const m=await fbMsg();return m.getToken({vapidKey:FB_VAPID,serviceWorkerRegistration:reg})}
+async function pushEnable(){
+  if(!pushOK()){toast(T('🔔 Website (myaingstudy.github.io) ဒါမှမဟုတ် APK မှာ ဖွင့်ပြီးမှ သတိပေးချက်ကို ဖွင့်လို့ရပါတယ်','🔔 Webサイトまたはアプリで有効にできます','🔔 Open the website or the app to turn this on'));return}
+  let p='default';try{p=await Notification.requestPermission()}catch(e){}
+  if(p!=='granted'){toast(T('Notification ကို ခွင့်မပြုထားပါ — ဖုန်း Settings မှာ Dokodemo/Chrome ရဲ့ Notification ကို ဖွင့်ပေးပါ','通知が許可されていません。設定で許可してください','Notifications are blocked — allow them in your phone settings'));return}
+  toast(T('🔔 ဖွင့်နေပါတယ်…','🔔 設定中…','🔔 Turning on…'));
+  try{const t=await pushGetToken();if(!t)throw new Error('no token');await fsSave(t);localStorage.setItem('myaing.push',t);
+    toast(T('✅ ဥပုသ်နေ့ သတိပေးချက် ဖွင့်ပြီးပါပြီ — ဥပုသ်နေ့နဲ့ အဖိတ်နေ့ မနက် ၇ နာရီမှာ ပို့ပေးပါမယ် 🙏','✅ 布薩日の通知をオンにしました（朝7時）','✅ Sabbath reminders on — sent at 7:00 am'));render()}
+  catch(e){console.warn(e);toast(T('❌ မအောင်မြင်ပါ — internet စစ်ပြီး နောက်တစ်ခါ ပြန်စမ်းပါ','❌ 失敗しました。もう一度お試しください','❌ Could not turn on — please try again'))}
+}
+async function pushDisable(){let t='';try{t=localStorage.getItem('myaing.push')||'';localStorage.removeItem('myaing.push')}catch(e){}render();
+  toast(T('🔕 ဥပုသ်နေ့ သတိပေးချက် ပိတ်ပြီးပါပြီ','🔕 通知をオフにしました','🔕 Reminders off'));
+  if(t){try{await fetch(fsURL(t),{method:'DELETE'})}catch(e){}try{const m=await fbMsg();await m.deleteToken()}catch(e){}}}
+/* keep the saved token & language fresh (weekly, or when the app language changes) */
+setTimeout(async function(){try{if(!PUSH_ON()||!pushOK()||Notification.permission!=='granted')return;const old=localStorage.getItem('myaing.push'),lang=localStorage.getItem('myaing.pushlang'),ts=+localStorage.getItem('myaing.pushts')||0;
+  if(lang===(SET.lang||'my')&&Date.now()-ts<7*864e5)return;const t=await pushGetToken();if(!t)return;if(t!==old){try{await fetch(fsURL(old),{method:'DELETE'})}catch(e){}localStorage.setItem('myaing.push',t)}await fsSave(t)}catch(e){}},4000);
+
 /* Remote on/off switches — edit config.json on GitHub to show/hide menu rows for everyone */
 const CFG_DEF={share:true,website:true,copyright:true};let _cfg=null;
 function CFG(){if(!_cfg){try{_cfg=Object.assign({},CFG_DEF,JSON.parse(localStorage.getItem('myaing.cfg')||'{}'))}catch(e){_cfg=Object.assign({},CFG_DEF)}}return _cfg}
@@ -38078,7 +38136,7 @@ document.getElementById('app').addEventListener('click',e=>{
   if(b.dataset.wlang){SET.lang=b.dataset.wlang;saveSet();render();return}
   if(b.dataset.mc!==undefined){mcGo(+b.dataset.mc);return}
   if(b.dataset.jch!==undefined){S.jch=b.dataset.jch;const m0=document.querySelector('main');render();const m1=document.querySelector('main');if(m1&&m0)m1.scrollTop=0;return}
-  if(kaClick(b))return;if(utClick(b))return;if(b.dataset.a==='qrshow'){S.qrOn=true;render();return}if(b.dataset.a==='vertap'){const n=Date.now();VTAP=VTAP.filter(t=>n-t<3000);VTAP.push(n);if(VTAP.length>=7){VTAP=[];const on=!ADMUI();try{localStorage.setItem('myaing.admui',on?'1':'0')}catch(e){}toast(on?T('🛠 Admin mode ဖွင့်ပြီးပါပြီ — ပိတ်ထားတဲ့ Menu တွေကိုပါ မြင်ရပါမယ်','🛠 管理者モード ON','🛠 Admin mode on'):T('Admin mode ပိတ်ပြီးပါပြီ','管理者モード OFF','Admin mode off'));render()}return}if(b.dataset.a==='tview'&&S.view==='topic'){S.tlist=!S.tlist;S.texp='';try{localStorage.setItem('myaing.tlist',S.tlist?'1':'0')}catch(e){}renderTopic();return}if(b.dataset.a==='tshuf'&&S.view==='topic'){S.tshuf=S.tshuf?0:(Date.now()%2147483000)+1;renderTopic();const m=document.getElementById('tm');if(m)m.scrollTop=0;toast(S.tshuf?T('🔀 ကျပန်း စီထားပါတယ်','🔀 シャッフルしました','🔀 Shuffled'):T('↺ မူလအစဉ်','↺ 元の順番','↺ Original order'));return}if(b.dataset.tx!==undefined&&S.view==='topic'){S.texp=S.texp===b.dataset.tx?'':b.dataset.tx}
+  if(kaClick(b))return;if(utClick(b))return;if(b.dataset.a==='qrshow'){S.qrOn=true;render();return}if(b.dataset.a==='pushtg'){PUSH_ON()?pushDisable():pushEnable();return}if(b.dataset.a==='vertap'){const n=Date.now();VTAP=VTAP.filter(t=>n-t<3000);VTAP.push(n);if(VTAP.length>=7){VTAP=[];const on=!ADMUI();try{localStorage.setItem('myaing.admui',on?'1':'0')}catch(e){}toast(on?T('🛠 Admin mode ဖွင့်ပြီးပါပြီ — ပိတ်ထားတဲ့ Menu တွေကိုပါ မြင်ရပါမယ်','🛠 管理者モード ON','🛠 Admin mode on'):T('Admin mode ပိတ်ပြီးပါပြီ','管理者モード OFF','Admin mode off'));render()}return}if(b.dataset.a==='tview'&&S.view==='topic'){S.tlist=!S.tlist;S.texp='';try{localStorage.setItem('myaing.tlist',S.tlist?'1':'0')}catch(e){}renderTopic();return}if(b.dataset.a==='tshuf'&&S.view==='topic'){S.tshuf=S.tshuf?0:(Date.now()%2147483000)+1;renderTopic();const m=document.getElementById('tm');if(m)m.scrollTop=0;toast(S.tshuf?T('🔀 ကျပန်း စီထားပါတယ်','🔀 シャッフルしました','🔀 Shuffled'):T('↺ မူလအစဉ်','↺ 元の順番','↺ Original order'));return}if(b.dataset.tx!==undefined&&S.view==='topic'){S.texp=S.texp===b.dataset.tx?'':b.dataset.tx}
   if(b.dataset.a==='nall'){S.nAll=!S.nAll;nmUpd();return}
   if(b.dataset.jxl){S.jx={L:+b.dataset.jxl,st:'setup'};render();return}
   if(b.dataset.jxs){jxStart(S.jx.L);render();const m=document.getElementById('jxm');if(m)m.scrollTop=0;return}
