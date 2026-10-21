@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="my"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex"><link rel="canonical" href="https://dokodemojapanese.github.io/">
+<meta name="theme-color" content="#1F3A68"><title>Dokodemo has moved</title>
+<style>
+:root{--navy:#1F3A68;--red:#E8463A}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#1F3A68;color:#fff;font:16px/1.7 -apple-system,'Noto Sans Myanmar','Hiragino Sans',sans-serif;padding:24px;text-align:center}
+.c{max-width:420px}
+h1{margin:10px 0 4px;font-size:30px;letter-spacing:1px}h1 i{display:inline-block;width:.54em;height:.54em;border-radius:50%;background:var(--red);margin:0 .07em 0 .06em;vertical-align:.02em}
+p{margin:6px 0;color:#DCE4F2}
+.u{display:inline-block;margin:14px 0;padding:6px 14px;border-radius:12px;background:rgba(255,255,255,.12);font-weight:700;color:#F5C036}
+a.b{display:block;margin-top:14px;padding:14px;border-radius:16px;background:var(--red);color:#fff;font-weight:800;text-decoration:none}
+.s{font-size:13px;color:#AFC0DD;margin-top:12px}
+</style></head><body><div class="c">
+<div style="font-size:44px">🚚</div>
+<h1>Dok<i></i>demo</h1>
+<p>Dokodemo ရဲ့ လိပ်စာ ပြောင်းသွားပါပြီ။ မှတ်တမ်းတွေ ယူဆောင်ပြီး လိပ်စာအသစ်ကို ပို့ပေးနေပါတယ်…</p>
+<p>新しいアドレスに移動しました。記録を引き継いで移動しています…</p>
+<p>Dokodemo has moved. Taking your progress to the new address…</p>
+<div class="u">dokodemojapanese.github.io</div>
+<a class="b" id="go" href="https://dokodemojapanese.github.io/">လိပ်စာအသစ်ကို သွားမယ် · Open the new address</a>
+<p class="s">ပြောင်းပြီးရင် Home Screen ထဲက icon အဟောင်းကို ဖျက်ပြီး အသစ်ကို ပြန်ထည့်ပါ 🙏<br>Please add the new address to your Home Screen.</p>
+</div>
+<script>
+(function(){
+  var NEW='https://dokodemojapanese.github.io';
+  var path=location.pathname;if(/\/(index\.html)?$/.test(path)||/404/.test(path))path='/';
+  var url=NEW+path+location.search, data={}, n=0;
+  try{for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(k&&k.indexOf('myaing.')===0){data[k]=localStorage.getItem(k);n++}}}catch(e){}
+  if(n){try{var b=btoa(unescape(encodeURIComponent(JSON.stringify(data)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');url=NEW+'/'+location.search+'#migrate='+b}catch(e){}}
+  document.getElementById('go').href=url;
+  try{if('serviceWorker' in navigator)navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.update()})})}catch(e){}
+  setTimeout(function(){location.replace(url)},1500);
+})();
+</script>
+</body></html>

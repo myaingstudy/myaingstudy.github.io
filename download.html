@@ -1,67 +1,37 @@
 <!doctype html>
-<html lang="my"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Dokodemo — ဒေါင်းလုဒ်</title>
-<meta name="theme-color" content="#1F3A68"><link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="icon.svg"><link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta property="og:title" content="Dokodemo — どこでも日本語 · Learn Japanese Anywhere"><meta property="og:description" content="ဟီရာဂါနာကနေ JLPT N1 အထိ · စကားပြော ၁၈,၅၀၀ ကြောင်း · 辞書 Dictionary · မြန်မာ ပြက္ခဒိန် · အခမဲ့"><meta property="og:image" content="https://myaingstudy.github.io/og-image.jpg"><meta property="og:url" content="https://myaingstudy.github.io/download.html"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;700&display=swap" rel="stylesheet">
+<html lang="my"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex"><link rel="canonical" href="https://dokodemojapanese.github.io/">
+<meta name="theme-color" content="#1F3A68"><title>Dokodemo has moved</title>
 <style>
-:root{--navy:#1F3A68;--red:#E8463A;--ink:#14223D;--muted:#6B7486;--bg:#F3F5F9}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans Myanmar',sans-serif;line-height:1.8}
-.wrap{max-width:520px;margin:0 auto;padding:16px 16px 40px;display:flex;flex-direction:column;gap:14px}
-.hero{background:linear-gradient(160deg,#14223D,#1F3A68);color:#fff;border-radius:24px;padding:28px 20px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px}
-.hero img{width:92px;height:92px;border-radius:24px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
-h1{margin:6px 0 0;font-size:28px;font-family:sans-serif}
-.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:52px;border-radius:26px;border:none;font:700 16px 'Noto Sans Myanmar',sans-serif;text-decoration:none;cursor:pointer}
-.red{background:var(--red);color:#fff}.dark{background:#14223D;color:#fff}.ghost{background:rgba(255,255,255,.15);color:#fff}
-.card{background:#fff;border-radius:20px;padding:16px 18px}
-.card h2{margin:0 0 6px;font-size:17px}
-ol{margin:0;padding-left:22px}li{margin:4px 0}
-.tabs{display:flex;gap:6px}.tab{flex:1;min-height:44px;border-radius:22px;border:1.5px solid #D5DCE8;background:#fff;font:700 14px sans-serif;color:var(--navy);cursor:pointer}
-.tab.on{background:var(--navy);color:#fff;border-color:var(--navy)}
-.note{background:#FFF1DE;color:#6B4200;border-radius:16px;padding:12px 14px;font-size:13.5px}
-.feat{display:grid;grid-template-columns:1fr 1fr;gap:8px}.feat div{background:#fff;border-radius:16px;padding:12px;font-size:13px}.feat b{display:block;font-size:14px}
-small{color:var(--muted)}
-</style><script>(function(){try{if(localStorage.getItem('myaing.set')&&JSON.parse(localStorage.getItem('myaing.set')).noga)return}catch(e){}if(!/github\.io$/.test(location.hostname))return;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-RML4B2XTPV';document.head.appendChild(s);window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','G-RML4B2XTPV',{anonymize_ip:true});document.addEventListener('click',function(e){var a=e.target.closest('a,button');if(a&&(a.id==='inst'||a.id==='apk'||/index\.html/.test(a.getAttribute('href')||'')))gtag('event','download_click',{target:a.id||'open_app'})})})();</script>
-</head><body><div class="wrap">
-<div class="hero"><img src="icon-512.png" alt="Dokodemo icon"><h1>Dok<span style="display:inline-block;width:.54em;height:.54em;border-radius:50%;background:#E8463A;margin:0 .085em;vertical-align:-.01em"></span>demo</h1>
-<div style="font-weight:800;letter-spacing:3px;color:#F5C036">どこでも日本語</div><div style="opacity:.85;font-size:13px;margin-top:-4px">Learn Japanese Anywhere</div>
-<div style="opacity:.92">ဂျပန်စာကို မြန်မာလို အလွယ်ဆုံး လေ့လာမယ်</div>
-<a class="btn red" href="index.html" style="margin-top:8px">▶ App ကို ဖွင့်မယ်</a>
-<button class="btn ghost" id="inst" hidden>⬇ ဖုန်းထဲ ထည့်မယ် (Install)</button>
-<a class="btn dark" id="apk" href="Dokodemo.apk" download="Dokodemo.apk">🤖 Android APK ဒေါင်းလုဒ်</a>
-<small style="color:#C9D4E8">အခမဲ့ · Pro ¥500 / ၁၅,၀၀၀ ကျပ် မှစ</small></div>
-
-<div class="note" id="inapp" hidden>Viber / Facebook / Messenger ထဲကနေ ဖွင့်ထားရင် ဖုန်းထဲ ထည့်လို့ မရပါဘူး။ ညာဘက်အပေါ်က ⋮ ကိုနှိပ်ပြီး <b>Chrome</b> (iPhone ဆို <b>Safari</b>) နဲ့ ပြန်ဖွင့်ပါ။</div>
-
-<div class="card"><h2>📲 ဖုန်း Home Screen ထဲ ထည့်နည်း</h2>
-<div class="tabs"><button class="tab on" data-t="and">Android</button><button class="tab" data-t="ios">iPhone</button></div>
-<div id="t-and" style="margin-top:10px"><ol><li><b>Chrome</b> နဲ့ ဒီစာမျက်နှာကို ဖွင့်ပါ။</li><li>အပေါ်က <b>“ဖုန်းထဲ ထည့်မယ်”</b> ခလုတ် ပေါ်ရင် နှိပ်ပါ။</li><li>မပေါ်ရင် ညာဘက်အပေါ် <b>⋮</b> → <b>“Add to Home screen”</b> ဒါမှမဟုတ် <b>“Install app”</b> ကို နှိပ်ပါ။</li><li>Home Screen မှာ Dokodemo icon ပေါ်လာပါမယ်။</li></ol></div>
-<div id="t-ios" style="margin-top:10px" hidden><ol><li><b>Safari</b> နဲ့ ဒီစာမျက်နှာကို ဖွင့်ပါ (Chrome မရပါ)။</li><li>အောက်ခြေက <b>မျှဝေ ခလုတ် (□↑)</b> ကို နှိပ်ပါ။</li><li>အောက်ဆွဲပြီး <b>“Add to Home Screen”</b> (ホーム画面に追加) ကို နှိပ်ပါ။</li><li>ညာဘက်အပေါ် <b>“Add”</b> နှိပ်ရင် Dokodemo icon ပေါ်လာပါမယ်။</li></ol></div>
-<small>တစ်ခါ ဖွင့်ပြီးရင် အင်တာနက် မရှိလည်း သုံးလို့ ရပါတယ်။ အင်တာနက် ရှိတဲ့အခါ ဗားရှင်းအသစ်ကို အလိုအလျောက် ရပါတယ်။</small></div>
-
-<div class="feat"><div><b>辞書 Dictionary</b>စကားလုံး ၂,၅၀၀ ကျော်</div><div><b>話 Dialog</b>စကားပြော ၁၈,၅၀၀ ကြောင်း</div><div><b>暦 ミャンマー暦</b>ဥပုသ် · ပွဲတော် · ပိတ်ရက်</div><div><b>N1 JLPT</b>N5 ကနေ N1 အထိ</div></div>
-
-<div class="card" id="qrcard" style="text-align:center"><h2>📷 ဖုန်းနဲ့ Scan ဖတ်ပြီး ဒေါင်းမယ်</h2>
-<img src="qr-apk.png" alt="Dokodemo APK QR code — bit.ly/DokodemoApk" width="220" height="220" style="display:block;margin:6px auto;border-radius:12px;border:1px solid #E3E8F0">
-<b style="font-size:15px">bit.ly/DokodemoApk</b><br><small>Android ဖုန်းရဲ့ ကင်မရာနဲ့ scan ဖတ်ရင် Dokodemo.apk ကို တန်းဒေါင်းလို့ရပါတယ်။</small></div>
-<div class="card" id="apk-soon"><h2>🤖 Android APK ထည့်နည်း</h2><ol>
-<li>အပေါ်က <b>“Android APK ဒေါင်းလုဒ်”</b> ကို နှိပ်ပါ။ (Chrome က “ဒေါင်းလုဒ် လုပ်မလား” မေးရင် <b>Download</b>)</li>
-<li>ဒေါင်းပြီးရင် <b>Open / 開く</b> ကို နှိပ်ပါ။ (သို့) <b>Files</b> app → <b>Downloads</b> ထဲက <b>Dokodemo.apk</b> ကို နှိပ်ပါ။</li>
-<li>“ဒီနေရာက app ထည့်ခွင့်မရှိဘူး” ပေါ်ရင် → <b>Settings</b> → <b>Allow from this source</b> ကို ဖွင့်ပြီး နောက်ပြန် (←) နှိပ်ပါ။</li>
-<li><b>Install</b> ကို နှိပ်ပါ။ Play Protect က သတိပေးရင် <b>More details</b> → <b>Install anyway</b> ကို နှိပ်ပါ။</li>
-<li>Home Screen မှာ <b>Dokodemo</b> icon ပေါ်လာပါမယ် 🎉</li></ol>
-<small>Play Store မှာ မတင်ရသေးလို့ ဖုန်းက သတိပေးတာ ပုံမှန်ပါ။ စကားလုံး၊ မေးခွန်း အသစ်တွေကို App ထဲမှာ အလိုလို ရပါတယ်။ APK က <b>Android ဖုန်း</b> အတွက်ပဲ ဖြစ်ပါတယ် — iPhone ဆိုရင် အပေါ်က “Home Screen ထဲ ထည့်နည်း” ကို သုံးပါ။</small></div>
-
-<div class="card"><h2>✉️ ဆက်သွယ်ရန်</h2><a href="https://t.me/DokodemoOfficial" target="_blank" rel="noopener">Telegram</a> · <a href="mailto:JapaneseDokodemo@gmail.com">Email</a></div>
-<small style="text-align:center">© 2026 Dokodemo<br>Made in Japan by the Dokodemo Team</small>
+:root{--navy:#1F3A68;--red:#E8463A}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#1F3A68;color:#fff;font:16px/1.7 -apple-system,'Noto Sans Myanmar','Hiragino Sans',sans-serif;padding:24px;text-align:center}
+.c{max-width:420px}
+h1{margin:10px 0 4px;font-size:30px;letter-spacing:1px}h1 i{display:inline-block;width:.54em;height:.54em;border-radius:50%;background:var(--red);margin:0 .07em 0 .06em;vertical-align:.02em}
+p{margin:6px 0;color:#DCE4F2}
+.u{display:inline-block;margin:14px 0;padding:6px 14px;border-radius:12px;background:rgba(255,255,255,.12);font-weight:700;color:#F5C036}
+a.b{display:block;margin-top:14px;padding:14px;border-radius:16px;background:var(--red);color:#fff;font-weight:800;text-decoration:none}
+.s{font-size:13px;color:#AFC0DD;margin-top:12px}
+</style></head><body><div class="c">
+<div style="font-size:44px">🚚</div>
+<h1>Dok<i></i>demo</h1>
+<p>Dokodemo ရဲ့ လိပ်စာ ပြောင်းသွားပါပြီ။ မှတ်တမ်းတွေ ယူဆောင်ပြီး လိပ်စာအသစ်ကို ပို့ပေးနေပါတယ်…</p>
+<p>新しいアドレスに移動しました。記録を引き継いで移動しています…</p>
+<p>Dokodemo has moved. Taking your progress to the new address…</p>
+<div class="u">dokodemojapanese.github.io</div>
+<a class="b" id="go" href="https://dokodemojapanese.github.io/">လိပ်စာအသစ်ကို သွားမယ် · Open the new address</a>
+<p class="s">ပြောင်းပြီးရင် Home Screen ထဲက icon အဟောင်းကို ဖျက်ပြီး အသစ်ကို ပြန်ထည့်ပါ 🙏<br>Please add the new address to your Home Screen.</p>
 </div>
 <script>
-const ua=navigator.userAgent||'';if(/FBAN|FBAV|FB_IAB|Instagram|Line\/|Viber|Messenger/i.test(ua))document.getElementById('inapp').hidden=false;
-if(/Android|iPhone|iPad|iPod|Mobile/i.test(ua))document.getElementById('qrcard').hidden=true;
-if(/iPhone|iPad|iPod/i.test(ua)){document.getElementById('apk').hidden=true;document.querySelector('[data-t=ios]').click&&setTimeout(()=>document.querySelector('[data-t=ios]').click(),0)}
-document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===b));document.getElementById('t-and').hidden=b.dataset.t!=='and';document.getElementById('t-ios').hidden=b.dataset.t!=='ios'});
-let dp=null;addEventListener('beforeinstallprompt',e=>{e.preventDefault();dp=e;document.getElementById('inst').hidden=false});
-document.getElementById('inst').onclick=async()=>{if(!dp)return;dp.prompt();try{await dp.userChoice}catch(e){}dp=null;document.getElementById('inst').hidden=true};
-if('serviceWorker' in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('sw.js').catch(()=>{});
-</script></body></html>
+(function(){
+  var NEW='https://dokodemojapanese.github.io';
+  var path=location.pathname;if(/\/(index\.html)?$/.test(path)||/404/.test(path))path='/';
+  var url=NEW+path+location.search, data={}, n=0;
+  try{for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(k&&k.indexOf('myaing.')===0){data[k]=localStorage.getItem(k);n++}}}catch(e){}
+  if(n){try{var b=btoa(unescape(encodeURIComponent(JSON.stringify(data)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');url=NEW+'/'+location.search+'#migrate='+b}catch(e){}}
+  document.getElementById('go').href=url;
+  try{if('serviceWorker' in navigator)navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.update()})})}catch(e){}
+  setTimeout(function(){location.replace(url)},1500);
+})();
+</script>
+</body></html>
